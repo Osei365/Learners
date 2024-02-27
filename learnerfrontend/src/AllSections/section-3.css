@@ -1,0 +1,216 @@
+.section-1 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 5px 0px;
+    min-height: 100vh;
+    width: 97%;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.06);
+    background: var(--body-color);
+}
+.section-1 .descrip2 {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: start;
+    padding: 40px 30px;
+}
+.section-1 .descrip2 h1 {
+    font-size: 50px;
+    font-weight: 600;
+    color: #ffcc99;
+}
+
+.section-1 .descrip2  p {
+    font-size: 18px;
+    line-height: 25px;
+    padding-top: 30px;
+    color: var(--colored-border);
+}
+
+.section-1 .image2 {
+    flex: 1;
+    padding: 0 20px;
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.section-1 .image2 .main-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 200px;
+}
+.section-1 .image2 .round1 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    bottom: 250px;
+    right: 80px;
+}
+.section-1 .image2 .round1 img,
+.section-1 .image2 .round2 img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.section-1 .image2 .round2 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    bottom: 240px;
+    left: 80px;
+}
+@media screen and (max-width: 1040px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    /* all section padding */
+
+    .section-p1 {
+        padding:20px;
+    }
+
+  
+
+    /* section 2 */
+
+    .section-1 .descrip2 {
+        padding-right: 60px;
+    }
+    .section-1 .descrip2 h1 {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    .section-1 .descrip2  p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+    }
+    .section-1 .image2 .main-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin-top: 100px;
+    }
+    .section-1 .image2 .round1 {
+        width: 150px;
+        height: 150px;
+        right: 40px;
+        bottom: 300px;
+    }
+
+    .section-1 .image2 .round2 {
+        width: 150px;
+        height: 150px;
+        left: 40px;
+        bottom: 300px;
+    }
+
+}
+
+@media (max-width: 799px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    /* all section padding */
+
+    .section-p1 {
+        padding:20px;
+    }
+    /* section 2 */
+
+    .section-1 .descrip2 {
+        padding-right: 60px;
+    }
+    .section-1 .descrip2 h1 {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    .section-1 .descrip2  p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+    }
+    .section-1 .image2 .main-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin-top: 0px;
+    }
+    .section-1 .image2 .round1 {
+        width: 150px;
+        height: 150px;
+        right: 150px;
+        bottom: 160px;
+    }
+
+    .section-1 .image2 .round2 {
+        width: 150px;
+        height: 150px;
+        left: 150px;
+        bottom: 160px;
+    }
+
+}
+
+
+@media screen and (max-width: 477px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    /* all section padding */
+
+    .section-p1 {
+        padding:20px;
+    }
+
+    /* section 3 */
+
+    .section-1 .descrip2 {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+    .section-1 .descrip2 h1 {
+        font-size: 25px;
+        line-height: 20px;
+    }
+
+    .section-1 .descrip2  p {
+        font-size: 12px;
+    }
+    .section-1 .image2 .main-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin-top: 0px;
+    }
+    .section-1 .image2 .round1 {
+        width: 140px;
+        height: 140px;
+        right: 10px;
+        bottom: 180px;
+    }
+
+    .section-1 .image2 .round2 {
+        width: 140px;
+        height: 140px;
+        left: 10px;
+        bottom: 180px;
+    }
+
+    #pop-up {
+        top: -210px;
+        animation: pop-up 0.5s ease forwards;
+    }
+}

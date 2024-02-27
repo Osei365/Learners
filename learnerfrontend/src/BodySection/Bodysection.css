@@ -1,0 +1,32 @@
+
+.color {
+    background: #1a1a1a;
+    color: var(--light-color);
+    border-radius: 10px;
+    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.color .contains-text p {
+    color: var(--light-color);
+}
+.reveal {
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+}
+.reveal.active4 {
+    transform: translateY(0px);
+    opacity: 1;
+    transition: all 2s ease;
+}
+
+/* section 1 */
+
+/* section 2 */
+
+
+/* section 3 */
+
+
+

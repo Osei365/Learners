@@ -1,0 +1,153 @@
+#newsletter {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-image: url("../assets/plain1.png");
+    background-repeat: no-repeat;
+    background-position: 20% 30%;
+    background-color: #1a1a1a;
+}
+#newsletter h4 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+}
+
+#newsletter p {
+    font-size: 14px;
+    font-weight: 500;
+    color: #99ffcc;
+}
+#newsletter p span {
+    color: #ffcc99;
+}
+#newsletter .form {
+    display: flex;
+    width: 40%;
+}
+
+#newsletter input {
+    height: 3.125rem;
+    padding: 0 1.25em;
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    outline: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#newsletter button {
+    background-color: var(--text-color);
+    color: #fff;
+    white-space: nowrap;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #99ffcc;
+}
+
+@media screen and (max-width: 1040px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    /* news letter */
+    #newsletter {
+        top: 1900px;
+    }
+
+    #newsletter .form {
+        width: 70%;
+    }
+    #newsletter h4 {
+        font-size: 20px;
+    }
+    
+    #newsletter p {
+        font-size: 14px;
+        line-height: 23px;
+    }
+    #newsletter input {
+        height: 3rem;
+    }
+    button.normal {
+        padding: 13px 30px;
+    }
+
+}
+
+@media (max-width: 799px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    /* all section padding */
+
+    .section-p1 {
+        padding:20px;
+    }
+
+    /* news letter */
+    #newsletter .form {
+        width: 70%;
+    }
+    #newsletter h4 {
+        font-size: 20px;
+    }
+    
+    #newsletter p {
+        font-size: 14px;
+        line-height: 23px;
+    }
+    #newsletter input {
+        height: 3rem;
+    }
+    button.normal {
+        padding: 13px 30px;
+    }
+
+}
+
+
+@media screen and (max-width: 477px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    /* all section padding */
+
+    .section-p1 {
+        padding:20px;
+    }
+    /* newsletter */
+    #newsletter {
+        padding: 40px 20px;
+        background-color: #1a1a1a;
+        top: 2850px;
+    }
+    #newsletter h4 {
+        font-size: 20px;
+    }
+    
+    #newsletter p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+    #newsletter .form {
+        margin-top: 10px;
+        width: 100%;
+    }
+    #newsletter input {
+        height: 2rem;
+    }
+    button.normal {
+        padding: 8px 30px;
+        font-size: 12px;
+    }
+    /* footer */
+
+   
+}
