@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from "../NavBar/NavBar";
+import AboutSection from "../AboutSection/AboutSection";
 import Footer from '../Footer/Footer';
-import AboutSection from '../AboutSection/AboutSection';
+
 
 const About = () => {
     return (

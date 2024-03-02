@@ -1,6 +1,6 @@
 import React from 'react';
 import Teacherpics from '../assets/teacher-about.jpg';
-import './AboutSection.css';
+import './AboutSecond.css';
 
 const AboutSecond = () => {
   return (

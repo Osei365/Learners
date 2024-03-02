@@ -2,6 +2,8 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 100%;
+    padding: 40px 30px;
 }
 
 footer .col {
@@ -68,7 +70,7 @@ footer .copyright {
 
 
 @media (max-width: 1040px) {
-    .section-p1 {
+    .section-p2 {
         padding:20px;
     }
  /* footer */

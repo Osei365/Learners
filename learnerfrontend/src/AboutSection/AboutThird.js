@@ -1,4 +1,5 @@
 import React from 'react';
+import './AboutThird.css';
 
 
 const AboutThird = () => {

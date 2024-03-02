@@ -39,7 +39,7 @@ const NavBar = () => {
                     <ul>
                         <li><Link to="/about">About Us</Link></li>
                         <li><Link to="#">Contact Us</Link></li>
-                        <li><Link to="#">Our Blog</Link></li>
+                        <li><Link to="/blog">Our Blog</Link></li>
                         <li><Link to="#">Support</Link></li>
                     </ul>
                     <div className="activity-container">
