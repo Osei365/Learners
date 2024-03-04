@@ -1,70 +1,62 @@
 import React from 'react';
-import blog from '../assets/blog1.jpg';
+/*import blog from '../assets/blog1.jpg';*/
 import 'boxicons/css/boxicons.min.css';
 import './BlogSection.css';
-import blogs from './AllBlogs';
 import { useRef , useEffect } from 'react';
 
-const BlogSection1 = () => {
+const BlogSection1 = ({ selectedArticle, blogs}) => {
 
-    const titlesRefs = useRef([]);
-    titlesRefs.current = [];
-    if (titlesRefs.current.length !== blogs.topics.length) {
-        titlesRefs.current = Array(blogs.topics.length)
-            .fill()
-            .map((_, i) => titlesRefs.current[i] || React.createRef());
-    }
-
+    const { title, image, content } = blogs.topics[selectedArticle]
+    const titlesRefs = useRef(Array(content.length).fill(null));
 
     const handleClick = (index) => {
-        /* titlesRefs.current[index]?.scrollIntoView({ behavior: 'smooth' });
-        titlesRefs.current.forEach((ref, i) => {
-            if (ref && i === index) {
-                ref.classList.add('selected');
-            } else if (ref) {
-                ref.classList.remove('selected');
-             }
-        }) */
         const prevSelected = titlesRefs.current.findIndex(ref => ref.classList.contains('selected'));
         if (prevSelected !== -1) {
             titlesRefs.current[prevSelected].classList.remove('selected');
         }
 
-        // Add 'selected' class to clicked topic
         titlesRefs.current[index].classList.add('selected');
         
-        // Scroll to the corresponding title
         titlesRefs.current[index].scrollIntoView({ behavior: 'smooth' });
     }
 
+
+    
     useEffect(() => {
-        titlesRefs.current[0].classList.add('selected');
+        if (titlesRefs.current[0]) {
+            titlesRefs.current[0].classList.add('selected');
+        }
     }, []);
 
-    return (
-    <div className="main-blog">
-        <h1>How to use python to save data to your database</h1>
-        <span className="span">13th March 2024 <strong>&#x2022;</strong> <i class='bx bx-time'></i> 08:45</span>
-        <img src={blog} alt="blog-pics-1" />
-        <div className="blog-content">
-            <div className="sub-topics">
-                {blogs.topics.map((blog, index) => (
-                    <span className='topic' key={index} onClick={() => handleClick(index)} ref={(el) => (titlesRefs.current[index]= el)}>
-                        {blog.title}
-                        </span>
-                ))}
-            </div> 
-            <div className="content">
-                {blogs.topics.map((blog, index) => (
-                <div className="content-1" key={index} >
-                    <h2>{blog.title}</h2>
-                    <p>{blog.content}</p>
-                </div>
-                ))}
-            </div>          
-        </div>
-    </div>
-  )
-}
 
-export default BlogSection1
+    return (
+                <div className="main-blog" key={selectedArticle}>
+                    <h1>{title}</h1>
+                    <span className="span">13th March 2024 <strong>&#x2022;</strong> <i className='bx bx-time'></i> 08:45</span>
+                    <img src={image} alt={`blog-pic-${selectedArticle}`} />
+                    <div className="blog-content">
+                        <ul className="sub-topics">
+                            {content.map((subTopic, index) => (
+                                <li
+                                    className='topic'
+                                    key={index}
+                                    onClick={() => handleClick(index)} ref={(el) => (titlesRefs.current[index]= el)}>
+                                    {subTopic.title}
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="content">
+                            {content.map((subTopic, index) => (
+                                <div id={`content-${index}`} className="content-1" key={index}>
+                                    <h2>{subTopic.title}</h2>
+                                    <p>{subTopic.content}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+    );
+};
+
+export default BlogSection1;
+
