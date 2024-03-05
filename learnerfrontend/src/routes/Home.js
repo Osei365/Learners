@@ -1,14 +1,13 @@
 import React from 'react';
-import Navbar from "../NavBar/NavBar";
-import BodySection from '../BodySection/BodySection';
-import Footer from '../Footer/Footer';
+import Navbar2 from "../NavBar/Navbar2";
+import Body from '../BodySection/Body';
+
 
 const Home= () => {
     return (
         <div>
-            <Navbar />
-            <BodySection />
-            <Footer />
+            <Navbar2 />
+            <Body />
         </div>
     )
 }

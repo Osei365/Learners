@@ -14,8 +14,8 @@ const Blog = () => {
   return (
     <div>
          <Navbar />
-         <BlogSection1 selectedArticle={selectedArticle} blogs={blogs} />
          <Articles onArticleClick={handleSelectedOne}  blogs={blogs}/>
+         <BlogSection1 selectedArticle={selectedArticle} blogs={blogs} />
         <Footer />
     </div>
   )

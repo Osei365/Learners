@@ -1,0 +1,105 @@
+
+.body1 {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    background: white;
+}
+.body1 .span1 {
+    padding: 10px 20px;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 20px;
+    font-size: 12px;
+    margin: 10px 0;
+}
+.body1 h1 {
+    font-size: 80px;
+    padding: 10px 0;
+}
+.body1 .span2 {
+    font-size: 18px;
+    
+}
+.body1 .container {
+    display: flex;
+    width: 100%;
+    height:400px;
+    position: relative;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.body1 .container .content1 {
+    width: 600px;
+    height: 300px;
+    background: rebeccapurple;
+    border-top-left-radius: 300px;
+    border-top-right-radius: 300px;
+    position: relative;
+}
+.body1 .container .content1  img{
+    position: absolute;
+    height: 390px;
+    top: -90px;
+    left: 15%;
+
+}
+.body1 .container .content1 .btn {
+   border: 10px solid white;
+   border-radius: 30px;
+    width: 150px;
+    height: 60px;
+    position: absolute;
+    bottom: 30px;
+    left: 40%;
+}
+
+.body1 .container .content1 .btn button {
+    background: rebeccapurple;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 20px;
+    font-size: 12px;
+    outline: none;
+   height: 100%;
+   width: 100%;
+    font-weight: 700;
+    box-shadow: 0px 5px 0px black;
+}
+.body1 .container .contentleft {
+    position: absolute;
+    left: 50px;
+    top: 80px; 
+    width: 300px;
+}
+.body1 .container .contentleft h2 {
+    width: 30px;
+    height: 50px;
+    font-size: 80px;
+}
+
+.body1 .container .contentleft span {
+    display: flex;
+    font-size: 18px;
+    font-weight: 500;
+    padding-bottom: 30px;
+    line-height: 20px;
+}
+.body1 .container .contentright {
+    position: absolute;
+    right: 50px;
+    top: 80px; 
+    width: 300px;
+    text-align: right;
+}
+
+.body1 .container .contentright .star {
+    margin-bottom: 30px;
+    color: rebeccapurple;
+}
+.body1 .container .contentright span {
+    font-size: 18px;
+    font-weight: 500;
+}

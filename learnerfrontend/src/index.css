@@ -42,7 +42,7 @@ button.white {
 body {
     width: 100%;
     min-height: 100vh;
-    background: var(--body-color); /* #faf9f9; */
+    background: #1a1a1a; /* #faf9f9; */
     overflow-x: hidden;
 }
 body.second-color {
