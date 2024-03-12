@@ -34,11 +34,11 @@ const Navbar2 = () => {
     return (
         <div className="navBar">
             <section className={`header-container ${isMenuOpen ? "active1" : ""}`}>
-                <span>Learners</span>
+            <span><Link to="/">Learners</Link></span>
                 <nav className={`header-carrier ${isMenuOpen ? "active" : ""}`}>
                     <ul>
                         <li><Link to="/about">About Us</Link></li>
-                        <li><Link to="#">Contact Us</Link></li>
+                        <li><Link to="/contact">Contact Us</Link></li>
                         <li><Link to="/blog">Our Blog</Link></li>
                     </ul>
                     <div className="activity-container">

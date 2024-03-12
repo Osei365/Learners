@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from "../NavBar/NavBar";
+import Navbar2 from "../NavBar/Navbar2";
 import BlogSection1 from '../blog/BlogSection1';
 import Footer from '../Footer/Footer';
 import Articles from '../blog/Articles';
@@ -13,7 +13,7 @@ const Blog = () => {
   }
   return (
     <div>
-         <Navbar />
+         <Navbar2 />
          <Articles onArticleClick={handleSelectedOne}  blogs={blogs}/>
          <BlogSection1 selectedArticle={selectedArticle} blogs={blogs} />
         <Footer />

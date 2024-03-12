@@ -17,13 +17,15 @@ const Body3 = () => {
         <div className="part2">
             <div className="lines">
                 <div className='div-1'>
-                    <div className='round'></div>
+                    <div className='round'><h1>1</h1></div>
                 </div>
                 <div className='div-2'>
-                    <div  className='round'></div>
+                    <div  className='round'><h1>2</h1></div>
                 </div>
                 <div className='div-3'>
-                    <div  className='round'></div>
+                    <div  className='round'><h1>3</h1></div>
+                </div>
+                <div className='div-4'>
                 </div>
             </div>
             <div className="Div-outer">

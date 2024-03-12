@@ -1,0 +1,124 @@
+.Footer1 {
+    margin-top: 200px;
+    background: #1a1a1a;
+    color: #fff;
+    width: 100%;
+    padding: 20px 60px;
+}
+
+.Footer1 .section1 {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.Footer1 .section1 .part1 h4,
+.Footer1 .section1 .part2 h4,
+.Footer1 .section1 .part3 h4,
+.Footer1 .section1 .part4  h4{
+    padding-bottom: 20px;
+    font-size: 20px;
+
+
+}
+.Footer1 .section1 .part1 a,
+.Footer1 .section1 .part2 a,
+.Footer1 .section1 .part3 a,
+.Footer1 .section1 .part4 a{
+    display: block;
+    line-height: 35px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #cbdccb;
+    font-weight: 200;
+}
+.Footer1 .section1 .part1 a:hover,
+.Footer1 .section1 .part2 a:hover,
+.Footer1 .section1 .part3 a:hover,
+.Footer1 .section1 .part4 a:hover {
+    color: rebeccapurple;
+}
+
+.Footer1 .section1 .part4 {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Footer1 .section1 .part4 .icon {
+    display: flex;
+}
+.Footer1 .section1 .part4 .icon i {
+    padding: 10px 10px;
+    border-radius: 50%;
+    background: #333;
+    margin-right: 10px;
+    color: #cbdccb;
+}
+.Footer1 .section1 .part4 .icon i:hover {
+    color: rebeccapurple;
+    background: #222;
+}
+.Footer1 .copy h1 {
+    font-family:my-Font;
+    font-size: 350px;
+    width: 100%;
+    text-align: center;
+    line-height: 200px;
+    margin:0;
+}
+.Footer1 .copy p{
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+@media (max-width: 799px) { 
+    .Footer1 .copy h1 {
+        font-size: 200px;
+        width: 100%;
+        text-align: center;
+        line-height: 100px;
+        margin:0;
+        }
+}
+
+@media screen and (max-width: 477px) { 
+    .Footer1 {
+        margin-top: 50px;
+        padding: 20px 20px;
+    }
+    .Footer1 .section1 .part1 h4, 
+    .Footer1 .section1 .part2 h4, 
+    .Footer1 .section1 .part3 h4, 
+    .Footer1 .section1 .part4  h4 {
+        padding-bottom: 10px;
+        font-size: 12px;
+    }
+    .Footer1 .section1 .part1 a, 
+    .Footer1 .section1 .part2 a, 
+    .Footer1 .section1 .part3 a, 
+    .Footer1 .section1 .part4 a {
+        font-size: 10px;
+        line-height: 18px;
+    }
+
+    .Footer1 .section1 .part4 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .Footer1 .section1 .part4 .icon i {
+        padding: 6px 6px;
+    }
+
+    .Footer1 .copy h1 {
+        font-size: 100px;
+        line-height: 80px;
+    }
+    .Footer1 .copy p {
+        font-size: 12px;
+        margin: 10px 0;
+    }
+}

@@ -8,7 +8,7 @@ import './Body2.css';
 
 const Body2 = () => {
   return (
-    <div className="contain">
+    <div className="contain5">
         <h6>Why Learners</h6>
         <h2>So Many Reasons To Start Here</h2>
         <p>Get, Set and Add questions for your students, with over 30 programming language</p>
@@ -30,23 +30,24 @@ const Body2 = () => {
             </li>
         </ul>
         <div className="lang-cnt">
-            <div className="cnt">
+            <div className="cnt1">
                 <h1>10K</h1>
                 <span>Teachers</span>
             </div>
-            <div className="cnt">
+            <div className="cnt1">
                 <h1>10K</h1>
                 <span>language</span>
             </div>
-            <div className="cnt">
+            <div className="cnt1">
                 <h1>75K</h1>
                 <span>Enrollments</span>
             </div>
-            <div className="cnt">
+            <div className="cnt1">
                 <h1>5K</h1>
                 <span>Enrollments</span>
             </div>
         </div>
+        
     </div>
   )
 }

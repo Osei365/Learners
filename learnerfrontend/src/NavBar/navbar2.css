@@ -22,11 +22,14 @@
     left: 0;
 }
 .header-container span {
+    display: block;
+    width: 40%;
+}
+.header-container span a {
+    text-decoration: none;
     font-family: my-Font;
     font-size: 60px;
     font-weight: 700;
-    display: block;
-    width: 40%;
     color: var( --dark-color1);
 }
 .header-container .header-carrier {
@@ -92,7 +95,7 @@
     .header-container {
         justify-content: space-between;
         width: 100%;
-        padding: 20px 20px;
+        padding: 25px 20px;
     }
     .header-container span  {
         width: 0%;
@@ -105,7 +108,7 @@
         justify-content: start;
         text-align: center;
         position: fixed;
-        top: 60px;
+        top: 90px;
         right: -100%;
         z-index: 999;
         transition: 0.3s;

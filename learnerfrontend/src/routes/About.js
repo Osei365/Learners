@@ -1,15 +1,15 @@
 import React from 'react';
-import Navbar from "../NavBar/NavBar";
+import Navbar2 from "../NavBar/Navbar2";
 import AboutSection from "../AboutSection/AboutSection";
-import Footer from '../Footer/Footer';
+import Footer1 from '../Footer/Footer1';
 
 
 const About = () => {
     return (
         <div>
-            <Navbar />
+            <Navbar2 />
             <AboutSection />
-            <Footer />
+            <Footer1 />
         </div>
     )
 }

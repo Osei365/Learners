@@ -7,7 +7,7 @@
     background-image: url("../assets/plain1.png");
     background-repeat: no-repeat;
     background-position: 20% 30%;
-    background-color: #1a1a1a;
+    background-color: #333;
 }
 #newsletter h4 {
     font-size: 22px;
@@ -18,7 +18,7 @@
 #newsletter p {
     font-size: 14px;
     font-weight: 500;
-    color: #99ffcc;
+    color: rebeccapurple;
 }
 #newsletter p span {
     color: #ffcc99;
@@ -46,7 +46,7 @@
     white-space: nowrap;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    background-color: #99ffcc;
+    background-color: rebeccapurple;
 }
 
 @media screen and (max-width: 1040px) {

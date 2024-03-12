@@ -24,13 +24,13 @@ const Body1 = () => {
             </div>
             <div className="contentright">
                 <div className="star">
-                <span><i class='bx bxs-star'></i></span>
-                <span><i class='bx bxs-star'></i></span>
-                <span><i class='bx bxs-star'></i></span>
-                <span><i class='bx bxs-star'></i></span>
-                <span><i class='bx bxs-star'></i></span>
+                    <span><i class='bx bxs-star'></i></span>
+                    <span><i class='bx bxs-star'></i></span>
+                    <span><i class='bx bxs-star'></i></span>
+                    <span><i class='bx bxs-star'></i></span>
+                    <span><i class='bx bxs-star'></i></span>
                 </div>
-                <span>"Learners has made teaching easy for most programming teachers, you can teach students from the comfort of my home"</span>
+                <span className='span-2'>"Learners has made teaching easy for most programming teachers, you can teach students from the comfort of my home"</span>
                 <span>Teachers</span>
             </div>
         </div>

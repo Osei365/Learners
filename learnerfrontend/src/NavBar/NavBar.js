@@ -34,7 +34,7 @@ const NavBar = () => {
     return (
         <div className="navBar">
             <section className={`header-container ${isMenuOpen ? "active1" : ""}`}>
-                <span>Learners</span>
+                <span><Link to="/">Learners</Link></span>
                 <nav className={`header-carrier ${isMenuOpen ? "active" : ""}`}>
                     <ul>
                         <li><Link to="/about">About Us</Link></li>

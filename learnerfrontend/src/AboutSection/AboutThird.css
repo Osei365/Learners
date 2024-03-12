@@ -5,21 +5,8 @@
     width: 100%;
     min-height: 60vh;
     border-radius: 15px;
-    box-shadow: 10px 5px 15px rgb(241, 241, 241);
     position: relative;
-}
-
-.about-details::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    margin: auto auto;
-    height: 65%;
-    background: #f2f8f5;
-    top: 10%;
-    left: 0;
-    transform: skew(60deg);
-    z-index: -3;
+    background: white;
 }
 
 .about-details .vision h1,
@@ -43,7 +30,7 @@
 }
 
 .about-details .div-button {
-    background: hsl(150, 100%, 80%);
+    background: rebeccapurple;
     padding: 15px 0px;
     width: 10%;
     text-align: center;

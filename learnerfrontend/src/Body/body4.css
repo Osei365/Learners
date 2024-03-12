@@ -1,0 +1,164 @@
+.body4 {
+    background: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 60px;
+}
+
+.body4 h5 {
+    display: inline-block;
+    padding: 10px 30px;
+    border: 1.5px solid #000;
+    border-radius: 30px;
+}
+.body4 h1 {
+    padding: 30px  0;
+}
+.body4 .testimony {
+    display: flex;
+    padding-top: 40px;
+    width: 100%;
+}
+.body4 .testimony .comment4 {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.body4 .testimony .picture4 {
+    flex: 1;
+    position: relative;
+}
+.body4 .testimony .comment4 h1 {
+    color: rebeccapurple;
+    padding: 0 0;
+    font-size: 40px;
+    height: 50px;
+}
+
+.body4 .testimony .comment4 p {
+    margin-top: 20px;
+    max-width: 700px;
+    line-height: 25px;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+.body4 .testimony .comment4 h4 {
+    color: #1a1a1a;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.body4 .testimony .comment4 span {
+    display: block;
+    color: rgb(172, 160, 160);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.body4 .testimony .picture4 .background {
+    width: 220px;
+    height: 280px;
+    background: rebeccapurple;
+    border: 1px solid #000;
+    border-radius: 100px;
+}
+.body4 .testimony .picture4  img {
+    position: absolute;
+    top: -57px;
+    left: -158px;
+    width: 550px;
+    border-bottom-left-radius: 550px;
+    border-bottom-right-radius: 550px;
+}
+
+@media (max-width: 799px) {
+    .body4 {
+        margin-top: -10px;
+    }
+    .body4 .testimony .comment4 {
+        flex: 1;
+    }
+    .body4 .testimony .comment4 p {
+        margin-top: 20px;
+        width: 300px;
+        line-height: 25px;
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .body4 .testimony .picture4 .background {
+        width: 200px;
+        height: 280px;
+        background: rebeccapurple;
+        border: 1px solid #000;
+        border-radius: 100px;
+        margin-left: 10px;
+    }
+
+    .body4 .testimony .picture4  img {
+        top: -27px;
+        left: -130px;
+        width: 500px;
+    }
+
+}
+@media screen and (max-width: 477px) {
+    .body4 {
+        padding: 20px 20px;
+    }
+
+    .body4 .testimony {
+        display: block;
+        padding-top: 10px;
+    }
+    .body4 h5 {
+        padding: 7px 20px;
+        font-size: 12px;
+    }
+    .body4 h1 {
+        padding: 10px  0;
+        font-size: 25px;
+    }
+    .body4 .testimony .comment4 {
+        align-items: flex-start;
+        margin-bottom: 40px; 
+    }
+    .body4 .testimony .comment4 h1 {
+        font-size: 30px;
+        height: 30px;
+    }
+    .body4 .testimony .comment4 p {
+        max-width: 100%;
+        line-height: 18px;
+        font-size: 12px;
+        margin-bottom: 30px;
+    }
+
+    .body4 .testimony .picture4 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .body4 .testimony .picture4 .background {
+        width: 160px;
+        height: 210px;
+
+    }
+    .body4 .testimony .picture4  img {
+        left: 5px;
+        width: 360px;
+    }
+}
+
+@media screen and (max-width: 361px) { 
+  
+    .body4 .testimony .picture4  img {
+        left: -4px;
+        width: 340px;
+        top: 0px;
+    }
+} 
+
