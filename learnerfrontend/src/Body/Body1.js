@@ -2,6 +2,7 @@ import React from 'react';
 import './Body1.css';
 import pics from "../assets/newpics.png";
 import 'boxicons/css/boxicons.min.css';
+import { Link } from 'react-router-dom';
 
 const Body1 = () => {
   return (
@@ -13,7 +14,7 @@ const Body1 = () => {
             <div className="content1">
                 <img src={pics} alt="ad-pics" />
                 <div className="btn">
-                <button>Get started  &rarr;</button>
+                <button><Link to="/sign-up">Get started  &rarr;</Link></button>
                 </div>
             </div>
             <div className="contentleft">

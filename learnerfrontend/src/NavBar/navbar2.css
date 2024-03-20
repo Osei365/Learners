@@ -64,12 +64,15 @@
 }
 .header-container .header-carrier .activity-container .sign-in {
     margin-right: 10px;
-    color: #1a1a1a;
     font-weight: 500;
     border: 1.5px solid #1a1a1a;
     padding: 10px 30px;
     border-radius: 25px;
     font-size: 18px;
+}
+.header-container .header-carrier .activity-container .sign-in a {
+    text-decoration: none;
+    color: #1a1a1a;
 }
 
 .header-container .contain{

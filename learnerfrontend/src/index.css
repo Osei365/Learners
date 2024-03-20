@@ -10,6 +10,11 @@
     font-family: my-Font;
     src: url(Quesha.ttf);
 }
+
+@font-face {
+    font-family: my-Font;
+    src: url(Quesha.ttf);
+}
 .section-p1 {
     padding: 40px 80px;
 }
@@ -44,6 +49,7 @@ body {
     min-height: 100vh;
     background: #1a1a1a; /* #faf9f9; */
     overflow-x: hidden;
+    position: relative;
 }
 body.second-color {
     --body-color: #fff;

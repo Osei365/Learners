@@ -12,7 +12,7 @@ const Body3 = () => {
             <h1>
                 How To Begin Your Journey as A Teacher
             </h1>
-            <Link to="#">Get Started</Link>
+            <Link to="/sign-up">Get Started</Link>
         </div>
         <div className="part2">
             <div className="lines">

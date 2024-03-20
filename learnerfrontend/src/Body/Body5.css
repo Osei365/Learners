@@ -105,7 +105,10 @@
     background: #fff;
     font-size: 14px;
 }
-
+.body .part3 .content h6 a {
+    text-decoration: none;
+    color: #1a1a1a;
+}
 
 @media (max-width: 799px) { 
     .body {
@@ -193,6 +196,7 @@
         padding: 3px 10px;
         font-size: 8px;
     }
+   
     .body .part3 .pics {
         flex: 0;
     }

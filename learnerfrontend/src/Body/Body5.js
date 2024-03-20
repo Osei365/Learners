@@ -2,6 +2,7 @@ import React from 'react';
 import './Body5.css';
 import support from '../assets/support.PNG';
 import man1 from '../assets/man1.PNG';
+import { Link } from "react-router-dom"
 
 const Body5 = () => {
   return (
@@ -26,7 +27,7 @@ const Body5 = () => {
             <div className="content">
                 <h1>Become A Tutor Today</h1>
                 <span>Join one of the world's largest online learning marketplaces.</span>
-                <h6>Get Started &#8594;</h6>
+                <h6><Link to="/sign-up">Get Started &#8594;</Link></h6>
             </div>
         </div>
     </div>

@@ -1,0 +1,344 @@
+@font-face {
+    font-family: myFont;
+    src: url('../fonts/GumelaRegular.ttf');
+    
+}
+
+@font-face {
+    font-family: fontBold;
+    src: url('../fonts/NoyhSlimR-Medium.ttf');
+    
+}
+@font-face {
+    font-family: fontBold2;
+    src: url('../fonts/SoftSemiBold.ttf');
+    
+}
+.containers {
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:100px 0;
+    background: rebeccapurple;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.welcome-me {
+    display: flex;
+    flex-direction: column;;
+    margin-bottom: 70px;
+    width: 400px;
+}
+
+.hello-msg {
+    font-family: fontBold2;
+    font-size: 90px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    line-height: 80px;
+}
+
+.greetings {
+    font-family: myFont;
+    font-size: 30px;
+}
+.sign-up{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    
+}
+
+.content-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+.em-cont, .em-conts {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-family: fontBold;
+    font-size: 20px;
+    background: rebeccapurple;
+}
+.em-cont i {
+    cursor: pointer;
+}
+input:focus {
+    background-color: black; 
+    z-index: 1;
+    background: rebeccapurple;
+}
+.m-ctrl {
+    display: flex;
+    position: relative;
+    border: 1px solid white;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+    align-items: center;
+    border-radius: 10px;
+}
+.the-control2, .the-control {
+    height: 50px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    background: rebeccapurple;
+    color: white;
+    font-family: fontBold;
+    font-size: 20px;
+    border: 1px solid white;
+    margin-bottom: 20px;
+}
+.the-control {
+    border: none;
+    width: 90%;
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.forgot {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    font-family: fontBold2;
+}
+.the-alert-danger {
+    position: absolute;
+    width: 20%;
+    height: 70px;
+    display: flex;
+    background: white;
+    color: black;
+    padding: 10px 10px;
+    justify-content: space-between;
+    border-radius: 30px;
+    top: 30%;
+    left: 35%;
+}
+.danger-btn {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    color: black;
+    border: none;
+    background: rgb(243, 241, 241);
+    border-radius: 7px;
+    font-size: 30px;
+}
+
+.the-alert-success {
+    position: absolute;
+    width: 20%;
+    height: 70px;
+    display: flex;
+    background: white;
+    color: black;
+    padding: 10px 10px;
+    justify-content: space-between;
+    border-radius: 30px;
+    top: 30%;
+    left: 35%;
+}
+.close-btn{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    color: black;
+    border: none;
+    background: rgb(243, 241, 241);
+    border-radius: 7px;
+    font-size: 30px;
+}
+
+.primary-btn {
+    height: 50px;
+    background-color: white;
+    outline: none;
+    border: none;
+    border-radius: 9px;
+    font-family: myFont;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .container {
+        margin-top: 100px;
+    }
+    
+    .welcome-me {
+        margin-bottom: 50px;
+        width: 200px;
+    }
+    
+    .hello-msg {
+        font-size: 45px;
+        line-height: 35px;
+    }
+    
+    .greetings {
+        font-family: myFont;
+        font-size: 14px;
+    }
+    .sign-up{
+        width: 200px;
+    }    
+    .em-cont {
+        font-size: 17px;
+    }
+    input:focus {
+        background-color: black; 
+    }
+    .m-ctrl {
+        height: 30px;
+        margin-bottom: 8px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    .the-control, .the-control2 {
+        height: 30px;
+        border-radius: 5px;
+        margin-bottom: 8px;
+        padding-left: 10px;
+        font-size: 17px;
+    }
+    .the-control {
+        border: none;
+        width: 90%;
+        height: 100%;
+        margin-bottom: 0;
+    }
+    
+    .forgot {
+        width: 100%;
+        font-size: 11px;
+    }
+    
+    .primary-btn {
+        height: 30px;
+        border-radius: 10px;
+        font-size: 13px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 896px) {
+    .container {
+        margin-top: 100px;
+    }
+    
+    .welcome-me {
+        margin-bottom: 50px;
+        width: 300px;
+    }
+    
+    .hello-msg {
+        font-size: 70px;
+        line-height: 60px;
+    }
+    
+    .greetings {
+        font-family: myFont;
+        font-size: 15px;
+    }
+    .sign-up{
+        width: 300px;
+    }    
+    .em-cont {
+        font-size: 20px;
+    }
+    .m-ctrl {
+        height: 40px;
+        margin-bottom: 10px;
+        border-radius: 9px;
+        font-size: 14px;
+    }
+
+    .the-control, .the-control2 {
+        height: 40px;
+        border-radius: 9px;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        font-size: 17px;
+        z-index: 1;
+    }
+    
+    .forgot {
+        width: 100%;
+        font-size: 12px;
+    }
+    
+    .primary-btn {
+        height: 40px;
+        border-radius: 9px;
+        font-size: 15px;
+    }
+}
+
+@media only screen and (min-width: 897px) and (max-width: 1024px) {
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1280px) {
+}
+
+@media only screen and (max-width: 280px) {
+    .container {
+        margin-top: 100px;
+    }
+    
+    .welcome-me {
+        margin-bottom: 50px;
+        width: 180px; 
+    }
+    
+    .hello-msg {
+        font-size: 40px;
+        line-height: 30px;
+    }
+    
+    .greetings {
+        font-family: myFont;
+        font-size: 14px;
+    }
+    .sign-up{
+        width: 180px;
+    }    
+    .em-cont {
+        font-size: 17px;
+    }
+    .m-ctrl {
+        height: 28px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .the-control, .the-control2 {
+        height: 28px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        padding-left: 8px;
+        font-size: 14px;
+    }
+    
+    .forgot {
+        width: 100%;
+        font-size: 10px;
+    }
+    
+    .primary-btn {
+        height: 28px;
+        border-radius: 9px;
+        font-size: 12px;
+    }
+
+}
