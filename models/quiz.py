@@ -1,7 +1,7 @@
 from models import db
 from models.question import question_quiz
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey, Integer
 
 class Quiz(db.Model):
     id = Column(String(120), primary_key=True)

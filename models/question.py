@@ -4,12 +4,12 @@ from sqlalchemy import Table, Column, Integer, String, ForeignKey
 question_quiz = Table(
     'question_quiz',
     Base.metadata,
-    Column('question_id', String(120), ForeignKey('quizs.id', onupdate='CASCADE', ondelete='CASCADE')),
-    Column('quiz_id', String(120), ForeignKey('questions.id', onupdate='CASCADE', ondelete='CASCADE'))
+    Column('question_id', String(120), ForeignKey('question.id', onupdate='CASCADE', ondelete='CASCADE')),
+    Column('quiz_id', String(120), ForeignKey('quiz.id', onupdate='CASCADE', ondelete='CASCADE'))
 )
 
 class Question(db.Model):
-    id = Column(Integer, primary_key=True)
+    id = Column(String(120), primary_key=True)
     teacher_id = Column(String(120), ForeignKey('teacher.id'), nullable=False) ## one to many relationship
     subject = Column(String(120), nullable=False) 
     header = Column(String(120))

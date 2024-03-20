@@ -1,9 +1,10 @@
 from models import db
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String, ForeignKey
+from flask_login import UserMixin
 
 
-class Teacher(db.Model):
+class Teacher(db.Model, UserMixin):
 
     id = Column(String(120), primary_key=True)
     name = Column(String(120), nullable=True)
