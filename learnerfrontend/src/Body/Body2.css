@@ -1,3 +1,58 @@
+
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+ * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'League Spartan';
+}
+
+.section-p1 {
+    padding: 40px 80px;
+}
+.section-m1 {
+    margin: 40px 0;
+}
+button.normal {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 30px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.02s;
+}
+button.white {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 18px;
+    color: #fff;
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid #fff;
+    outline: none;
+    transition: 0.02s;
+}
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: #1a1a1a; /* #faf9f9; */
+    overflow-x: hidden;
+    position: relative;
+}
+
+
+:root {
+    --body-color: #fff;
+    --text-color: rgb(29, 238, 29);
+    --colored-border: #333;
+    --dark-color: #0a032e;
+    --light-color: #fff;
+}
 .contain5 {
     color: white;
     display: flex;

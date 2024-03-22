@@ -1,3 +1,18 @@
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: #1a1a1a; /* #faf9f9; */
+    overflow-x: hidden;
+    position: relative;
+}
+
+:root {
+    --body-color: #fff;
+    --colored-border: #333;
+    --dark-color: #0a032e;
+    --light-color: #fff;
+}
+
 #about-head {
     width: 100%;
     display: flex;
@@ -6,10 +21,10 @@
     background-color: #1a1a1a;
     color: var(--light-color);
     min-height: 80vh;
-    margin-top: 20px;
-    border-radius: 12px;
-    box-shadow: 10px 5px 15px rgba(0,0, 0, 0.06);
-    margin-top: 100px;
+    border-radius: 15px;
+    box-shadow: 10px 7px 15px white;
+    margin-top: 93px;
+    /*border: 1px solid white;*/
 }
 #about-head .about-text {
     display: flex;

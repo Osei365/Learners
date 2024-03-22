@@ -42,7 +42,7 @@ const Navbar2 = () => {
                         <li><Link to="/blog">Our Blog</Link></li>
                     </ul>
                     <div className="activity-container">
-                        <div className="sign-in"><Link to="/sign-up">Sign In</Link></div>
+                        <div className="sign-in"><Link to="/dashboard">Sign In</Link></div>
                     </div>
                 </nav>
                 <div className="contain">

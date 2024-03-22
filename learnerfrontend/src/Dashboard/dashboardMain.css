@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&family=Quicksand:wght@300..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+/* ======globals===== */
+* {
+    font-family: "Ubuntu", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    --blue: #2a2185;
+    --white: #fff;
+    --purple: rebeccapurple;
+    --purple2: rebeccapurple;
+    --black1: #222;
+    --black2: #999;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --tran-03: all 0.3s ease;
+    --tran-05: all 0.5s ease;
+    --white2: #fff;
+    --white3: #fff;
+    --dark: #1a1a1a;
+    --purple3: rebeccapurple;
+    --grey: #333;
+    --boxshadow : rgba(0, 0, 0, 0.08);
+}
+
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--white);
+}
+
+body.dark {
+    --white: #222;
+    --white3: #fff;
+    --purple: #333;
+    --primary-color-light: #3A3B3C;
+    --purple2: #fff;
+    --white2: rebeccapurple;
+    --dark: #fff;
+    --black2: #fff; 
+    --grey: #fff;
+    --boxshadow: rgba(0, 0, 0, 0.9);
+}
+
+.main {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: var(--white);
+    transition: var(--tran-05);
+}
+.main.active {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+
+.topbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: var(--dark);
+}
+.search {
+    position: relative;
+    width: 400px;
+    margin: 0 10px;
+}
+
+.search label {
+    position:relative;
+    width: 100%;
+}
+.search label input {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 20px;
+    padding-left: 35px;
+    font-size: 18px;
+    outline: none;
+    border:1px solid var(--black2);
+}
+
+.search label i { 
+position: absolute;
+top: 0;
+left: 10px;
+font-size: 1.2rem;
+}
+
+.user {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 40px;
+    color: var(--dark);
+}
+
+.CardBox {
+    position: relative;
+    width: 100%;
+    padding:20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.CardBox .Cards {
+    position: relative;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px var(--boxshadow);
+
+}
+.CardBox .Cards .Numbers {
+    position: relative;
+    font-weight: 500;
+    font-size: 2rem;
+    color: var(--purple3);
+}
+
+.CardBox .Cards .CardName {
+    color: var(--black2);
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+.CardBox .Cards .iconBx {
+    font-size: 3rem;
+    color: var(--black2);
+}
+
+.CardBox .Cards:hover {
+    background: var(--purple3);
+}
+
+.CardBox .Cards:hover .Numbers,
+.CardBox .Cards:hover .CardName,
+.CardBox .Cards:hover .iconBx {
+    color: var(--white3);
+}
+
+/* =======table for all questions ======== */
+
+.Details {
+    position:relative;
+    width: 100%;
+    padding: 20px;
+   /* margin-top: 10px;*/
+}
+.Details .recentQuestions {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    background: var(--white);
+    padding:20px;
+    box-shadow: 0 7px 25px var(--boxshadow);
+    border-radius: 20px;
+}
+
+.Details .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cardHeader h2 {
+    font-weight: 600;
+    color: var(--purple3);
+}
+
+.cardHeader .btnd {
+    position: relative;
+    padding: 5px 10px;
+    background: var(--purple3);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+}
+.courses {
+    padding: 20px;
+    display: flex;
+    flex-direction:column;
+}
+.courses .course {
+    font-weight: 500;
+    font-size: 16px;
+    padding: 5px 7px;
+    border-radius: 10px;
+    margin: 5px 0;
+    box-shadow: 0 7px 25px var(--boxshadow);
+    color: var(--purple3);
+}
+
+.Details .recentQuestions {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.Details .recentQuestions .recent-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Details .recentQuestions .recent-container .recent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0px;
+    line-height: 25px;
+    color: var(--grey);
+    position: relative;
+}
+
+.Details .recentQuestions .recent-container .recent .quest-num {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 2rem;
+}
+
+.Details .recentQuestions .recent-container .recent img {
+    width: 300px;
+    border-radius: 6px;
+    margin: 20px 0px;
+}
+
+.Details .recentQuestions .recent-container .recent p {
+    font-weight: 500;
+    color: var(--grey);
+    line-height: 25px;
+    font-size: 16px;
+    margin: 10px 0px;
+}
+
+
+.Details .recentQuestions .recent-container .recent .checks {
+    display: flex;
+    margin: 10px 0px;
+    margin-left: 50px;
+    position: relative;
+    font-weight: 500;
+}
+.Details .recentQuestions .recent-container .recent .checks:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--grey);
+    background-image: url("../assets/uncheck.png");
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    top: 0px;
+    cursor: pointer;
+    left: -50px;
+}
+
+.Details .recentQuestions .recent-container .recent .checked:before {
+    background-image: url("../assets/ok.png");
+}
+
+
+
+  

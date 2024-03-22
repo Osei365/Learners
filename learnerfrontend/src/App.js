@@ -7,7 +7,8 @@ import Blog1 from "./routes/Blog1";
 import Contacts from "./routes/Contact";
 import SignUp from "./routes/signup";
 import SignIn from "./routes/SignIn";
-/*import DashBoard from './routes/dashboard';*/
+import DashBoard from './routes/dashboard';
+import Createtest from './routes/createTest';
 
 
 
@@ -21,7 +22,8 @@ function App() {
       <Route path="/contact" element={<Contacts />} />
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/sign-in" element={<SignIn />} />
-      {/*<Route path="/dashboard" element={<DashBoard />} />*/}
+      <Route path="/dashboard" element={<DashBoard />} />
+      <Route path="/createTest" element={<Createtest />} />
     </Routes>
     </div>
     
