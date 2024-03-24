@@ -8,6 +8,8 @@ from flask_migrate import Migrate
 from models.question import Question
 from models.quiz import Quiz
 from models.teacher import Teacher
+from models.score import Score
+from models.student import Student
 
 host = os.getenv('DATABASEHOST')
 password = os.getenv('DATABASEPASSWORD')
@@ -39,7 +41,5 @@ def home():
     print('something')
     return render_template('index.html')
     
-
-
 if __name__ == "__main__":
     app.run(threaded=True)

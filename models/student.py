@@ -7,7 +7,7 @@ from flask_login import UserMixin
 student_quiz = db.Table('student_quiz',
                         Base.metadata,
                         Column('student_id', String(120), ForeignKey('quiz.id', onupdate='CASCADE', ondelete='CASCADE')),
-                        Column('quiz_id'), String(120), ForeignKey('student.id'), onupdate='CASCADE', ondelete='CASCADE')
+                        Column('quiz_id', String(120), ForeignKey('student.id', onupdate='CASCADE', ondelete='CASCADE')))
 class Student(db.Model):
     """Student model"""
 

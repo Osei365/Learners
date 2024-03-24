@@ -23,8 +23,8 @@ def signup():
     teacher = Teacher(**json_doc)
     db.session.add(teacher)
     db.session.commit()
-    result = jsonify({"email": "{}".format(json_doc['email']),
-                          "id": "{}".format(json_doc['id'])})
+    result = jsonify({"id": "{}".format(json_doc['id']),
+                      'isValid': True})
     return result
     
 def hash_password(password):
