@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import './signup.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Redirect } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+import {  useNavigate } from "react-router-dom";
+import { useAuth } from '../AuthContext';
 
 const Signup = () => {
+    const navigate = useNavigate();
     const { loginUser } = useAuth();
     const [isPassword, setPassword] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -56,12 +57,12 @@ const Signup = () => {
     };
 
     if (isLoggedIn) {
-        return <Redirect to="/dashboard" />;
+        return  navigate("/dashboard");;
     }
 
     return (
     <div class="containers">
-        {error  & 
+        {error  && 
             <div class="logo">
                 {error}
             </div>

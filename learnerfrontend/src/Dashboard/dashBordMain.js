@@ -10,7 +10,7 @@ const subjectsList = uniqueSubjects(questions);
 
 
 const dashBoardMainItems = [
-    {id: 1, icons: <i class='bx bxs-graduation'></i>, CardName: "Available Courses", numbers: subjectsCount()},
+    {id: 1, icons: <i class='bx bxs-graduation'></i>, CardName: "Available Courses", numbers: subjectsCount},
     {id: 2, icons: <i class='bx bx-library'></i>, CardName: "All Questions", numbers: questions.length},
     {id: 3, icons: <i class='bx bx-male-female'></i>, CardName: "Students", numbers: 1024},
     {id: 4, icons: <i class='bx bx-code'></i>, CardName: "Trending", numbers: 1024},
@@ -84,7 +84,7 @@ const DashBoardMain = ({ handleToggle }) => {
             </div>
             {allCourses && (
                 <div className="courses">
-                    {subjectsList().map((course, index) => (
+                    {subjectsList.map((course, index) => (
                         <span key={index} className="course">{course}</span>
                     ))}
                 </div>

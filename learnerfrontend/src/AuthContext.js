@@ -12,17 +12,17 @@ export const AuthProvider = ({children}) =>  {
         setIsLogged(true);
     }
     const logout = () => {
-        setUserId(nul);
+        setUserId(null);
         setIsLogged(false);
     }
 
     return (
-        <AuthContext.Provider values={{userId, loginUser, logout, isLogged }}>
+        <AuthContext.Provider value={{userId, loginUser, logout, isLogged }}>
             {children}
         </AuthContext.Provider>
     )
 };
 
 export const useAuth = () => {
-    useContext(AuthContext);
+    return useContext(AuthContext);
 };
