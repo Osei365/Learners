@@ -6,7 +6,7 @@ from models.teacher import Teacher
 from flask import Flask, request, abort, jsonify
 
 
-@app_views.route('/signup', methods=['POST'])
+@app_views.route('/sign-up', methods=['POST'])
 def signup():
     json_doc = request.get_json()
     if not json_doc:
@@ -18,6 +18,7 @@ def signup():
     if 'password' not in json_doc:
         abort(404, description='password not present')
 
+    del json_doc['phone_number']
     json_doc['password'] = hash_password(json_doc['password'])
     json_doc['id'] = uuid.uuid4()
     teacher = Teacher(**json_doc)

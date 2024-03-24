@@ -1,5 +1,6 @@
 from models import db
 from models.question import question_quiz
+from models.student import student_quiz
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String, ForeignKey, Integer
 
@@ -10,3 +11,5 @@ class Quiz(db.Model):
     # relationships
     teacher = relationship('Teacher', back_populates='quizs')
     questions = relationship('Question', secondary=question_quiz, back_populates='quizs')
+    students = relationship('Student', secondary=student_quiz, back_populates='quizs')
+    scores = relationship('Score', back_populates='quiz')
