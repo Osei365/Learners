@@ -35,14 +35,6 @@ button.white {
     outline: none;
     transition: 0.02s;
 }
-body {
-    width: 100%;
-    min-height: 100vh;
-    background: #1a1a1a; /* #faf9f9; */
-    overflow-x: hidden;
-    position: relative;
-}
-
 
 :root {
     --body-color: #fff;
@@ -50,6 +42,7 @@ body {
     --colored-border: #333;
     --dark-color: #0a032e;
     --light-color: #fff;
+    --body-background: #1a1a1a;
 }
 @font-face {
     font-family: my-Font;
@@ -62,6 +55,13 @@ body {
     margin: 40px 0;
 }
 
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--body-background); /* #faf9f9; */
+    overflow-x: hidden;
+    position: relative;
+}
 .header-container {
     display: flex;
     width: 100%;

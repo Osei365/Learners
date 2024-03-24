@@ -12,8 +12,8 @@ const Body4 = () => {
           <div className="comment4">
               <h1><i class='bx bxs-quote-left'></i></h1>
               <p>"I'm proud to wake up knowing that there is a channel to make life easy for me as a teacher
-                where i have to worry myself about questions to give my studnets 
-                or even worry about materilas togive to student. ican do this from the comfort of my home anytime any day.
+                where i have to worry myself about questions to give my students 
+                or even worry about materials to give to student. I can do this from the comfort of my home anytime any day.
                 i can be a teacher and still take on other jobs".
               </p>
               <h4>Osei Williams</h4>

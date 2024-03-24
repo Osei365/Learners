@@ -9,7 +9,7 @@ const Signin = () => {
     const navigate = useNavigate();
 
     const [isPassword, setPassword] = useState(false);
-    const { loginUser } = useAuth();
+    const { loginUser, userId } = useAuth();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [error, setError] = useState(null);
 
@@ -30,7 +30,7 @@ const Signin = () => {
         console.log(formData);
 
         try {
-            const response = await fetch('127.0.0.1:5000', {
+            const response = await fetch('http://127.0.0.1:5000/api/learners/v1/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -44,12 +44,23 @@ const Signin = () => {
             const data = await response.json();
             console.log(data);
             loginUser(data.teacherId);
-                setIsLoggedIn(data.isValid);
+            console.log(userId);
+            if(data.isValid) {
+                setIsLoggedIn(true);
+                console.log(isLoggedIn);
+            } else {
+                setIsLoggedIn(false);
+            }
             setError(null);
         } catch (error) {
             setError(error.message);
         }
     };
+
+    if (isLoggedIn) {
+        return  navigate("/dashboard");;
+    }
+
 
     if (isLoggedIn) {
         return  navigate("/dashboard");

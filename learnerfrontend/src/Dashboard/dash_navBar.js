@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import 'boxicons/css/boxicons.min.css';
 import './dash_navBar.css';
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+import { useAuth } from '../AuthContext'; 
 
 
 const dashBoardItems = [
@@ -17,10 +18,13 @@ const dashBoardItems = [
 ];
 
 const DashNavBar = ({toggle}) => {
+    const { logout } = useAuth();
 
     const [darkMode, setDarkMode] = useState(false);
 
     const [activeItem, setActiveItem] = useState(null);
+    const navigate = useNavigate();
+
 
     const handleMouseOver = (itemId) => {
         setActiveItem(itemId);
@@ -31,16 +35,30 @@ const DashNavBar = ({toggle}) => {
         document.body.classList.toggle('dark');
     }
 
+    const handleLogout = () => {
+        logout();
+        navigate("/sign-in");
+    };
 
-   const DashboardItem = ({id, icon, name, link }) => {
+
+   const DashboardItem = ({id, icon, name, link, handleLogout }) => {
         return (
-            <li onMouseOver={() => handleMouseOver(id)}
-            className={activeItem === id ? 'hovered' : ''}>
+            link === '/logout' ? (<li onMouseOver={() => handleMouseOver(id)}
+            className={activeItem === id ? 'hovered' : ''} onClick={handleLogout}>
+                <Link to={link}>
+                    <span className="icon">{icon}</span>
+                    <span className="title">{name}</span>
+                </Link>
+            </li>) : (
+                <li onMouseOver={() => handleMouseOver(id)}
+                className={activeItem === id ? 'hovered' : ''}>
                 <Link to={link}>
                     <span className="icon">{icon}</span>
                     <span className="title">{name}</span>
                 </Link>
             </li>
+            )
+            
         );
     };
 
@@ -48,7 +66,7 @@ const DashNavBar = ({toggle}) => {
         <div className={`navigation ${toggle ? 'active' : ''}`}>
             <ul>
             {dashBoardItems.map(item => (
-                    <DashboardItem key={item.id}  id={item.id} icon={item.icon} name={item.name} link={item.link} />
+                    <DashboardItem key={item.id}  id={item.id} icon={item.icon} name={item.name} link={item.link} handleLogout={handleLogout} />
                 ))}
                 <li className="mode">
                     <div className="mode-inner">
