@@ -2,40 +2,15 @@ import React, {useState} from 'react';
 import './dashboardMain.css';
 import {Link} from 'react-router-dom';
 import questions from './questions';
+import { uniqueSubjects } from './daashboardutils';
 
-/*const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-};*/
-const subjectLength = () => {
-    const allSubjects = [];
-    for(let i = 0; i < questions.length; i++) {
-        const subject = questions[i].subject
-        if(subject  && !allSubjects.includes(subject)) {
-            allSubjects.push(subject);
-        }
-    }
-    console.log(allSubjects);
-    return allSubjects.length;
-}
 
-const availableCourses = () => {
-    const allSubjects = [];
-    for(let i = 0; i < questions.length; i++) {
-        const subject = questions[i].subject
-        if(subject  && !allSubjects.includes(subject)) {
-            allSubjects.push(subject);
-        }
-    }
-    console.log(allSubjects);
-    return allSubjects;
-}
+const subjectsCount = uniqueSubjects(questions, true);
+const subjectsList = uniqueSubjects(questions);
+
 
 const dashBoardMainItems = [
-    {id: 1, icons: <i class='bx bxs-graduation'></i>, CardName: "Available Courses", numbers: subjectLength()},
+    {id: 1, icons: <i class='bx bxs-graduation'></i>, CardName: "Available Courses", numbers: subjectsCount()},
     {id: 2, icons: <i class='bx bx-library'></i>, CardName: "All Questions", numbers: questions.length},
     {id: 3, icons: <i class='bx bx-male-female'></i>, CardName: "Students", numbers: 1024},
     {id: 4, icons: <i class='bx bx-code'></i>, CardName: "Trending", numbers: 1024},
@@ -109,7 +84,7 @@ const DashBoardMain = ({ handleToggle }) => {
             </div>
             {allCourses && (
                 <div className="courses">
-                    {availableCourses().map((course, index) => (
+                    {subjectsList().map((course, index) => (
                         <span key={index} className="course">{course}</span>
                     ))}
                 </div>

@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import './signup.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { Redirect } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 const Signup = () => {
-    
-    const [isPassword1, setPassword1] = useState(false);
-    const [isPassword2, setPassword2] = useState(false);
+    const { loginUser } = useAuth();
+    const [isPassword, setPassword] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [error, setError] = useState(null);
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -15,29 +18,60 @@ const Signup = () => {
         password: '',
         institution: ''
     });
-
+    
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value});
     }
     
-    const togglePassword1 = () => {
-        setPassword1(prevState => !prevState);
+    const togglePassword = () => {
+        setPassword(prevState => !prevState);
     };
 
-    const togglePassword2 = () => {
-        setPassword2(prevState => !prevState);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch('api/learners/v1/sign-up', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            if(!response.ok) {
+                throw new Error("Sign Up failed");
+            }
+
+            const data = await response.json();
+            loginUser(data.teacherId);
+            if(data.isValid === "True" ) {
+                setIsLoggedIn(true);
+            } else {
+                setIsLoggedIn(false);
+            }
+            setError(null);
+        } catch (error) {
+            setError(error.message);
+        }
     };
-    
-  return (
+
+    if (isLoggedIn) {
+        return <Redirect to="/dashboard" />;
+    }
+
+    return (
     <div class="containers">
-        <div class="logo">
-        </div>
+        {error  & 
+            <div class="logo">
+                {error}
+            </div>
+        }
         <div class="welcome-me">
             <span class="hello-msg">Hello</span>
             <span class="greetings">Welcome Tutors!</span>
         </div>
         <div class="sign-up">
-            <form method="POST">
+            <form onSubmit={handleSubmit}>
                 <div class="content-div">
                     <div class="em-cont">
                         <label for="first_name">First Name</label>
@@ -76,18 +110,6 @@ const Signup = () => {
                         />
                     </div>
                     <div class="em-cont">
-                        <label for="phone_number">Phone Number</label>
-                        <input 
-                            type="number"
-                            class="the-control2"
-                            id="phoneNumber"
-                            value={formData.phone_number}
-                            onChange={handleChange}
-                            name="phoneNumber" 
-                            placeholder="Enter Last Name"
-                        />
-                    </div>
-                    <div class="em-cont">
                         <label for="institution">Institution</label>
                         <input 
                             type="text"
@@ -103,7 +125,7 @@ const Signup = () => {
                         <label for="password">Password</label>
                         <div class="m-ctrl">
                         <input 
-                                    type={isPassword1 ? 'text' : 'password'}
+                                    type={isPassword ? 'text' : 'password'}
                                     className="the-control"
                                     value={formData.password}
                                     onChange={handleChange}
@@ -112,31 +134,11 @@ const Signup = () => {
                                     placeholder="Enter password" 
                                 />
                                 <FontAwesomeIcon 
-                                    icon={isPassword1 ? faEyeSlash : faEye}
+                                    icon={isPassword ? faEyeSlash : faEye}
                                     id="togglePassword" 
-                                    onClick={togglePassword1} 
+                                    onClick={togglePassword} 
                                     style={{ cursor: 'pointer' }}
                                     /> 
-                        </div>
-                    </div>
-                    <div class="em-cont">
-                        <label for="password2">Confirm Password</label>
-                        <div class="m-ctrl">
-                        <input 
-                                    type={isPassword2 ? 'text' : 'password' }
-                                    className="the-control"
-                                    id="password2"
-                                    name="password2" 
-                                    value={formData.password2}
-                                    onChange={handleChange}
-                                    placeholder="Confirm password"
-                                />
-                               <FontAwesomeIcon 
-                                    icon={isPassword2 ? faEyeSlash : faEye}
-                                    id="togglePassword2" 
-                                    onClick={togglePassword2} 
-                                    style={{ cursor: 'pointer' }} 
-                                    />
                         </div>
                     </div>
                     <br />

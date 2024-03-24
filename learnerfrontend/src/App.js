@@ -9,6 +9,7 @@ import SignUp from "./routes/signup";
 import SignIn from "./routes/SignIn";
 import DashBoard from './routes/dashboard';
 import Createtest from './routes/createTest';
+import CreatedBy from "./routes/CreatedBy";
 
 
 
@@ -24,6 +25,7 @@ function App() {
       <Route path="/sign-in" element={<SignIn />} />
       <Route path="/dashboard" element={<DashBoard />} />
       <Route path="/createTest" element={<Createtest />} />
+      <Route path="/created" element={<CreatedBy />} />
     </Routes>
     </div>
     

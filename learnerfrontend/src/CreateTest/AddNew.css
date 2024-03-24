@@ -55,12 +55,56 @@ body.dark {
     flex-direction: column;
     margin: 0px auto;
 }
+.choosen .num-of-questions {
+    width: 100%;
+}
+.choosen .num-of-questions form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.choosen .num-of-questions label {
+    font-weight: 500;
+    color: var(--purple3);
+    margin-bottom: 10px;
+    font-size: 20px;
+    width: 100%;
+}
 
-.choosen h2 {
-    color: var(--black2);
-    padding-left: 5px;
+.choosen .num-of-questions input {
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0px 7px 25px rgba(0, 0, 0, 0.3);
+    background: var(--white3);
+    color: var(--purple3);
+    padding: 10px;
+    margin: 20px 0px;
+    outline: none;
+    font-size: 18px;
     font-weight: 500;
 }
+
+.choosen .num-of-questions form  input[type="text"]:focus {
+    background: var(--white);
+    color: var(--black2);
+} 
+.choosen .num-of-questions button {
+    width: 200px;
+    height: 50px;
+    background: var(--dark2);
+    color: var(--white3);
+    margin: 0;
+}
+.choosen h2 {
+    color: var(--black1);
+    padding-left: 5px;
+    font-weight: 500;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 
 .choosen .question-details {
     display: flex;

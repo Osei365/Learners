@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import './Sign-in.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { Redirect } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 const Signin = () => {
 
     const [isPassword, setPassword] = useState(false);
+    const { loginUser } = useAuth();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [error, setError] = useState(null);
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -18,6 +24,38 @@ const Signin = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value});
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch('api/learners/v1/sign-up', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            if(!response.ok) {
+                throw new Error("Sign Up failed");
+            }
+
+            const data = await response.json();
+            loginUser(data.teacherId);
+            if(data.isValid === "True" ) {
+                setIsLoggedIn(true);
+            } else {
+                setIsLoggedIn(false);
+            }
+            setError(null);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    if (isLoggedIn) {
+        return <Redirect to="/dashboard" />;
+    }
+
 
   return (
     <div class="container3">
@@ -28,7 +66,7 @@ const Signin = () => {
                 <span class="greetings2">Welcome back Tutors!</span>
             </div>
             <div class="logging2">
-                <form> 
+                <form onSubmit={handleSubmit}> 
                     <div class="content-div2">
                         <div class="em-cont2">
                             <label for="email">Email</label>

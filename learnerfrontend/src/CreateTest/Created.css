@@ -23,6 +23,8 @@
     --dark: #1a1a1a;
     --purple3: rebeccapurple;
     --grey: #333;
+    --boxshadow: rgba(0, 0, 0, 0.08);
+    --white4: #fff;
 }
 
 
@@ -42,9 +44,10 @@ body.dark {
     --dark: #fff;
     --black2: #fff; 
     --grey: #fff;
+    --boxshadow: rgba(0, 0, 0, 0.9);
 }
 
-.mainC {
+.mainD {
     position: absolute;
     width: calc(100% - 300px);
     left: 300px;
@@ -52,12 +55,12 @@ body.dark {
     background: var(--white);
     transition: var(--tran-05);
 }
-.mainC.activeC {
+.mainD.activeD {
     width: calc(100% - 80px);
     left: 80px;
 }
 
-.topbarC {
+.topbarD {
     width: 100%;
     height: 60px;
     display: flex;
@@ -65,7 +68,7 @@ body.dark {
     align-items: center;
 }
 
-.toggleC {
+.toggleD {
     position: relative;
     width: 60px;
     height: 60px;
@@ -76,17 +79,17 @@ body.dark {
     cursor: pointer;
     color: var(--dark);
 }
-.searchC {
+.searchD {
     position: relative;
     width: 400px;
     margin: 0 10px;
 }
 
-.searchC label {
+.searchD label {
     position:relative;
     width: 100%;
 }
-.searchC label input {
+.searchD label input {
     width: 100%;
     height: 40px;
     border-radius: 40px;
@@ -97,14 +100,14 @@ body.dark {
     border:1px solid var(--black2);
 }
 
-.searchC label i { 
+.searchD label i { 
 position: absolute;
 top: 0;
 left: 10px;
 font-size: 1.2rem;
 }
 
-.userC {
+.userD {
     position: relative;
     width: 40px;
     height: 40px;
@@ -113,55 +116,73 @@ font-size: 1.2rem;
     font-size: 40px;
     color: var(--dark);
 }
-.To-Do {
-    padding: 30px 100px;
+.boxes {
+    width: 100%;
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
-.To-Do .add-new,
-.To-Do .add-existing {
-    width: 400px;
-    height: 200px;
+.boxes .box1 {
+    width: 300px;
+    height: 100px;
+    border-radius: 20px;
+    box-shadow: 0px 7px 25px var(--boxshadow);
     display: flex;
-    justify-content: space-between;
-    border-radius: 10px;
-    box-shadow: 0 7px 25px var(--boxshadow);
+    justify-content: space-around;
     align-items: center;
-    padding: 0px 40px;
-    margin-bottom: 40px;
+    font-size: 1.2rem;
 }
-.To-Do .add-new:hover,
-.To-Do .add-existing:hover {
+
+.boxes .box1 .icn-bx {
+    font-size: 2rem;
+}
+.boxes .box1:hover {
+    background: var(--white2);
+    color: var(--purple2);
+}
+.boxes .box2 {
     background: var(--purple3);
-    cursor: pointer;
-}
-
-.To-Do .add-new {
-    background: orangered;
-    
-}
-.To-Do .add-existing {
-    background:  rgb(99, 247, 99);
-}
-
-.To-Do .add-new .new,
-.To-Do .add-existing .new {
-    font-size: 1.75rem;
     color: var(--white);
-    max-width: 200px;
-    line-height: 2rem;
+}
 
+.boxes .box0 {
+    background: rgb(99, 247, 99);
+    color: var(--white);
 }
-.To-Do .add-new .icon-new ,
-.To-Do .add-existing .icon-new {
-    font-size: 2.5rem;
-    color: var(--black2);
+.boxes .box3 {
+    background: orangered;
+    color: var(--white);
 }
-.To-Do .add-new:hover .new,
-.To-Do .add-existing:hover .icon-new,
-.To-Do .add-existing:hover .new,
-.To-Do .add-new:hover .icon-new {
-    color: var(--white3);
+.created-quiz {
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    box-shadow: 0px 7px 25px var(--boxshadow);
+    margin-left: 20px;
+}
+.created-quiz h2 {
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--purple3);
+    padding: 20px 0px;
+    padding-top: 5px;
+}
+
+.created-quiz .courseBox {
+    width: 100%;
+}
+
+.created-quiz .courseBox .Cbx {
+    padding: 10px;
+    color: var(--black1);
+    box-shadow: 0px 7px 25px var(--boxshadow);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.created-quiz .courseBox .Cbx:hover {
+    background: orangered;
+    color: var(--white);
 }
