@@ -13,7 +13,7 @@ def login():
     password = data.get('password')
     teacher = db.one_or_404(db.select(Teacher).filter_by(email=email))
     if bcrypt.checkpw(password.encode('utf-8'), teacher.password):
-        result = jsonify({"id": "{}".format(teacher.id),
+        result = jsonify({"teacherId": "{}".format(teacher.id),
                           "isValid": True})
     else:
         abort(404)

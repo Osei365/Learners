@@ -8,7 +8,7 @@ from flask import Flask, request, abort, jsonify
 
 @app_views.route('/signup', methods=['POST'])
 def signup():
-    json_doc = dict(request.form)
+    json_doc = request.get_json()
     if not json_doc:
         abort(404, description='Not a JSON')
 
@@ -23,7 +23,7 @@ def signup():
     teacher = Teacher(**json_doc)
     db.session.add(teacher)
     db.session.commit()
-    result = jsonify({"id": "{}".format(json_doc['id']),
+    result = jsonify({"teacherId": "{}".format(json_doc['id']),
                       'isValid': True})
     return result
     
