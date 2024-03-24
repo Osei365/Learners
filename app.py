@@ -5,6 +5,7 @@ from api.v1.views import app_views
 from models import db
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_cors import CORS
 from models.question import Question
 from models.quiz import Quiz
 from models.teacher import Teacher
@@ -18,6 +19,7 @@ database = os.getenv('DATABASE')
 db_uri = 'mysql+pymysql://{}:{}@{}/{}'.format(user, password, host, database)
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
 app.register_blueprint(app_views)
 app.secret_key = os.urandom(24)

@@ -32,7 +32,7 @@ const Signup = () => {
         console.log(formData);
 
         try {
-            const response = await fetch('api/learners/v1/sign-up', {
+            const response = await fetch('http://127.0.0.1:5000/api/learners/v1/sign-up', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -44,8 +44,9 @@ const Signup = () => {
             }
 
             const data = await response.json();
+            console.log(data);
             loginUser(data.teacherId);
-            if(data.isValid === "True" ) {
+            if(data.isValid) {
                 setIsLoggedIn(true);
             } else {
                 setIsLoggedIn(false);

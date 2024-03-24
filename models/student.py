@@ -18,3 +18,4 @@ class Student(db.Model):
 
     # relationship
     quizs = relationship('Quiz', secondary=student_quiz, back_populates='students')
+    scores = relationship('Score', back_populates='student')
