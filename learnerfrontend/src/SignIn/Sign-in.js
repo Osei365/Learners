@@ -27,9 +27,10 @@ const Signin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(formData);
 
         try {
-            const response = await fetch('api/learners/v1/sign-up', {
+            const response = await fetch('127.0.0.1:5000', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,12 +42,9 @@ const Signin = () => {
             }
 
             const data = await response.json();
+            console.log(data);
             loginUser(data.teacherId);
-            if(data.isValid === "True" ) {
-                setIsLoggedIn(true);
-            } else {
-                setIsLoggedIn(false);
-            }
+                setIsLoggedIn(data.isValid);
             setError(null);
         } catch (error) {
             setError(error.message);

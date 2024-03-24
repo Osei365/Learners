@@ -18,7 +18,6 @@ def signup():
     if 'password' not in json_doc:
         abort(404, description='password not present')
 
-    del json_doc['phone_number']
     json_doc['password'] = hash_password(json_doc['password'])
     json_doc['id'] = uuid.uuid4()
     teacher = Teacher(**json_doc)

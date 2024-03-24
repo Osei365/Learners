@@ -7,7 +7,7 @@ import { useAuth } from '../AuthContext';
 
 const Signup = () => {
     const navigate = useNavigate();
-    const { loginUser } = useAuth();
+    const { userId, loginUser } = useAuth();
     const [isPassword, setPassword] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [error, setError] = useState(null);
@@ -46,8 +46,10 @@ const Signup = () => {
             const data = await response.json();
             console.log(data);
             loginUser(data.teacherId);
+            console.log(userId);
             if(data.isValid) {
                 setIsLoggedIn(true);
+                console.log(isLoggedIn);
             } else {
                 setIsLoggedIn(false);
             }

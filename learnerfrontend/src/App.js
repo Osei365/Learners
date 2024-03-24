@@ -20,19 +20,15 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog1 />} />
         <Route path="/contact" element={<Contacts />} />
-        {userId ? (
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        {userId && 
             <>
             <Route path="/dashboard" element={<DashBoard userId={userId} />} />
             <Route path="/createTest" element={<Createtest userId={userId} />} />
             <Route path="/created" element={<CreatedBy userId={userId} />} />
             </>
-        ) : (
-            <>
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            </>
-        )}
-        <Route path="*" element={<Navigate to="/" />} />
+        }
     </Routes>
   );
 }
