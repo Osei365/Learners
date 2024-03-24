@@ -14,7 +14,6 @@ const Signup = () => {
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
-        phone_number: '',
         email: '',
         password: '',
         institution: ''
@@ -30,6 +29,7 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(formData);
 
         try {
             const response = await fetch('api/learners/v1/sign-up', {

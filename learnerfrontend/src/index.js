@@ -6,10 +6,10 @@ import { AuthProvider } from './AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <AuthProvider>
+    <BrowserRouter>
+        <AuthProvider>
             <App />
-    </AuthProvider>
-  </BrowserRouter>
+        </AuthProvider>
+    </BrowserRouter>
 );
 

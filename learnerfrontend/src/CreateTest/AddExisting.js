@@ -8,7 +8,7 @@ const AddExisting = () => {
 
     const submitQuestion = () => {
         const questionId = [];
-        const selectedQuestions = []; // Initialize selectedQuestions array here
+        const selectedQuestions = [];
     
         checkedStates.forEach((state, index) => {
             if (state !== null) {
@@ -71,7 +71,7 @@ const AddExisting = () => {
     }
     <button className="sub-btn" onClick={submitQuestion}>Create Quiz</button>
     </div>
-  )
+)
 }
 
 export default AddExisting

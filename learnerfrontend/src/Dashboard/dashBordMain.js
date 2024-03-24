@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './dashboardMain.css';
 import {Link} from 'react-router-dom';
 import questions from './questions';
-import { uniqueSubjects } from './daashboardutils';
+import { uniqueSubjects } from './dashboardutils';
 
 
 const subjectsCount = uniqueSubjects(questions, true);
