@@ -15,8 +15,22 @@ const CreateTest = () => {
         const handleCreateNew = () => {
             setCreateNew(true);
         }
-        const handleCreateExisting = () => {
+        const handleCreateExisting = async () => {
             setCreateNew(false);
+
+            /*try {
+                const response = await fetch('http://127.0.0.1:5000/api/learners/v1/all-questions', {
+                    method: 'GET',
+                });
+                if(!response.ok) {
+                    throw new Error("Sign Up failed");
+                }
+    
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                setError(error.message);
+            }*/
         }
 
   return (

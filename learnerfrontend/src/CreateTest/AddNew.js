@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import './AddNew.css';
 import QuestionForm from './QuestionForm';
+import { useAuth } from '../AuthContext';
 
 
 const AddNew = () => {
     const [numQuestions, setNumQuestions] = useState(1);
     const [showForm, setShowForm] = useState(true);
     const [questions, setQuestions] = useState([]);
+    const { userId } = useAuth();
 
     const handleNumQuestionsChange = (e) => {
         setNumQuestions(parseInt(e.target.value));
@@ -31,9 +33,27 @@ const AddNew = () => {
     };
 
 
-        const handleSubmit = (e) => {
+        const handleSubmit = async (e) => {
             e.preventDefault();
             console.log("Submitting questions:", questions);
+
+            try {
+                const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/all-questions/${userId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(questions)
+                });
+                if(!response.ok) {
+                    throw new Error("cerating quetion failed");
+                }
+    
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
         };
 
     return (
