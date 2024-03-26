@@ -1,22 +1,46 @@
+import React, {useState } from 'react';
+import { useAuth } from '../AuthContext';
 import React, {useState, useRef} from 'react';
 import questions from '../Dashboard/questions';
 import './AllExisting.css';
 
 
 
-const AddExisting = () => {
+const AddExisting = ({ questions }) => {
+    console.log('existing ', questions );
     const [checkedStates, setCheckedStates] = useState(Array(questions.length).fill(null));
+    const [ userId ] = useAuth();
     const containerRef = useRef(null);
 
-    const submitQuestion = () => {
+    const submitQuestion = async () => {
         const questionId = [];
         const selectedQuestions = [];``
     
+        checkedStates.forEach((state) => {
         checkedStates.forEach((state  ) => {
             if (state !== null) {
                 questionId.push(state);
             }
         });
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/create-existing/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify({ids : questionId})
+            });
+            if(!response.ok) {
+                throw new Error("Error posting Id");
+            }
+
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+          console.log('The Error: ', error.message);
+        }
+        console.log(questionId);
+
     
         questions.forEach((question) => {
             if (questionId.includes(question.id)) { // Check if question ID is in questionId array
@@ -39,22 +63,24 @@ const AddExisting = () => {
         setCheckedStates(Array(questions.length).fill(null));
     };
 
-    const handleCheck = (questionIndex) => {
-        const updatedStates = [...checkedStates];
-        if(updatedStates[questionIndex] === null) {
-            updatedStates[questionIndex] = questionIndex;
-            setCheckedStates(updatedStates);
-        } else if(updatedStates[questionIndex] === questionIndex) {
-            updatedStates[questionIndex] = null;
-            setCheckedStates(updatedStates);
-        }
-        
+        const handleCheck = (questionIndex, questionId) => {
+            const updatedStates = [...checkedStates];
+            if(updatedStates[questionIndex] === null) {
+                updatedStates[questionIndex] = questionId;
+                setCheckedStates(updatedStates);
+            } else if(updatedStates[questionIndex] === questionId) {
+                updatedStates[questionIndex] = null;
+                setCheckedStates(updatedStates);
+            }
     };
+
   return (
     <div className="choosen2">
         <h2>Create Quiz from Pre Existing Question</h2>
         <h4>Select Question</h4>
         {questions.map((items, questionIndex) => (
+            <div  id={items.id} key={questionIndex} onClick={() => handleCheck(questionIndex, items.id)} className="Each-question">
+                <span  id={items.id} className={`Each-quest-num ${checkedStates[questionIndex] === items.id ? 'checked' : ''}`} onClick={() => handleCheck(questionIndex)}>Question {questionIndex}</span>
             <div id={items.id} key={questionIndex} onClick={() => handleCheck(questionIndex)} className="Each-question">
                 <span className={`Each-quest-num ${checkedStates[questionIndex] === questionIndex ? 'checked' : ''}`} onClick={() => handleCheck(questionIndex)}>Question {items.id}</span>
                 <span className="subject"><strong>Subject: </strong>{items.subject}</span>
@@ -66,7 +92,7 @@ const AddExisting = () => {
                     <span><strong>B: </strong> {items.wrong_answer1}</span>
                     <span><strong>C: </strong> {items.wrong_answer2}</span>
                     <span><strong>D: </strong> {items.wrong_answer3}</span>
-                    <span><strong>F: </strong> {items.wrong_answer4}</span>
+                    <span><strong>E: </strong> {items.wrong_answer4}</span>
                 </div>
             </div>
         ))

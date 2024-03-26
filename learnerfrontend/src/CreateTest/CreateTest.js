@@ -12,7 +12,8 @@ const CreateTest = () => {
     const handleToggle = () => {
         setToggle(prevState => !prevState);
         console.log(toggle);
-        };
+    };
+
         const handleCreateNew = () => {
             setCreateNew(true);
         }
@@ -43,11 +44,11 @@ const CreateTest = () => {
                 </div>
             </div>
             <div className="To-Do">
-                <div to="/add-new" className="add-new" onClick={handleCreateNew}>
+                <div className="add-new" onClick={handleCreateNew}>
                         <span className="new">Create New Quiz</span>
                         <span className="icon-new"><i class='bx bx-plus'></i></span>
                 </div>
-                <div to="/add-existing" className="add-existing" onClick={handleCreateExisting}>
+                <div className="add-existing" onClick={handleCreateExisting}>
                     <span className="new">Add From pre existing question</span>
                     <span className="icon-new"><i class='bx bx-edit-alt'></i></span>
                 </div>
