@@ -63,10 +63,11 @@
     width: 100%;
     font-family: fontBold;
     font-size: 20px;
-}
-input:focus {
-    background-color:rebeccapurple; 
     z-index: 1;
+}
+input[type="text"]:focus {
+    background-color:rebeccapurple; 
+    z-index: 2;
 }
 .m-ctrl2 {
     display: flex;
@@ -84,6 +85,7 @@ input:focus {
     margin-bottom: 10px;
     border: none;
     outline: none;
+    padding-right: 30px;
     padding-left: 10px;
     background: rebeccapurple;
     color: white;
@@ -93,9 +95,16 @@ input:focus {
 }
 .the-control1 {
     border: none;
-    width: 90%;
+    width: 100%;
     height: 100%;
     margin-bottom: 0;
+    z-index: 1;
+}
+.font-tag {
+    position: absolute;
+    color: #1a1a1a;
+    right: 5px;
+    z-index: 2;
 }
 
 .forgot {

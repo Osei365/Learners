@@ -16,7 +16,7 @@ const AddNew = () => {
     const setDetailsList = (event) => {
         event.preventDefault();
         setShowForm(false);
-        console.log("Submitted");
+          console.log("Submitted");
     }
 
     /*const isSubmitDisabled = () => {

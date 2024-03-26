@@ -4,10 +4,12 @@ import 'boxicons/css/boxicons.min.css';
 import AddNew from './AddNew';
 import AddExisting from './AddExisting';
 import './CreateTest.css';
+import { get } from 'request';
 
 const CreateTest = () => {
     const [toggle, setToggle ] = useState(false);
     const [createNew, setCreateNew] = useState(null);
+    const [questions, setQuestion ] = useState(null);
     const handleToggle = () => {
         setToggle(prevState => !prevState);
         console.log(toggle);
@@ -15,8 +17,15 @@ const CreateTest = () => {
         const handleCreateNew = () => {
             setCreateNew(true);
         }
-        const handleCreateExisting = () => {
+        const handleCreateExisting = async () => {
             setCreateNew(false);
+
+            const response = await fetch('http://127.0.0.1:5000/api/learners/v1/');
+            if(!response.ok) {
+                throw new Error('Error fetching questions');
+            }
+            const data = await response.json();
+            
         }
 
   return (

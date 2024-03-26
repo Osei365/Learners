@@ -8,7 +8,7 @@ const AddExisting = () => {
 
     const submitQuestion = () => {
         const questionId = [];
-        const selectedQuestions = [];
+        const selectedQuestions = [];``
     
         checkedStates.forEach((state, index) => {
             if (state !== null) {

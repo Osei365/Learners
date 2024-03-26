@@ -142,6 +142,7 @@ const Signup = () => {
                                     id="togglePassword" 
                                     onClick={togglePassword} 
                                     style={{ cursor: 'pointer' }}
+                                    className="font-tag"
                                     /> 
                         </div>
                     </div>

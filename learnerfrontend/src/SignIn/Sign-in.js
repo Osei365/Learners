@@ -103,11 +103,12 @@ const Signin = () => {
                                     onChange={handleChange}
                                     placeholder="Enter password" 
                                 />
-                                <FontAwesomeIcon 
+                                 <FontAwesomeIcon 
                                     icon={isPassword ? faEyeSlash : faEye}
                                     id="togglePassword" 
                                     onClick={togglePassword} 
                                     style={{ cursor: 'pointer'  }} 
+                                    className="font-tag"
                                     />
                                 </div>
                         </div>
