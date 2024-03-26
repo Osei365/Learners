@@ -19,7 +19,7 @@ const CreateTest = () => {
         }
         const handleCreateExisting = async () => {
             setCreateNew(false);
-            const response = await fetch('http://127.0.0.1:5000/api/learners/v1/');
+            const response = await fetch('http://127.0.0.1:5000/api/learners/v1/all-questions');
             if(!response.ok) {
                 throw new Error('Error fetching questions');
             }

@@ -61,6 +61,7 @@ def create_existing(id):
     """creates a quiz from pre existing"""
 
     question_dict = request.get_json()
+    print(question_dict)
     if not question_dict:
         abort(404)
     question_id_list = question_dict['ids']
