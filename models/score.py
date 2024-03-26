@@ -8,6 +8,7 @@ class Score(db.Model):
     id = Column(String(120), primary_key=True)
     student_id = Column(String(120), ForeignKey('student.id'))
     quiz_id = Column(String(120), ForeignKey('quiz.id'))
+    score = Column(Integer, nullable=False)
 
 
     student = relationship('Student', back_populates='scores')

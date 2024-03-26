@@ -1,5 +1,5 @@
 from models import db, Base
-from sqlalchemy import Table, Column, Integer, String, ForeignKey
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, Text
 
 question_quiz = Table(
     'question_quiz',
@@ -13,7 +13,7 @@ class Question(db.Model):
     teacher_id = Column(String(120), ForeignKey('teacher.id'), nullable=False) ## one to many relationship
     subject = Column(String(120), nullable=False) 
     header = Column(String(120))
-    body = Column(String(120))
+    body = Column(Text)
     image = Column(String(120))
     right_answer = Column(String(120))
     wrong_answer1 = Column(String(120))

@@ -20,12 +20,28 @@ const CreateTest = () => {
         const handleCreateExisting = async () => {
             setCreateNew(false);
 
+<<<<<<< HEAD
             const response = await fetch('http://127.0.0.1:5000/api/learners/v1/');
             if(!response.ok) {
                 throw new Error('Error fetching questions');
             }
             const data = await response.json();
             
+=======
+            /*try {
+                const response = await fetch('http://127.0.0.1:5000/api/learners/v1/all-questions', {
+                    method: 'GET',
+                });
+                if(!response.ok) {
+                    throw new Error("Sign Up failed");
+                }
+    
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                setError(error.message);
+            }*/
+>>>>>>> 14e7dfb9c5944826c456994c6cc1e76c9878e4ec
         }
 
   return (
