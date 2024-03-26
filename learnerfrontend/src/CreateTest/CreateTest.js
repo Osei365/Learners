@@ -8,7 +8,7 @@ import './CreateTest.css';
 const CreateTest = () => {
     const [toggle, setToggle ] = useState(false);
     const [createNew, setCreateNew] = useState(null);
-    /*const [questions, setQuestions ]  = useState([]);*/
+    const [questions, setQuestions ]  = useState([]);
     let data;
     
 
@@ -21,6 +21,7 @@ const CreateTest = () => {
             setCreateNew(true);
         }
         const handleCreateExisting = async () => {
+            setCreateNew(false);
             
             try {
                 const response =  await fetch('http://127.0.0.1:5000/api/learners/v1/all-questions');
@@ -29,13 +30,13 @@ const CreateTest = () => {
                 }
                 data = await response.json();
                 console.log(data);
-                /*setQuestions([...data]);
-                for(let i = 0; i < data.length; i++) {
-                    console.log('the data: ', data[i]);
-                    questions.push(data[i]);
+                setQuestions([...data]);
+                // for(let i = 0; i < data.length; i++) {
+                //     console.log('the data: ', data[i]);
+                //     questions.push(data[i]);
                     
-                }
-                console.log(questions);*/
+                // }
+                // console.log(questions);
              } catch (error) {
               console.log('The Error: ', error.message);
             }
@@ -74,7 +75,7 @@ const CreateTest = () => {
                     <>
                         {createNew ? 
                             (<AddNew />) :
-                            (<AddExisting questions={data}/>)
+                            (<AddExisting questions={questions}/>)
                         }
                     </>
                 )}

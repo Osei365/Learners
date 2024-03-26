@@ -7,7 +7,7 @@ import './AllExisting.css';
 const AddExisting = ({ questions }) => {
     console.log('existing ', questions );
     const [checkedStates, setCheckedStates] = useState(Array(questions.length).fill(null));
-    const [ userId ] = useAuth();
+    const { userId } = useAuth();
 
     const submitQuestion = async () => {
         const questionId = [];
@@ -17,6 +17,7 @@ const AddExisting = ({ questions }) => {
                 questionId.push(state);
             }
         });
+        console.log(questionId);
         try {
             const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/create-existing/${userId}`, {
                 method: 'POST',

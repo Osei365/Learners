@@ -2,14 +2,33 @@ import React, {useState} from 'react';
 import DashNavBar from '../Dashboard/dash_navBar';
 import 'boxicons/css/boxicons.min.css';
 import './Created.css';
-/*import questions from '../Dashboard/questions';*/
+import { useAuth } from '../AuthContext';
 
 const Created = () => {
     const [toggle, setToggle ] = useState(false);
+    const [views,  setViews ] = useState(null);
+    const { userId } = useAuth();
+    const [ quiz, setQuiz ] = useState();
+
     const handleToggle = () => {
         setToggle(prevState => !prevState);
         console.log(toggle);
         };
+
+        const handleAllQuiz = async () => {
+            setViews(true);
+
+            const response = await fetch(`http://127.0.0.1:5000/api/learners/v1//teacher-quiz/${userId}`);
+            if(!response.ok) {
+                throw new Error('failed to get all quiz');
+            }
+            const data = await response.json();
+            console.log(data);
+
+        }
+        const handleCourses = () => {
+            setViews(false);
+        }
 
   return (
     <div className="container">
@@ -28,29 +47,28 @@ const Created = () => {
                 </div>
             </div>
             <div className="boxes">
-                <div className="box1 box0">
+                <div className="box1 box0" onClick={handleAllQuiz}>
                     <span class="textspan">All Created Quiz</span>
                     <span className="icn-bx"><i class='bx bx-podcast'></i></span>    
                 </div>
-                <div className="box1 box2">
-                <span class="textspan">All Students</span>
-                    <span className="icn-bx"><i class='bx bx-child'></i></span> 
-                </div>
-                <div className="box1 box3">
+                <div className="box1 box3" onClick={handleCourses}>
                     <span class="textspan">Courses Taken</span>
                     <span className="icn-bx"><i class='bx bx-folder'></i></span> 
                 </div>
             </div>
             <div className="created-quiz">
-                <h2>Click on Any course to see Quizzes Created By you</h2>
-                <div className="courseBox">
-                    <div className="Cbx" >Python</div>
-                    <div className="Cbx" >C</div>
-                    <div className="Cbx" >php</div>
-                    <div className="Cbx" >Java</div>
-                    <div className="Cbx" >C++</div>
-                    <div className="Cbx" >c#</div>
-                </div>
+            {views !== null && (
+                    <>
+                        {views ? 
+                            (<div className="all-quiz">My girl
+                                <div className="quiz-box">
+
+                                </div>
+                            </div>) :
+                            (<div className="all-courses">My boy</div>)
+                        }
+                    </>
+                )}
             </div>
         </div>
     </div>
