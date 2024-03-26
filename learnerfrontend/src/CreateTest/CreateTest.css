@@ -114,10 +114,10 @@ font-size: 1.2rem;
     color: var(--dark);
 }
 .To-Do {
-    padding: 30px 100px;
+    padding: 10px 70px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .To-Do .add-new,
@@ -148,7 +148,7 @@ font-size: 1.2rem;
 
 .To-Do .add-new .new,
 .To-Do .add-existing .new {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     color: var(--white);
     max-width: 200px;
     line-height: 2rem;
