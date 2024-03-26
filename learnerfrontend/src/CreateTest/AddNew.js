@@ -16,7 +16,7 @@ const AddNew = () => {
     };
 
     const setDetailsList = (event) => {
-        event.preventDefault();
+      event.preventDefault();
         setShowForm(false);
           console.log("Submitted");
     }

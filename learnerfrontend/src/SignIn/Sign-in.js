@@ -46,7 +46,7 @@ const Signin = () => {
             loginUser(data.teacherId);
             console.log(userId);
             if(data.isValid) {
-                setIsLoggedIn(true);
+                setIsLoggedIn(data.isValid);
                 console.log(isLoggedIn);
             } else {
                 setIsLoggedIn(false);

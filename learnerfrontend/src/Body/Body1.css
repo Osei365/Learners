@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 14e7dfb9c5944826c456994c6cc1e76c9878e4ec
 body {
     width: 100%;
     min-height: 100vh;
@@ -9,11 +5,6 @@ body {
     overflow-x: hidden;
     position: relative;
 }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 14e7dfb9c5944826c456994c6cc1e76c9878e4ec
 .body1 {
     margin-top: 80px;
     display: flex;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './routes/Home';
 import About from './routes/About';
 import Blog1 from "./routes/Blog1";
@@ -11,9 +11,9 @@ import Createtest from './routes/createTest';
 import CreatedBy from "./routes/CreatedBy";
 import { useAuth } from './AuthContext';
 
+
 function App() {
   const { userId } = useAuth();
-
   return (
     <Routes>
         <Route path="/" element={<Home />} />
@@ -22,13 +22,13 @@ function App() {
         <Route path="/contact" element={<Contacts />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
-        {userId && 
-            <>
-            <Route path="/dashboard" element={<DashBoard userId={userId} />} />
-            <Route path="/createTest" element={<Createtest userId={userId} />} />
-            <Route path="/created" element={<CreatedBy userId={userId} />} />
-            </>
-        }
+        {userId && (
+          <>
+        <Route path="/dashboard" element={<DashBoard  />} />
+        <Route path="/createTest" element={<Createtest  />} />
+        <Route path="/created" element={<CreatedBy />} />
+        </>
+        )}
     </Routes>
   );
 }

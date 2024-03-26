@@ -24,7 +24,7 @@ const CreateTest = () => {
                 throw new Error('Error fetching questions');
             }
             const data = await response.json();
-                setQuestions(...data);
+                setQuestion([...data]);
         }
 
   return (
@@ -57,7 +57,7 @@ const CreateTest = () => {
                     <>
                         {createNew ? 
                             (<AddNew />) :
-                            (<AddExisting />)
+                            (<AddExisting  questions={questions} />)
                         }
                     </>
                 )}
