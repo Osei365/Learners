@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import questions from '../Dashboard/questions';
 import './AllExisting.css';
 
@@ -6,17 +6,17 @@ import './AllExisting.css';
 
 const AddExisting = () => {
     const [checkedStates, setCheckedStates] = useState(Array(questions.length).fill(null));
+    const containerRef = useRef(null);
 
     const submitQuestion = () => {
         const questionId = [];
         const selectedQuestions = [];``
     
-        checkedStates.forEach((state, index) => {
+        checkedStates.forEach((state  ) => {
             if (state !== null) {
                 questionId.push(state);
             }
         });
-
     
         questions.forEach((question) => {
             if (questionId.includes(question.id)) { // Check if question ID is in questionId array
@@ -55,7 +55,7 @@ const AddExisting = () => {
         <h2>Create Quiz from Pre Existing Question</h2>
         <h4>Select Question</h4>
         {questions.map((items, questionIndex) => (
-            <div  id={items.id} key={questionIndex} onClick={() => handleCheck(questionIndex)} className="Each-question">
+            <div id={items.id} key={questionIndex} onClick={() => handleCheck(questionIndex)} className="Each-question">
                 <span className={`Each-quest-num ${checkedStates[questionIndex] === questionIndex ? 'checked' : ''}`} onClick={() => handleCheck(questionIndex)}>Question {items.id}</span>
                 <span className="subject"><strong>Subject: </strong>{items.subject}</span>
                 <span className="header"><strong>Header: </strong>{items.header}</span>

@@ -4,12 +4,11 @@ import 'boxicons/css/boxicons.min.css';
 import AddNew from './AddNew';
 import AddExisting from './AddExisting';
 import './CreateTest.css';
-import { get } from 'request';
 
 const CreateTest = () => {
     const [toggle, setToggle ] = useState(false);
     const [createNew, setCreateNew] = useState(null);
-    const [questions, setQuestion ] = useState(null);
+    const [questions, setQuestion ] = useState([]);
     const handleToggle = () => {
         setToggle(prevState => !prevState);
         console.log(toggle);
@@ -19,29 +18,12 @@ const CreateTest = () => {
         }
         const handleCreateExisting = async () => {
             setCreateNew(false);
-
-<<<<<<< HEAD
             const response = await fetch('http://127.0.0.1:5000/api/learners/v1/');
             if(!response.ok) {
                 throw new Error('Error fetching questions');
             }
             const data = await response.json();
-            
-=======
-            /*try {
-                const response = await fetch('http://127.0.0.1:5000/api/learners/v1/all-questions', {
-                    method: 'GET',
-                });
-                if(!response.ok) {
-                    throw new Error("Sign Up failed");
-                }
-    
-                const data = await response.json();
-                console.log(data);
-            } catch (error) {
-                setError(error.message);
-            }*/
->>>>>>> 14e7dfb9c5944826c456994c6cc1e76c9878e4ec
+                setQuestions(...data);
         }
 
   return (
