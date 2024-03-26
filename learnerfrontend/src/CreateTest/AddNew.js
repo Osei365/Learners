@@ -38,7 +38,7 @@ const AddNew = () => {
             console.log("Submitting questions:", questions);
 
             try {
-                const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/all-questions/${userId}`, {
+                const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/create-new/${userId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

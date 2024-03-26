@@ -8,6 +8,11 @@ import './CreateTest.css';
 const CreateTest = () => {
     const [toggle, setToggle ] = useState(false);
     const [createNew, setCreateNew] = useState(null);
+    /*const [questions, setQuestions ]  = useState([]);*/
+    let data;
+    
+
+
     const handleToggle = () => {
         setToggle(prevState => !prevState);
         console.log(toggle);
@@ -16,22 +21,28 @@ const CreateTest = () => {
             setCreateNew(true);
         }
         const handleCreateExisting = async () => {
-            setCreateNew(false);
-
-            /*try {
-                const response = await fetch('http://127.0.0.1:5000/api/learners/v1/all-questions', {
-                    method: 'GET',
-                });
+            
+            try {
+                const response =  await fetch('http://127.0.0.1:5000/api/learners/v1/all-questions');
                 if(!response.ok) {
-                    throw new Error("Sign Up failed");
+                    throw new Error("Error fetching Questions");
                 }
-    
-                const data = await response.json();
+                data = await response.json();
                 console.log(data);
-            } catch (error) {
-                setError(error.message);
-            }*/
+                /*setQuestions([...data]);
+                for(let i = 0; i < data.length; i++) {
+                    console.log('the data: ', data[i]);
+                    questions.push(data[i]);
+                    
+                }
+                console.log(questions);*/
+             } catch (error) {
+              console.log('The Error: ', error.message);
+            }
+            setCreateNew(false);
         }
+        
+        /*console.log('All questions: ', questions);*/
 
   return (
     <div className="container">
@@ -50,11 +61,11 @@ const CreateTest = () => {
                 </div>
             </div>
             <div className="To-Do">
-                <div to="/add-new" className="add-new" onClick={handleCreateNew}>
+                <div className="add-new" onClick={handleCreateNew}>
                         <span className="new">Create New Quiz</span>
                         <span className="icon-new"><i class='bx bx-plus'></i></span>
                 </div>
-                <div to="/add-existing" className="add-existing" onClick={handleCreateExisting}>
+                <div className="add-existing" onClick={handleCreateExisting}>
                     <span className="new">Add From pre existing question</span>
                     <span className="icon-new"><i class='bx bx-edit-alt'></i></span>
                 </div>
@@ -63,7 +74,7 @@ const CreateTest = () => {
                     <>
                         {createNew ? 
                             (<AddNew />) :
-                            (<AddExisting />)
+                            (<AddExisting questions={data}/>)
                         }
                     </>
                 )}
