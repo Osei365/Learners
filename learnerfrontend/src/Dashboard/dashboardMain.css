@@ -285,6 +285,36 @@ font-size: 1.2rem;
     background-image: url("../assets/ok.png");
 }
 
+.pagination {
+    margin-top: 20px;
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+
+}
+.pagination .prev,
+.pagination .current {
+    padding: 7px 15px;
+    background: var(--dark2);
+    color: var(--white3);
+    font-size: 14px;
+    border-radius: 5px;
+}
+.pagination .key {
+    padding: 10px 15px;
+    background: rgb(230, 229, 229);
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+}
+.pagination .prev:hover,
+.pagination .current:hover {
+    background: var(--purple3);
+    cursor: pointer;
+}
+
 
 
   

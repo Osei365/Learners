@@ -1,27 +1,39 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import './dashboardMain.css';
 import {Link} from 'react-router-dom';
-import questions from './questions';
 import { uniqueSubjects } from './dashboardutils';
 
 
-const subjectsCount = uniqueSubjects(questions, true);
-const subjectsList = uniqueSubjects(questions);
-
-
-const dashBoardMainItems = [
-    {id: 1, icons: <i class='bx bxs-graduation'></i>, CardName: "Available Courses", numbers: subjectsCount},
-    {id: 2, icons: <i class='bx bx-library'></i>, CardName: "All Questions", numbers: questions.length},
-    {id: 3, icons: <i class='bx bx-male-female'></i>, CardName: "Students", numbers: 1024},
-    {id: 4, icons: <i class='bx bx-code'></i>, CardName: "Trending", numbers: 1024},
-];
-
-
 const DashBoardMain = ({ handleToggle }) => {
-
+    const [questions, setQuestions] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5);
     const [checkedStates, setCheckedStates] = useState(Array(questions.length).fill(null));
     const [viewAll, setViewAll] = useState(false);
     const [allCourses, setAllCourses] = useState(false);
+
+    useEffect(() => {
+        const fetchQuestions = async () => {
+            try {
+                const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/all-questions`);
+                if (!response.ok) {
+                    throw new Error('Error fetching questions');
+                }
+                const data = await response.json();
+                setQuestions(data);
+            } catch (error) {
+                console.error('Error fetching questions:', error.message);
+            }
+        };
+        fetchQuestions();
+    }, []);
+    const totalPages = Math.ceil(questions.length / itemsPerPage);
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentQuestions = questions.slice(indexOfFirstItem, indexOfLastItem);
 
     const handleCheck = (questionIndex, spanIndex) => {
         const updatedStates = [...checkedStates];
@@ -35,6 +47,15 @@ const DashBoardMain = ({ handleToggle }) => {
     const handleAvailableCourses = () => {
         setAllCourses(prevState => !prevState);
     }
+    const subjectsCount = uniqueSubjects(questions, true);
+    const subjectsList = uniqueSubjects(questions);
+
+    const dashBoardMainItems = [
+        {id: 1, icons: <i class='bx bxs-graduation'></i>, CardName: "Available Courses", numbers: subjectsCount},
+        {id: 2, icons: <i class='bx bx-library'></i>, CardName: "All Questions", numbers: questions.length},
+        {id: 3, icons: <i class='bx bx-male-female'></i>, CardName: "Students", numbers: 1024},
+        {id: 4, icons: <i class='bx bx-code'></i>, CardName: "Trending", numbers: 1024},
+    ];
 
     const handleCardClick = (id) => {
         // Perform actions based on the id of the clicked card
@@ -96,14 +117,16 @@ const DashBoardMain = ({ handleToggle }) => {
                         <Link to="#" className="btnd" onClick={handleViewAll}>{viewAll ? "View Less" : "View All"}</Link>
                     </div>
                     <div className="recent-container">
-                        {viewAll ? (
-                            questions.map((items, questionIndex) => (
+                    {viewAll ? (
+                        <>
+                            {currentQuestions.map((items, questionIndex) => (
                                 <div className="recent" key={items.id}>
-                                    <span className="quest-num">Question {items.id}</span>
+                                    {/* Render question details */}
+                                    <span className="quest-num">Question {questionIndex + 1}</span>
                                     <span><strong>Subject: </strong>{items.subject}</span>
                                     <span><strong>Header: </strong>{items.header}</span>
                                     {items.image && <img src={items.image} alt={`img-${items.id}`} />}
-                                    <p>{items.Body}</p>
+                                    <p>{items.body}</p>
                                     {Array.from({ length: 5 }).map((_, spanIndex) => (
                                         <span
                                             key={spanIndex}
@@ -114,17 +137,30 @@ const DashBoardMain = ({ handleToggle }) => {
                                         </span>
                                     ))}
                                 </div>
-                            ))
-                        ) : (
-                            questions.slice(0, 5).map((items, questionIndex) => (
+                            ))}
+                            {/* Pagination controls */}
+                            <div className="pagination">
+                                <button className="prev" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Prev</button>
+                                {Array.from({ length: totalPages }).map((_, index) => (
+                                    <button key={index} className="key" onClick={() => handlePageChange(index + 1)}>{index + 1}</button>
+                                ))}
+                                <button className="current" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            {questions.slice(0, 5).map((items, questionIndex) => (
                                 <div className="recent" key={items.id}>
-                                    <span className="quest-num">Question {items.id}</span>
+                                    {/* Render question details */}
+                                    <span className="quest-num">Question {questionIndex}</span>
                                     <span><strong>Subject: </strong>{items.subject}</span>
                                     <span><strong>Header: </strong>{items.header}</span>
-                                    <p>{items.Body}</p>
+                                    <p>{items.body}</p>
                                 </div>
-                            ))
-                        )}
+                            ))}
+                        </>
+)}
+
                     </div>
                 </div>
             </div>

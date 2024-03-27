@@ -6,6 +6,21 @@ const AddExisting = ({ questions }) => {
     console.log('existing ', questions);
     const [checkedStates, setCheckedStates] = useState(Array(questions.length).fill(null));
     const { userId } = useAuth();
+    const [showQuestion, setShowQuestion] = useState(true);
+    const [testDuration, setDuration] = useState(null);
+
+    const setDetailsList = (event) => {
+        event.preventDefault();
+        setShowQuestion(false);
+            console.log("Submitted");
+            console.log(testDuration);
+  
+      }
+
+      const handleDuration = (e) => {
+        setDuration(e.target.value);
+    }
+  
 
     const submitQuestion = async () => {
         const questionId = checkedStates.filter(state => state !== null);
@@ -15,13 +30,14 @@ const AddExisting = ({ questions }) => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ ids: questionId })
+                body: JSON.stringify({ ids: questionId, duration: testDuration })
             });
             if (!response.ok) {
                 throw new Error("Error posting Id");
             }
             const data = await response.json();
             console.log(data);
+            setCheckedStates(Array(questions.length).fill(null));
         } catch (error) {
             console.log('The Error: ', error.message);
         }
@@ -43,9 +59,12 @@ const AddExisting = ({ questions }) => {
     return (
         <div className="choosen2">
             <h2>Create Quiz from Pre Existing Question</h2>
-            <h4>Select Question</h4>
-            {questions.map((items, questionIndex) => (
-                <div key={items.id} className="Each-question">
+            {testDuration !== null && !showQuestion ? 
+            (
+                <>
+                <h4>Select Question</h4>
+                {questions.map((items, questionIndex) => (
+                    <div key={items.id} className="Each-question">
                     <span
                         className={`Each-quest-num ${checkedStates[questionIndex] === items.id ? 'checked' : ''}`}
                         onClick={() => handleCheck(questionIndex, items.id)}>
@@ -65,8 +84,23 @@ const AddExisting = ({ questions }) => {
                         </div>
                     </div>
                 </div>
-            ))}
-            <button className="sub-btn" onClick={submitQuestion}>Create Quiz</button>
+                ))}
+                <button className="sub-btn" onClick={submitQuestion}>Create Quiz</button>
+                </>) : (
+                <div className="duration">
+                    <form onSubmit={setDetailsList}>
+                        <label className="label">Test Duration</label>
+                        <input
+                            className="new-input"
+                            type="time"
+                            id="duration"
+                            value={testDuration}
+                            onChange={handleDuration }
+                        />
+                        <button type="submit" className="submit-Btn">Set Duration</button>
+                    </form>
+                </div>
+            )}
         </div>
     );
 };

@@ -6,6 +6,7 @@ import { useAuth } from '../AuthContext';
 
 const AddNew = () => {
     const [numQuestions, setNumQuestions] = useState(1);
+    const [testDuration, setDuration] = useState(null);
     const [showForm, setShowForm] = useState(true);
     const [questions, setQuestions] = useState([]);
     const { userId } = useAuth();
@@ -14,11 +15,16 @@ const AddNew = () => {
         setNumQuestions(parseInt(e.target.value));
         setQuestions(Array.from({ length: parseInt(e.target.value) }, () => ({})));
     };
+    const handleDuration = (e) => {
+        setDuration(e.target.value);
+    }
 
     const setDetailsList = (event) => {
       event.preventDefault();
         setShowForm(false);
           console.log("Submitted");
+          console.log(testDuration);
+
     }
 
     /*const isSubmitDisabled = () => {
@@ -36,14 +42,13 @@ const AddNew = () => {
         const handleSubmit = async (e) => {
             e.preventDefault();
             console.log("Submitting questions:", questions);
-
             try {
                 const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/create-new/${userId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(questions)
+                    body: JSON.stringify({questions: questions, duration: testDuration})
                 });
                 if(!response.ok) {
                     throw new Error("cerating quetion failed");
@@ -78,6 +83,15 @@ const AddNew = () => {
                             id="numberOfQuestions"
                             value={numQuestions}
                             onChange={handleNumQuestionsChange }
+                        />
+                        <label className="label">Test Duration</label>
+                        <input
+                            className="new-input"
+                            type="time"
+                            id="duration"
+                            value={testDuration}
+                            onChange={handleDuration }
+                            placeholder="e.g 1hr 30 min"
                         />
                         <button type="submit" className="submit-details-btn">Set Questions</button>
                     </form>
