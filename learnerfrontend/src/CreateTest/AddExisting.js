@@ -9,6 +9,7 @@ const AddExisting = ({ questions }) => {
     const [showQuestion, setShowQuestion] = useState(true);
     const [testDuration, setDuration] = useState(30);
     const [ quizId, setQuizId ] = useState(null);
+    const [code , setCode] = useState(null);
 
     const setDetailsList = (event) => {
         event.preventDefault();
@@ -38,6 +39,7 @@ const AddExisting = ({ questions }) => {
             }
             const data = await response.json();
             console.log(data);
+            setCode(data.code);
             setQuizId(data.quiz_id);
             setCheckedStates(Array(questions.length).fill(null));
         } catch (error) {
@@ -58,12 +60,23 @@ const AddExisting = ({ questions }) => {
         });
     };
 
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text)
+            .then(() => alert("Link copied"))
+            .catch((error) => console.error("Failed to copy link: ", error));
+    };
+
+
     return (
         <div className="choosen2">
             {quizId ? (
                 <div className="quiz-id-section">
-                    <h2>Quiz ID: {quizId}</h2>
-                    {/* Add copy icon functionality here */}
+                    <h2>Copy Test Link For Students</h2>
+                    <div className="link">
+                        <span>api/learners/v1/take-quiz/{quizId}</span>
+                        <span><i class='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${quizId}`)}></i></span>
+                    </div>
+                    <span>PassCode: {code} <i class='bx bx-copy' onClick={() => copyToClipboard(`${code}`)}></i></span>
                 </div>
             ) : (
                 <div>

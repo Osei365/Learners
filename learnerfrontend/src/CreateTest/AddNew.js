@@ -10,6 +10,7 @@ const AddNew = () => {
     const [questions, setQuestions] = useState([]);
     const { userId } = useAuth();
     const [quizId, setQuizId] = useState(null);
+    const [code, setCode ] = useState(null);
     const handleNumQuestionsChange = (e) => {
         setNumQuestions(parseInt(e.target.value));
     };
@@ -34,27 +35,41 @@ const AddNew = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Submitting questions:", questions);
         try {
+            const formData = new FormData();
+    
+            // Append the questions data
+            formData.append('questions', JSON.stringify(questions));
+            
+            // Append the test duration
+            formData.append('duration', testDuration);
+    
+            // Append each image file
+            questions.forEach((question, index) => {
+                if (question.image instanceof File) {
+                    formData.append(`image${index}`, question.image);
+                }
+            });
+    
+            // Send the form data to the backend
             const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/create-new/${userId}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ questions: questions, duration: testDuration })
+                body: formData
             });
+    
             if (!response.ok) {
                 throw new Error("Creating question failed");
             }
-
+    
             const data = await response.json();
             setQuizId(data.quiz_id);
+            setCode(data.code)
             console.log(data);
             setNumQuestions(1);
             setQuestions([]);
             setShowForm(false);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
@@ -73,6 +88,7 @@ const AddNew = () => {
                         <span>api/learners/v1/take-quiz/{quizId}</span>
                         <span><i class='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${quizId}`)}></i></span>
                     </div>
+                    <span>PassCode: {code} <i class='bx bx-copy' onClick={() => copyToClipboard(`${quizId}`)}></i></span>
                 </div>
             ) : (
                 <div>
