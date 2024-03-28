@@ -70,8 +70,8 @@ const AddNew = () => {
                 <div className="quiz-id-section">
                     <h2>Copy Test Link For Students</h2>
                     <div className="link">
-                        <span>api/learners/v1/create-new/{quizId}</span>
-                        <span><i class='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/create-new/${quizId}`)}></i></span>
+                        <span>api/learners/v1/take-quiz/{quizId}</span>
+                        <span><i class='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${quizId}`)}></i></span>
                     </div>
                 </div>
             ) : (
