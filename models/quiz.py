@@ -7,6 +7,8 @@ from sqlalchemy import Column, String, ForeignKey, Integer
 class Quiz(db.Model):
     id = Column(String(120), primary_key=True)
     teacher_id = Column(String(120), ForeignKey('teacher.id'), nullable=False)
+    duration = Column(Integer, nullable=False)
+    code = Column(String(120))
 
     # relationships
     teacher = relationship('Teacher', back_populates='quizs')
