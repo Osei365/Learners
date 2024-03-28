@@ -1,15 +1,10 @@
 body {
     width: 100%;
     min-height: 100vh;
-    background: #1a1a1a; /* #faf9f9; */
+    background: #1a1a1a; 
     overflow-x: hidden;
     position: relative;
 }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 14e7dfb9c5944826c456994c6cc1e76c9878e4ec
 .body3 {
     display: flex;
     background: #fff;
