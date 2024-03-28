@@ -37,7 +37,7 @@ def get_allquestions():
             new_questions.append(new_dict)
         return jsonify(new_questions)
     else:
-        return jsonify({})
+        return jsonify([{}])
     
 @app_views.route('/create-new/<id>', methods=['POST'])
 def create_new(id):
