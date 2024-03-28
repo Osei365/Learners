@@ -16,16 +16,23 @@ def get_allquestions():
         for objs in questions:
             obj= objs[0]
             new_dict = {}
-            new_dict['id'] = obj.id
-            new_dict['teacher_id'] = obj.teacher_id
-            new_dict['subject'] = obj.subject
-            new_dict['header'] = obj.header
-            new_dict['body'] = obj.body
-            new_dict['right_answer'] = obj.right_answer
-            new_dict['wrong_answer1'] = obj.wrong_answer1
-            new_dict['wrong_answer2'] = obj.wrong_answer2
-            new_dict['wrong_answer3'] = obj.wrong_answer3
-            new_dict['wrong_answer4'] = obj.wrong_answer4
+            needed = ['id', 'teacher_id', 'subject', 'header',
+                      'body', 'right_answer', 'wrong_answer1',
+                      'wrong_answer2', 'wrong_answer3',
+                      'wrong_answer4']
+            for key, value in obj.__dict__.items():
+                if key in needed:
+                    new_dict[key] = value
+            # new_dict['id'] = obj.id
+            # new_dict['teacher_id'] = obj.teacher_id
+            # new_dict['subject'] = obj.subject
+            # new_dict['header'] = obj.header
+            # new_dict['body'] = obj.body
+            # new_dict['right_answer'] = obj.right_answer
+            # new_dict['wrong_answer1'] = obj.wrong_answer1
+            # new_dict['wrong_answer2'] = obj.wrong_answer2
+            # new_dict['wrong_answer3'] = obj.wrong_answer3
+            # new_dict['wrong_answer4'] = obj.wrong_answer4
             new_questions.append(new_dict)
         return jsonify(new_questions)
     else:
