@@ -160,19 +160,36 @@ body.dark {
  .imagelabel::after {
   display: none;
   }
-  .submit-details-btn {
-    margin-left: 20px;
-    margin-top: 10px;
-    padding: 10px 25px;
-    color: var(--white4);
-    background: var(--purple4);
+
+
+  .num-of-questions .new-input {
+    background: var(--white);
     border: none;
-    border-radius: 6px;
+    border: 1px solid var(--white2);
+    height: 40px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px var(--boxshadow);
+    padding: 0px 20px;
+    color: var(--purple3);
+    outline: none;
     font-size: 16px;
-    font-weight: 500;
+    cursor: pointer;
+    width: 170px;
+    margin-bottom: 20px;
+}
+
+.submit-details-btn {
+    width: 150px;
+    font-size: 16px;
+    margin-left: 0;
+    margin-top: 20px;
+    background: var(--dark2);
+    color: var(--white3);
+    padding: 15px 0px;
+    border-radius: 10px;
+    border: none;
+}
+
+.submit-details-btn:hover {
+    background: orangered;
   }
-  .submit-details-btn:hover {
-    background: var(--white4);
-    color: var(--purple4);
-  }
- 

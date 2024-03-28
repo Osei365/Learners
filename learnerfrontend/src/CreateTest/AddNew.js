@@ -85,14 +85,12 @@ const AddNew = () => {
                             onChange={handleNumQuestionsChange }
                         />
                         <label className="label">Test Duration</label>
-                        <input
-                            className="new-input"
-                            type="time"
-                            id="duration"
-                            value={testDuration}
-                            onChange={handleDuration }
-                            placeholder="e.g 1hr 30 min"
-                        />
+                        <select className="new-input" name="duration" id="duration" value={testDuration} onChange={handleDuration}>
+                            <option value="30">30 min</option>
+                            <option value="60">60 min</option>
+                            <option value="90">90 min</option>
+                            <option value="120">120 min</option>
+                        </select>
                         <button type="submit" className="submit-details-btn">Set Questions</button>
                     </form>
                 </div>) 

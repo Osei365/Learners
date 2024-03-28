@@ -7,7 +7,7 @@ const AddExisting = ({ questions }) => {
     const [checkedStates, setCheckedStates] = useState(Array(questions.length).fill(null));
     const { userId } = useAuth();
     const [showQuestion, setShowQuestion] = useState(true);
-    const [testDuration, setDuration] = useState(null);
+    const [testDuration, setDuration] = useState(30);
 
     const setDetailsList = (event) => {
         event.preventDefault();
@@ -17,8 +17,8 @@ const AddExisting = ({ questions }) => {
   
       }
 
-      const handleDuration = (e) => {
-        setDuration(e.target.value);
+    const handleDuration = (e) => {
+        setDuration(parseInt(e.target.value));
     }
   
 
@@ -90,13 +90,12 @@ const AddExisting = ({ questions }) => {
                 <div className="duration">
                     <form onSubmit={setDetailsList}>
                         <label className="label">Test Duration</label>
-                        <input
-                            className="new-input"
-                            type="time"
-                            id="duration"
-                            value={testDuration}
-                            onChange={handleDuration }
-                        />
+                        <select className="new-input" name="duration" id="duration" value={testDuration} onChange={handleDuration}>
+                            <option value="30">30 min</option>
+                            <option value="60">60 min</option>
+                            <option value="90">90 min</option>
+                            <option value="120">120 min</option>
+                        </select>
                         <button type="submit" className="submit-Btn">Set Duration</button>
                     </form>
                 </div>
