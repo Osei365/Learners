@@ -33,7 +33,7 @@ const DashBoardMain = ({ handleToggle }) => {
     };
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentQuestions = questions.slice(indexOfFirstItem, indexOfLastItem);
+    const currentQuestions = Array.isArray(questions) ? questions.slice(indexOfFirstItem, indexOfLastItem) : [];
 
     const handleCheck = (questionIndex, spanIndex) => {
         const updatedStates = [...checkedStates];
@@ -119,10 +119,12 @@ const DashBoardMain = ({ handleToggle }) => {
                     <div className="recent-container">
                     {viewAll ? (
                         <>
-                            {currentQuestions.map((items, questionIndex) => (
+                        {currentQuestions.map((items, index) => {
+                            const questionNumber = (currentPage - 1) * itemsPerPage + index + 1;
+                            return (
                                 <div className="recent" key={items.id}>
                                     {/* Render question details */}
-                                    <span className="quest-num">Question {questionIndex + 1}</span>
+                                    <span className="quest-num">Question {questionNumber}</span>
                                     <span><strong>Subject: </strong>{items.subject}</span>
                                     <span><strong>Header: </strong>{items.header}</span>
                                     {items.image && <img src={items.image} alt={`img-${items.id}`} />}
@@ -130,14 +132,15 @@ const DashBoardMain = ({ handleToggle }) => {
                                     {Array.from({ length: 5 }).map((_, spanIndex) => (
                                         <span
                                             key={spanIndex}
-                                            className={`checks ${checkedStates[questionIndex] === spanIndex ? 'checked' : ''}`}
-                                            onClick={() => handleCheck(questionIndex, spanIndex)}
+                                            className={`checks ${checkedStates[index] === spanIndex ? 'checked' : ''}`}
+                                            onClick={() => handleCheck(index, spanIndex)}
                                         >
                                             {spanIndex === 0 ? items.right_answer : items[`wrong_answer${spanIndex}`]}
                                         </span>
                                     ))}
                                 </div>
-                            ))}
+                            );
+        })}
                             {/* Pagination controls */}
                             <div className="pagination">
                                 <button className="prev" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Prev</button>
@@ -149,7 +152,7 @@ const DashBoardMain = ({ handleToggle }) => {
                         </>
                     ) : (
                         <>
-                            {questions.slice(0, 5).map((items, questionIndex) => (
+                            {Array.isArray(questions) && questions.length > 0 && questions.slice(0, 5).map((items, questionIndex) => (
                                 <div className="recent" key={items.id}>
                                     {/* Render question details */}
                                     <span className="quest-num">Question {questionIndex}</span>

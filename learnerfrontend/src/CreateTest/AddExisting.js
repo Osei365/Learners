@@ -8,6 +8,7 @@ const AddExisting = ({ questions }) => {
     const { userId } = useAuth();
     const [showQuestion, setShowQuestion] = useState(true);
     const [testDuration, setDuration] = useState(30);
+    const [ quizId, setQuizId ] = useState(null);
 
     const setDetailsList = (event) => {
         event.preventDefault();
@@ -37,6 +38,7 @@ const AddExisting = ({ questions }) => {
             }
             const data = await response.json();
             console.log(data);
+            setQuizId(data.quiz_id);
             setCheckedStates(Array(questions.length).fill(null));
         } catch (error) {
             console.log('The Error: ', error.message);
@@ -58,50 +60,60 @@ const AddExisting = ({ questions }) => {
 
     return (
         <div className="choosen2">
-            <h2>Create Quiz from Pre Existing Question</h2>
-            {testDuration !== null && !showQuestion ? 
-            (
-                <>
-                <h4>Select Question</h4>
-                {questions.map((items, questionIndex) => (
-                    <div key={items.id} className="Each-question">
-                    <span
-                        className={`Each-quest-num ${checkedStates[questionIndex] === items.id ? 'checked' : ''}`}
-                        onClick={() => handleCheck(questionIndex, items.id)}>
-                        Question {questionIndex}
-                    </span>
-                    <div className="Each-question-details">
-                        <span className="subject"><strong>Subject: </strong>{items.subject}</span>
-                        <span className="header"><strong>Header: </strong>{items.header}</span>
-                        {items.image && <img src={items.image} alt={`img-${items.id}`} />}
-                        <p>{items.body}</p>
-                        <div className="options-div">
-                            <span><strong>A: </strong> {items.right_answer}</span>
-                            <span><strong>B: </strong> {items.wrong_answer1}</span>
-                            <span><strong>C: </strong> {items.wrong_answer2}</span>
-                            <span><strong>D: </strong> {items.wrong_answer3}</span>
-                            <span><strong>E: </strong> {items.wrong_answer4}</span>
-                        </div>
-                    </div>
+            {quizId ? (
+                <div className="quiz-id-section">
+                    <h2>Quiz ID: {quizId}</h2>
+                    {/* Add copy icon functionality here */}
                 </div>
-                ))}
-                <button className="sub-btn" onClick={submitQuestion}>Create Quiz</button>
-                </>) : (
-                <div className="duration">
-                    <form onSubmit={setDetailsList}>
-                        <label className="label">Test Duration</label>
-                        <select className="new-input" name="duration" id="duration" value={testDuration} onChange={handleDuration}>
-                            <option value="30">30 min</option>
-                            <option value="60">60 min</option>
-                            <option value="90">90 min</option>
-                            <option value="120">120 min</option>
-                        </select>
-                        <button type="submit" className="submit-Btn">Set Duration</button>
-                    </form>
+            ) : (
+                <div>
+                    <h2>Create Quiz from Pre Existing Question</h2>
+                    {testDuration !== null && !showQuestion ? (
+                        <>
+                            <h4>Select Question</h4>
+                            {questions.map((items, questionIndex) => (
+                                <div key={items.id} className="Each-question">
+                                    <span
+                                        className={`Each-quest-num ${checkedStates[questionIndex] === items.id ? 'checked' : ''}`}
+                                        onClick={() => handleCheck(questionIndex, items.id)}>
+                                        Question {questionIndex}
+                                    </span>
+                                    <div className="Each-question-details">
+                                        <span className="subject"><strong>Subject: </strong>{items.subject}</span>
+                                        <span className="header"><strong>Header: </strong>{items.header}</span>
+                                        {items.image && <img src={items.image} alt={`img-${items.id}`} />}
+                                        <p>{items.body}</p>
+                                        <div className="options-div">
+                                            <span><strong>A: </strong> {items.right_answer}</span>
+                                            <span><strong>B: </strong> {items.wrong_answer1}</span>
+                                            <span><strong>C: </strong> {items.wrong_answer2}</span>
+                                            <span><strong>D: </strong> {items.wrong_answer3}</span>
+                                            <span><strong>E: </strong> {items.wrong_answer4}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                            <button className="sub-btn" onClick={submitQuestion}>Create Quiz</button>
+                        </>
+                    ) : (
+                        <div className="duration">
+                            <form onSubmit={setDetailsList}>
+                                <label className="label">Test Duration</label>
+                                <select className="new-input" name="duration" id="duration" value={testDuration} onChange={handleDuration}>
+                                    <option value="30">30 min</option>
+                                    <option value="60">60 min</option>
+                                    <option value="90">90 min</option>
+                                    <option value="120">120 min</option>
+                                </select>
+                                <button type="submit" className="submit-Btn">Set Duration</button>
+                            </form>
+                        </div>
+                    )}
                 </div>
             )}
         </div>
     );
+    
 };
 
 export default AddExisting;
