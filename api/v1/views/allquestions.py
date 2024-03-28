@@ -4,6 +4,7 @@ from models.question import Question
 from models.quiz import Quiz
 from api.v1.views import app_views
 from flask import Flask, request, abort, jsonify
+from utils import generate_code
 
 @app_views.route('/all-questions', methods=['GET'])
 def get_allquestions():
@@ -40,17 +41,22 @@ def get_allquestions():
     
 @app_views.route('/create-new/<id>', methods=['POST'])
 def create_new(id):
-    """post question from a teacher"""
+    """post questions from a teacher and
+    creates a new quiz"""
 
-    question_list = request.get_json()
-    if not question_list:
+    question_metadata = request.get_json()
+    if not question_metadata:
         abort(404)
 
     
-    print(type(question_list))
+    print(type(question_metadata))
     print(id)
+    duration = question_metadata.get('duration')
+    question_list = question_metadata.get('questions')
     quiz = Quiz(id = uuid.uuid4())
     quiz.teacher_id = id
+    quiz.duration = duration
+    quiz.code = generate_code()
     db.session.add(quiz)
     db.session.commit()
     for question_dic in question_list:
@@ -65,17 +71,22 @@ def create_new(id):
 
 @app_views.route('/create-existing/<id>', methods=['POST'])
 def create_existing(id):
-    """creates a quiz from pre existing"""
+    """creates a quiz from pre existing questions"""
 
-    question_dict = request.get_json()
-    print(question_dict)
-    if not question_dict:
+    # gets a metadata from the get json, it contains the questions and the duration for the quiz
+    # it is a dictionary
+    question_metadata = request.get_json()
+    print(question_metadata)
+    if not question_metadata:
         abort(404)
-    question_id_list = question_dict['ids']
+    question_id_list = question_metadata.get('ids')
+    duration = question_metadata.get('duration')
     if not question_id_list:
         abort(404)
     quiz = Quiz(id = uuid.uuid4())
     quiz.teacher_id = id
+    quiz.duration = duration
+    quiz.code = generate_code()
     db.session.add(quiz)
     db.session.commit()
 
