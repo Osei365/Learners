@@ -24,16 +24,6 @@ def get_allquestions():
             for key, value in obj.__dict__.items():
                 if key in needed:
                     new_dict[key] = value
-            # new_dict['id'] = obj.id
-            # new_dict['teacher_id'] = obj.teacher_id
-            # new_dict['subject'] = obj.subject
-            # new_dict['header'] = obj.header
-            # new_dict['body'] = obj.body
-            # new_dict['right_answer'] = obj.right_answer
-            # new_dict['wrong_answer1'] = obj.wrong_answer1
-            # new_dict['wrong_answer2'] = obj.wrong_answer2
-            # new_dict['wrong_answer3'] = obj.wrong_answer3
-            # new_dict['wrong_answer4'] = obj.wrong_answer4
             new_questions.append(new_dict)
         return jsonify(new_questions)
     else:
@@ -66,7 +56,7 @@ def create_new(id):
         db.session.add(question)
         quiz.questions.append(question)
         db.session.commit()
-    result = {'quiz_id': quiz.id, 'message': 'quiz created'}
+    result = {'quiz_id': quiz.id, 'message': 'quiz created', 'code': quiz.code}
     return jsonify(result)
 
 @app_views.route('/create-existing/<id>', methods=['POST'])
@@ -94,7 +84,7 @@ def create_existing(id):
         question = db.get_or_404(Question, q_id)
         quiz.questions.append(question)
         db.session.commit()
-    result = {'quiz_id': quiz.id, 'message': 'quiz created'}
+    result = {'quiz_id': quiz.id, 'message': 'quiz created', 'code': quiz.code}
     return jsonify(result)
     
 
