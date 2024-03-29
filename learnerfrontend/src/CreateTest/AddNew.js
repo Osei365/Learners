@@ -50,7 +50,10 @@ const AddNew = () => {
                     formData.append(`image${index}`, question.image);
                 }
             });
-    
+            // console log everything in the form data to see the content 
+            for (let pair of formData.entries()) {
+                console.log(pair[0], pair[1]);
+            }
             // Send the form data to the backend
             const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/create-new/${userId}`, {
                 method: 'POST',
@@ -88,7 +91,7 @@ const AddNew = () => {
                         <span>api/learners/v1/take-quiz/{quizId}</span>
                         <span><i class='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${quizId}`)}></i></span>
                     </div>
-                    <span>PassCode: {code} <i class='bx bx-copy' onClick={() => copyToClipboard(`${quizId}`)}></i></span>
+                    <span>PassCode: {code} <i class='bx bx-copy' onClick={() => copyToClipboard(`${code}`)}></i></span>
                 </div>
             ) : (
                 <div>
