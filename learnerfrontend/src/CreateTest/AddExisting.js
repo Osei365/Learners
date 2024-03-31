@@ -10,6 +10,7 @@ const AddExisting = ({ questions }) => {
     const [testDuration, setDuration] = useState(30);
     const [ quizId, setQuizId ] = useState(null);
     const [code , setCode] = useState(null);
+    const [subject, setSubject] = useState('');
 
     const setDetailsList = (event) => {
         event.preventDefault();
@@ -22,6 +23,9 @@ const AddExisting = ({ questions }) => {
     const handleDuration = (e) => {
         setDuration(parseInt(e.target.value));
     }
+    const handleSubject = (e) => {
+        setSubject(e.target.value);
+    }
   
 
     const submitQuestion = async () => {
@@ -32,7 +36,7 @@ const AddExisting = ({ questions }) => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ ids: questionId, duration: testDuration })
+                body: JSON.stringify({ ids: questionId, duration: testDuration, Subject: subject })
             });
             if (!response.ok) {
                 throw new Error("Error posting Id");
@@ -97,7 +101,7 @@ const AddExisting = ({ questions }) => {
                                         {items.image && <img src={items.image} alt={`img-${items.id}`} />}
                                         <p>{items.body}</p>
                                         <div className="options-div">
-                                            <span><strong>A: </strong> {items.right_answer}</span>
+                                            <span ><strong>A: </strong> {items.right_answer}</span>
                                             <span><strong>B: </strong> {items.wrong_answer1}</span>
                                             <span><strong>C: </strong> {items.wrong_answer2}</span>
                                             <span><strong>D: </strong> {items.wrong_answer3}</span>
@@ -111,6 +115,14 @@ const AddExisting = ({ questions }) => {
                     ) : (
                         <div className="duration">
                             <form onSubmit={setDetailsList}>
+                                <label className="label">Enter subject Name</label>
+                                    <input
+                                        className="new-input"
+                                        type="text"
+                                        id="Subject"
+                                        value={subject}
+                                        onChange={handleSubject}
+                                    />
                                 <label className="label">Test Duration</label>
                                 <select className="new-input" name="duration" id="duration" value={testDuration} onChange={handleDuration}>
                                     <option value="30">30 min</option>

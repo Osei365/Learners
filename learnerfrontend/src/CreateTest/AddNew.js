@@ -11,6 +11,7 @@ const AddNew = () => {
     const { userId } = useAuth();
     const [quizId, setQuizId] = useState(null);
     const [code, setCode ] = useState(null);
+    const [subject, setSubject ] = useState('');
     const handleNumQuestionsChange = (e) => {
         setNumQuestions(parseInt(e.target.value));
     };
@@ -32,6 +33,9 @@ const AddNew = () => {
         updatedQuestions[questionNumber - 1] = { ...questionDetails };
         setQuestions(updatedQuestions);
     };
+    const handleSubject = (e) => {
+        setSubject(e.target.value);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,6 +47,7 @@ const AddNew = () => {
             
             // Append the test duration
             formData.append('duration', testDuration);
+            formData.append('Subject', subject)
     
             // Append each image file
             questions.forEach((question, index) => {
@@ -118,6 +123,14 @@ const AddNew = () => {
                                     id="numberOfQuestions"
                                     value={numQuestions}
                                     onChange={handleNumQuestionsChange}
+                                />
+                                <label className="label">Enter subject Name</label>
+                                <input
+                                    className="new-input"
+                                    type="text"
+                                    id="Subject"
+                                    value={subject}
+                                    onChange={handleSubject}
                                 />
                                 <label className="label">Test Duration</label>
                                 <select className="new-input" name="duration" id="duration" value={testDuration} onChange={handleDuration}>

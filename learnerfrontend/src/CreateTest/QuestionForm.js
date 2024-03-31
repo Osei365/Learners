@@ -24,10 +24,6 @@ const QuestionForm = ({ questionNumber, onChange }) => {
     <div key={questionNumber}>
         <h2>Question {questionNumber}</h2>
         <div className="question-details">
-            <label className="label">Subject</label>
-            <input className="new-input" type="text" name="subject" value={details.subject} onChange={handleChange} />
-        </div>
-        <div className="question-details">
             <label className="label">Header</label>
             <input className="new-input" type="text" name="header" value={details.header} onChange={handleChange} required />
         </div>
