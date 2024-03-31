@@ -21,7 +21,8 @@ def verify_student(id):
     
 @app_views.route('/register/<id>', methods=['POST'])
 def register_student(id):
-    """register student to the database"""
+    """registers student to the database
+    and sends student's quiz questions"""
     student_names = request.get_json()
     print(student_names)
     if not student_names:
@@ -34,7 +35,7 @@ def register_student(id):
         abort(404)
 
     quiz = db.get_or_404(Quiz, id)
-    student = db.first_or_404(db.select(Student).filter_by(firstname=firstname))
+    student = db.session.execute(db.select(Student).filter_by(firstname=firstname)).first()
     if not student:
         student = Student(id=uuid.uuid4(),
                           firstname=firstname,
@@ -42,7 +43,22 @@ def register_student(id):
         student.teachers.append(quiz.teacher)
         db.session.add(student)
         db.session.commit()
-    return jsonify({'id': student.id, 'isRegistered': True})
+
+    # sending the questions that student will answer
+    quiz_questions = {}
+    quiz_questions['Subject'] = quiz.subject
+    quiz_questions['duration'] = quiz.duration
+    questions = quiz.questions
+    questions_list = []
+    for question in questions:
+        new_dict = {}
+        for key, value in question.__dict__.items():
+            if key in needed:
+                new_dict[key] = value
+        questions_list.append(new_dict)
+    quiz_questions['questions'] = questions_list
+
+    return jsonify({'id': student.id, 'isRegistered': True, 'testQuestions': quiz_questions})
 
 
 
