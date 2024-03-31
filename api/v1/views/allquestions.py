@@ -4,7 +4,7 @@ import json
 from models import db
 from models.question import Question
 from models.quiz import Quiz
-from api.v1.views import app_views
+from api.v1.views import app_views, needed
 from flask import Flask, request, abort, jsonify
 from utils import generate_code
 from werkzeug.utils import secure_filename
@@ -21,17 +21,13 @@ def get_allquestions():
         for objs in questions:
             obj= objs[0]
             new_dict = {}
-            needed = ['id', 'teacher_id', 'subject', 'header',
-                      'body', 'right_answer', 'wrong_answer1',
-                      'wrong_answer2', 'wrong_answer3',
-                      'wrong_answer4', 'image']
             for key, value in obj.__dict__.items():
                 if key in needed:
                     new_dict[key] = value
             new_questions.append(new_dict)
         return jsonify(new_questions)
     else:
-        return jsonify([{}])
+        return jsonify([])
     
 @app_views.route('/create-new/<id>', methods=['POST'])
 def create_new(id):
@@ -43,9 +39,10 @@ def create_new(id):
     if not question_metadata:
         abort(404)
 
+    print(question_metadata)
     duration = question_metadata.get('duration')
     question_list = question_metadata.get('questions')
-    subject = question_metadata.get('subject')
+    subject = question_metadata.get('Subject')
   
     question_list = json.loads(question_list)
 

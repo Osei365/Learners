@@ -4,7 +4,7 @@ from models.question import Question
 from models.student import Student
 from models.quiz import Quiz
 from models.teacher import Teacher
-from api.v1.views import app_views
+from api.v1.views import app_views, needed
 from flask import Flask, request, abort, jsonify
 
 @app_views.route('/verify/<id>', methods=['POST'])
@@ -58,10 +58,6 @@ def get_teacher_quiz(id):
         questions_list = []
         for question in questions:
             new_dict = {}
-            needed = ['id', 'teacher_id', 'subject', 'header',
-                      'body', 'right_answer', 'wrong_answer1',
-                      'wrong_answer2', 'wrong_answer3',
-                      'wrong_answer4', 'image']
             for key, value in question.__dict__.items():
                 if key in needed:
                     new_dict[key] = value
