@@ -4,6 +4,7 @@ from models.question import Question
 from models.student import Student
 from models.quiz import Quiz
 from models.teacher import Teacher
+from models.score import Score
 from api.v1.views import app_views, needed
 from flask import Flask, request, abort, jsonify
 
@@ -60,6 +61,33 @@ def register_student(id):
 
     return jsonify({'id': student.id, 'isRegistered': True, 'testQuestions': quiz_questions})
 
+
+
+@app_views.route('/calculate-score/<id>', methods=['POST'])
+def calculate_score(id):
+    score_metadata = request.get_json()
+    if not score_metadata:
+        abort(404)
+    score_list = score_metadata.get('quiz')
+    student_id = score_metadata.get('studentId')
+    quiz = db.get_or_404(Quiz, id)
+    for answer_dict in score_list:
+        question_id = answer_dict['questionId']
+        selected_option = answer_dict['selectedOption']
+        question = db.get_or_404(Question, question_id)
+        score = 0
+        if selected_option == question.right_answer:
+            score += 1
+    score_model = Score(
+        id=uuid.uuid4(),
+        student_id=student_id,
+        quiz_id = quiz.id,
+        score=score
+    )
+    db.session.add(score_model)
+    db.session.commit()
+    return jsonify({'status': 'submitted'})
+        
 
 
 
