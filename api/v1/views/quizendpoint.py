@@ -71,11 +71,12 @@ def calculate_score(id):
     score_list = score_metadata.get('quiz')
     student_id = score_metadata.get('studentId')
     quiz = db.get_or_404(Quiz, id)
+    score = 0
     for answer_dict in score_list:
         question_id = answer_dict['questionId']
         selected_option = answer_dict['selectedOption']
         question = db.get_or_404(Question, question_id)
-        score = 0
+        
         if selected_option == question.right_answer:
             score += 1
     score_model = Score(
