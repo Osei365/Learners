@@ -9,6 +9,7 @@ class Quiz(db.Model):
     teacher_id = Column(String(120), ForeignKey('teacher.id'), nullable=False)
     duration = Column(Integer, nullable=False)
     code = Column(String(120))
+    subject = Column(String(120))
 
     # relationships
     teacher = relationship('Teacher', back_populates='quizs')

@@ -1,14 +1,47 @@
 import uuid
 from models import db
 from models.question import Question
+from models.student import Student
 from models.quiz import Quiz
 from models.teacher import Teacher
 from api.v1.views import app_views
 from flask import Flask, request, abort, jsonify
 
-@app_views.route('/take-quiz/<id>', methods=['GET'])
-def get_quiz(id):
-    pass
+@app_views.route('/verify/<id>', methods=['POST'])
+def verify_student(id):
+    """verify student"""
+    code = request.get_json()
+    if not code:
+        abort(404)
+    quiz = db.get_or_404(Quiz, id)
+    if quiz.code == code:
+        return jsonify({'isVerified': True})
+    else:
+        return jsonify({'isVerified': False})
+    
+@app_views.route('/register/<id>', methods=['POST'])
+def register_student(id):
+    """register student to the database"""
+    student_names = request.get_json()
+    if not student_names:
+        abort(404)
+    firstname = student_names.get('firstname')
+    lastname = student_names.get('lastname')
+    if not firstname or not lastname:
+        abort(404)
+
+    quiz = db.get_or_404(Quiz, id)
+    student = db.first_or_404(db.select(Student).filter_by(firstname=firstname))
+    if not student:
+        student = Student(id=uuid.uuid4(),
+                          firstname=firstname,
+                          lastname=lastname)
+        student.teachers.append(quiz.teacher)
+        db.session.add(student)
+        db.session.commit()
+    return jsonify({'id': student.id, 'isRegistered': True})
+
+
 
 
 @app_views.route('/teacher-quiz/<id>', methods=['GET'])
@@ -28,7 +61,7 @@ def get_teacher_quiz(id):
             needed = ['id', 'teacher_id', 'subject', 'header',
                       'body', 'right_answer', 'wrong_answer1',
                       'wrong_answer2', 'wrong_answer3',
-                      'wrong_answer4']
+                      'wrong_answer4', 'image']
             for key, value in question.__dict__.items():
                 if key in needed:
                     new_dict[key] = value

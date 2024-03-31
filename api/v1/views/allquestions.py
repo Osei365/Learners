@@ -24,7 +24,7 @@ def get_allquestions():
             needed = ['id', 'teacher_id', 'subject', 'header',
                       'body', 'right_answer', 'wrong_answer1',
                       'wrong_answer2', 'wrong_answer3',
-                      'wrong_answer4']
+                      'wrong_answer4', 'image']
             for key, value in obj.__dict__.items():
                 if key in needed:
                     new_dict[key] = value
@@ -43,24 +43,25 @@ def create_new(id):
     if not question_metadata:
         abort(404)
 
-    
-    print(question_metadata)
-    print(files)
-    print(id)
     duration = question_metadata.get('duration')
     question_list = question_metadata.get('questions')
-    print(type(question_list))
+    subject = question_metadata.get('subject')
+  
     question_list = json.loads(question_list)
-    print(type(question_list))
+
+    # creating the quiz object/model
     quiz = Quiz(id = uuid.uuid4())
     quiz.teacher_id = id
     quiz.duration = duration
     quiz.code = generate_code()
+    quiz.subject = subject
     db.session.add(quiz)
     db.session.commit()
+
     for n, question_dic in enumerate(question_list):
         question_dic['id'] = uuid.uuid4()
         question_dic['teacher_id'] = id
+        question_dic['subject'] = subject
 
         # handles the saving of the images for the questions
         del question_dic['image']
