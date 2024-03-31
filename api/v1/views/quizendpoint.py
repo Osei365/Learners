@@ -32,16 +32,6 @@ def get_teacher_quiz(id):
             for key, value in question.__dict__.items():
                 if key in needed:
                     new_dict[key] = value
-            # new_dict['id'] = question.id
-            # new_dict['teacher_id'] = question.teacher_id
-            # new_dict['subject'] = question.subject
-            # new_dict['header'] = question.header
-            # new_dict['body'] = question.body
-            # new_dict['right_answer'] = question.right_answer
-            # new_dict['wrong_answer1'] = question.wrong_answer1
-            # new_dict['wrong_answer2'] = question.wrong_answer2
-            # new_dict['wrong_answer3'] = question.wrong_answer3
-            # new_dict['wrong_answer4'] = question.wrong_answer4
             questions_list.append(new_dict)
         quiz_dict[quiz_obj.id] = questions_list
     print(quizs)

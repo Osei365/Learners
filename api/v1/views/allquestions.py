@@ -1,11 +1,15 @@
+import os
 import uuid
+import json
 from models import db
 from models.question import Question
 from models.quiz import Quiz
 from api.v1.views import app_views
 from flask import Flask, request, abort, jsonify
 from utils import generate_code
+from werkzeug.utils import secure_filename
 
+UPLOAD_FOLDER = 'app_images/question_images/'
 @app_views.route('/all-questions', methods=['GET'])
 def get_allquestions():
     """gets all questions"""
@@ -34,24 +38,40 @@ def create_new(id):
     """post questions from a teacher and
     creates a new quiz"""
 
-    question_metadata = request.get_json()
+    question_metadata = request.form
+    files = request.files
     if not question_metadata:
         abort(404)
 
     
-    print(type(question_metadata))
+    print(question_metadata)
+    print(files)
     print(id)
     duration = question_metadata.get('duration')
     question_list = question_metadata.get('questions')
+    print(type(question_list))
+    question_list = json.loads(question_list)
+    print(type(question_list))
     quiz = Quiz(id = uuid.uuid4())
     quiz.teacher_id = id
     quiz.duration = duration
     quiz.code = generate_code()
     db.session.add(quiz)
     db.session.commit()
-    for question_dic in question_list:
+    for n, question_dic in enumerate(question_list):
         question_dic['id'] = uuid.uuid4()
         question_dic['teacher_id'] = id
+
+        # handles the saving of the images for the questions
+        del question_dic['image']
+        if 'image' + str(n) in files.keys():
+            file = files.get('image' + str(n))
+            if file:
+                filename = secure_filename(file.filename)
+                filepath = os.path.join(UPLOAD_FOLDER, filename)
+                file.save(filepath)
+                question_dic['image'] = filepath
+
         question = Question(**question_dic)
         db.session.add(question)
         quiz.questions.append(question)
