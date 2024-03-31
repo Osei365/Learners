@@ -23,10 +23,13 @@ def verify_student(id):
 def register_student(id):
     """register student to the database"""
     student_names = request.get_json()
+    print(student_names)
     if not student_names:
         abort(404)
-    firstname = student_names.get('firstname')
-    lastname = student_names.get('lastname')
+    firstname = student_names.get('firstName')
+    lastname = student_names.get('LastName')
+    print(firstname)
+    print(lastname)
     if not firstname or not lastname:
         abort(404)
 
