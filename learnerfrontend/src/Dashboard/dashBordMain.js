@@ -127,7 +127,7 @@ const DashBoardMain = ({ handleToggle }) => {
                                     <span className="quest-num">Question {questionNumber}</span>
                                     <span><strong>Subject: </strong>{items.subject}</span>
                                     <span><strong>Header: </strong>{items.header}</span>
-                                    {items.image && <img src={items.image} alt={`img-${items.id}`} />}
+                                    {items.image && <img src={`http://localhost:5000/api/learners/v1/${items.image}`} alt={`img-${items.id}`} />}
                                     <p>{items.body}</p>
                                     {Array.from({ length: 5 }).map((_, spanIndex) => (
                                         <span
