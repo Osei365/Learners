@@ -36,14 +36,24 @@ def register_student(id):
         abort(404)
 
     quiz = db.get_or_404(Quiz, id)
-    student = db.session.execute(db.select(Student).filter_by(firstname=firstname)).first()
+    student = db.session.execute(db.select(Student).filter_by(firstname=firstname)).one()
+
+    
     if not student:
         student = Student(id=uuid.uuid4(),
                           firstname=firstname,
                           lastname=lastname)
         student.teachers.append(quiz.teacher)
+        student.quizs.append(quiz)
+        quiz.students.append(student)
         db.session.add(student)
         db.session.commit()
+    else:
+        student = student[0]
+        if student not in quiz.students:
+            quiz.students.append(student)
+            db.session.commit()
+
 
     # sending the questions that student will answer
     quiz_questions = {}
