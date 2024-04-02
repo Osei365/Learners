@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import DashNavBar from '../Dashboard/dash_navBar';
 import 'boxicons/css/boxicons.min.css';
 import AddNew from './AddNew';
@@ -8,7 +8,12 @@ import './CreateTest.css';
 const CreateTest = () => {
     const [toggle, setToggle ] = useState(false);
     const [createNew, setCreateNew] = useState(null);
-    const [questions, setQuestion ] = useState([]);
+    const [questions, setQuestions ] = useState([]);
+    const [showForm, setShowForm] = useState(false);
+    const [quizId, setQuizId] = useState(null);
+    const [code, setCode] = useState(null);
+    const [question, setQuestion] = useState([]);
+
     const handleToggle = () => {
         setToggle(prevState => !prevState);
         console.log(toggle);
@@ -16,6 +21,10 @@ const CreateTest = () => {
 
         const handleCreateNew = () => {
             setCreateNew(true);
+            setShowForm(false); 
+            setQuizId('');
+            setCode('');
+            setQuestions([]);
         }
         const handleCreateExisting = async () => {
             setCreateNew(false);
@@ -24,8 +33,8 @@ const CreateTest = () => {
                 throw new Error('Error fetching questions');
             }
             const data = await response.json();
-                setQuestion([...data]);
-        }
+            setQuestion([...data]);
+    }
 
   return (
     <div className="container">
@@ -55,9 +64,10 @@ const CreateTest = () => {
             </div>
            {createNew !== null && (
                     <>
+                    {console.log("createNew:", createNew)}
                         {createNew ? 
-                            (<AddNew />) :
-                            (<AddExisting  questions={questions} />)
+                            (<AddNew setShowForm={setShowForm} setQuizId={setQuizId} setCode={setCode} setQuestions={setQuestions} question={questions} code={code} showForm={showForm} quizId={quizId} />) :
+                            (<AddExisting question={question} />)
                         }
                     </>
                 )}

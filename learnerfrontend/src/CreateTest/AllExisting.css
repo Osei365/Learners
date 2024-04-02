@@ -96,6 +96,12 @@ body.dark {
     color: var(--purple3);
     padding-right: 10px;
 }
+.choosen2 .Each-question .Each-question-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
 
 .choosen2 .Each-question img {
     width: 300px;
@@ -135,6 +141,7 @@ body.dark {
     display: flex;
     width: 100%;
 }
+
 
 .choosen2 .Each-question  .options-div span {
     padding: 20px;

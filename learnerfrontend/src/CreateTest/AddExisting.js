@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useAuth } from '../AuthContext';
 import './AllExisting.css';
 
-const AddExisting = ({ questions }) => {
-    console.log('existing ', questions);
-    const [checkedStates, setCheckedStates] = useState(Array(questions.length).fill(null));
+const AddExisting = ({ question }) => {
+    console.log('existing ', question);
+    const [checkedStates, setCheckedStates] = useState(Array(question.length).fill(null));
     const { userId } = useAuth();
     const [showQuestion, setShowQuestion] = useState(true);
     const [testDuration, setDuration] = useState(30);
@@ -45,7 +45,7 @@ const AddExisting = ({ questions }) => {
             console.log(data);
             setCode(data.code);
             setQuizId(data.quiz_id);
-            setCheckedStates(Array(questions.length).fill(null));
+            setCheckedStates(Array(question.length).fill(null));
         } catch (error) {
             console.log('The Error: ', error.message);
         }
@@ -88,7 +88,7 @@ const AddExisting = ({ questions }) => {
                     {testDuration !== null && !showQuestion ? (
                         <>
                             <h4>Select Question</h4>
-                            {questions.map((items, questionIndex) => (
+                            {question.map((items, questionIndex) => (
                                 <div key={items.id} className="Each-question">
                                     <span
                                         className={`Each-quest-num ${checkedStates[questionIndex] === items.id ? 'checked' : ''}`}

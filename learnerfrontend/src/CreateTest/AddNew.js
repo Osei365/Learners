@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import './AddNew.css';
 import QuestionForm from './QuestionForm';
 import { useAuth } from '../AuthContext';
 
-const AddNew = () => {
+
+
+const AddNew = ({ setShowForm, setQuizId, setCode, setQuestions, questions, code, showForm, quizId }) => {
     const [numQuestions, setNumQuestions] = useState(1);
     const [testDuration, setDuration] = useState(30);
-    const [showForm, setShowForm] = useState(false); // Initially, don't show the form
-    const [questions, setQuestions] = useState([]);
+    /*`const [showForm, setShowForm] = useState(false); // Initially, don't show the form
+    const [questions, setQuestions] = useState([]);*/
     const { userId } = useAuth();
-    const [quizId, setQuizId] = useState(null);
-    const [code, setCode ] = useState(null);
+    /*const [quizId, setQuizId] = useState(null);
+    const [code, setCode ] = useState(null);*/
     const [subject, setSubject ] = useState('');
     const handleNumQuestionsChange = (e) => {
         setNumQuestions(parseInt(e.target.value));
@@ -39,6 +42,7 @@ const AddNew = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(subject);
         try {
             const formData = new FormData();
     
@@ -149,4 +153,15 @@ const AddNew = () => {
     );
 };
 
+
+/*AddNew.propTypes = {
+    setShowForm:  Dispatch<SetStateAction<boolean>>, 
+    setQuizId:  Dispatch<SetStateAction<string>>,
+    setCode:  Dispatch<SetStateAction<boolean>>, 
+    setQuestions:  Dispatch<SetStateAction<array>>, 
+    questions: PropTypes.array, 
+    showForm: PropTypes.bool, 
+    code: PropTypes.string, 
+    quizId: PropTypes.string,
+}*/
 export default AddNew;

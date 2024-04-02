@@ -16,8 +16,10 @@ const QuestionForm = ({ questionNumber, onChange }) => {
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
         const updatedValue = type === 'file' ? files[0] : value;
+        console.log(value);
         setDetails({ ...details, [name]: updatedValue });
-        onChange(details, questionNumber);
+        console.log(details);
+        onChange({ ...details, [name]: updatedValue }, questionNumber);
     };
 
     return (
