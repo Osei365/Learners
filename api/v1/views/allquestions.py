@@ -1,10 +1,11 @@
 import os
 import uuid
 import json
+from random import shuffle
 from models import db
 from models.question import Question
 from models.quiz import Quiz
-from api.v1.views import app_views, needed
+from api.v1.views import app_views, needed, question_options
 from flask import Flask, request, abort, jsonify
 from utils import generate_code
 from werkzeug.utils import secure_filename
@@ -21,9 +22,14 @@ def get_allquestions():
         for objs in questions:
             obj= objs[0]
             new_dict = {}
+            options = []
             for key, value in obj.__dict__.items():
                 if key in needed:
                     new_dict[key] = value
+                if key in question_options:
+                    options.append(value)
+            shuffle(options)
+            new_dict['options'] = options
             new_questions.append(new_dict)
         return jsonify(new_questions)
     else:

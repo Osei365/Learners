@@ -3,14 +3,10 @@ import './AddNew.css';
 import QuestionForm from './QuestionForm';
 import { useAuth } from '../AuthContext';
 
-const AddNew = () => {
+const AddNew = ({ setQuestions, setShowForm, setCode, setQuizId, questions, quizId, code, showForm}) => {
     const [numQuestions, setNumQuestions] = useState(1);
     const [testDuration, setDuration] = useState(30);
-    const [showForm, setShowForm] = useState(false); // Initially, don't show the form
-    const [questions, setQuestions] = useState([]);
     const { userId } = useAuth();
-    const [quizId, setQuizId] = useState(null);
-    const [code, setCode ] = useState(null);
     const [subject, setSubject ] = useState('');
     const handleNumQuestionsChange = (e) => {
         setNumQuestions(parseInt(e.target.value));
@@ -41,6 +37,7 @@ const AddNew = () => {
         e.preventDefault();
         try {
             const formData = new FormData();
+            console.log(questions);
     
             // Append the questions data
             formData.append('questions', JSON.stringify(questions));

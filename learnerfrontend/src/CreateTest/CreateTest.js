@@ -8,7 +8,13 @@ import './CreateTest.css';
 const CreateTest = () => {
     const [toggle, setToggle ] = useState(false);
     const [createNew, setCreateNew] = useState(null);
-    const [questions, setQuestion ] = useState([]);
+    const [questions, setQuestions ] = useState([]);
+    const [quizId, setQuizId] = useState('');
+    const [code, setCode ] = useState();
+    const [showForm, setShowForm] = useState(false); // Initially, don't show the form
+    const [question, setQuestion] = useState([]);
+    
+
     const handleToggle = () => {
         setToggle(prevState => !prevState);
         console.log(toggle);
@@ -16,15 +22,25 @@ const CreateTest = () => {
 
         const handleCreateNew = () => {
             setCreateNew(true);
+            setQuestions([]);
+            setQuizId('');
+            setCode('');
+            setShowForm(false);
         }
         const handleCreateExisting = async () => {
-            setCreateNew(false);
+            
             const response = await fetch('http://127.0.0.1:5000/api/learners/v1/all-questions');
             if(!response.ok) {
                 throw new Error('Error fetching questions');
             }
             const data = await response.json();
-                setQuestion([...data]);
+            console.log(data);
+            setQuestion(data);
+            // for (let n = 0; n < data.length; n++) {
+            //     question.push(data[n]);
+            // }
+            console.log(question);
+            setCreateNew(false);
         }
 
   return (
@@ -56,8 +72,8 @@ const CreateTest = () => {
            {createNew !== null && (
                     <>
                         {createNew ? 
-                            (<AddNew />) :
-                            (<AddExisting  questions={questions} />)
+                            (<AddNew setQuestions={setQuestions} setShowForm={setShowForm} setQuizId={setQuizId} setCode={setCode} questions={questions} showForm={showForm} code={code} quizId={quizId}/>) :
+                            (<AddExisting  question={question} />)
                         }
                     </>
                 )}

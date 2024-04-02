@@ -8,7 +8,7 @@ const Created = () => {
     const [toggle, setToggle ] = useState(false);
     const [views,  setViews ] = useState(null);
     const { userId } = useAuth();
-    const [ quiz, setQuiz ] = useState();
+    const [ quiz, setQuiz ] = useState({});
 
     const handleToggle = () => {
         setToggle(prevState => !prevState);
@@ -24,6 +24,8 @@ const Created = () => {
             }
             const data = await response.json();
             console.log(data);
+            setQuiz(data);
+            console.log('show me quiz and dont be silly', quiz);
 
         }
         const handleCourses = () => {
@@ -59,12 +61,13 @@ const Created = () => {
             <div className="created-quiz">
             {views !== null && (
                     <>
-                        {views ? 
-                            (<div className="all-quiz">My girl
-                                <div className="quiz-box">
-
-                                </div>
-                            </div>) :
+                        {views ? (
+                            <div className="all-quiz">
+                                {console.log(Object.keys(quiz))}
+                                {Object.keys(quiz).map((value, index) => {
+                                    {console.log(value)}
+                                    <p key={index}>{value}</p>
+                                })}</div> ) :
                             (<div className="all-courses">My boy</div>)
                         }
                     </>

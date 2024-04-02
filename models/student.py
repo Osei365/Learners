@@ -17,7 +17,8 @@ class Student(db.Model):
     """Student model"""
 
     id = Column(String(120), primary_key=True)
-    firstname = Column(String(120), nullable=False)
+    firstname = Column(String(120))
+    email = Column(String(120), nullable=False)
     lastname = Column(String(120))
     school = Column(String(120))
     gender = Column(String(120))
