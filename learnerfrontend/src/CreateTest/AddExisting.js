@@ -93,19 +93,19 @@ const AddExisting = ({ question }) => {
                                     <span
                                         className={`Each-quest-num ${checkedStates[questionIndex] === items.id ? 'checked' : ''}`}
                                         onClick={() => handleCheck(questionIndex, items.id)}>
-                                        Question {questionIndex}
+                                        Question {questionIndex + 1}
                                     </span>
                                     <div className="Each-question-details">
                                         <span className="subject"><strong>Subject: </strong>{items.subject}</span>
                                         <span className="header"><strong>Header: </strong>{items.header}</span>
-                                        {items.image && <img src={items.image} alt={`img-${items.id}`} />}
+                                        {items.image && <img src={`http://localhost:5000/api/learners/v1/${items.image}`} alt={`img-${items.id}`} />}
                                         <p>{items.body}</p>
                                         <div className="options-div">
-                                            <span ><strong>A: </strong> {items.right_answer}</span>
-                                            <span><strong>B: </strong> {items.wrong_answer1}</span>
-                                            <span><strong>C: </strong> {items.wrong_answer2}</span>
-                                            <span><strong>D: </strong> {items.wrong_answer3}</span>
-                                            <span><strong>E: </strong> {items.wrong_answer4}</span>
+                                            <span ><strong>A: </strong> {items.options[0]}</span>
+                                            <span><strong>B: </strong> {items.options[1]}</span>
+                                            <span><strong>C: </strong> {items.options[2]}</span>
+                                            <span><strong>D: </strong> {items.options[3]}</span>
+                                            <span><strong>E: </strong> {items.options[4]}</span>
                                         </div>
                                     </div>
                                 </div>

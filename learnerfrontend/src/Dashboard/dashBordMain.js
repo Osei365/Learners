@@ -11,6 +11,7 @@ const DashBoardMain = ({ handleToggle }) => {
     const [checkedStates, setCheckedStates] = useState(Array(questions.length).fill(null));
     const [viewAll, setViewAll] = useState(false);
     const [allCourses, setAllCourses] = useState(false);
+    const [studentCount, setStudentCount] = useState(0);
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -27,6 +28,20 @@ const DashBoardMain = ({ handleToggle }) => {
         };
         fetchQuestions();
     }, []);
+
+    const studentCountFunc = async () => {
+        const response = await fetch('http://127.0.0.1:5000/api/learners/v1/get-students');
+        if (!response.ok) {
+            console.log('Seyi did not do her job well')
+        }
+        const data = await response.json()
+        setStudentCount(data.totalStudents);
+        return data.totalStudents;
+        console.log(data);
+    };
+
+    studentCountFunc();
+    
     const totalPages = Math.ceil(questions.length / itemsPerPage);
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -47,13 +62,15 @@ const DashBoardMain = ({ handleToggle }) => {
     const handleAvailableCourses = () => {
         setAllCourses(prevState => !prevState);
     }
+
+    
     const subjectsCount = uniqueSubjects(questions, true);
     const subjectsList = uniqueSubjects(questions);
 
     const dashBoardMainItems = [
         {id: 1, icons: <i class='bx bxs-graduation'></i>, CardName: "Available Courses", numbers: subjectsCount},
         {id: 2, icons: <i class='bx bx-library'></i>, CardName: "All Questions", numbers: questions.length},
-        {id: 3, icons: <i class='bx bx-male-female'></i>, CardName: "Students", numbers: 1024},
+        {id: 3, icons: <i class='bx bx-male-female'></i>, CardName: "Students", numbers: studentCount},
         {id: 4, icons: <i class='bx bx-code'></i>, CardName: "Trending", numbers: 1024},
     ];
 
@@ -129,13 +146,13 @@ const DashBoardMain = ({ handleToggle }) => {
                                     <span><strong>Header: </strong>{items.header}</span>
                                     {items.image && <img src={`http://localhost:5000/api/learners/v1/${items.image}`} alt={`img-${items.id}`} />}
                                     <p>{items.body}</p>
-                                    {Array.from({ length: 5 }).map((_, spanIndex) => (
+                                    {items.options.map((option, spanIndex) => (
                                         <span
                                             key={spanIndex}
-                                            className={`checks ${checkedStates[index] === spanIndex ? 'checked' : ''}`}
+                                            className="checks"
                                             onClick={() => handleCheck(index, spanIndex)}
                                         >
-                                            {spanIndex === 0 ? items.right_answer : items[`wrong_answer${spanIndex}`]}
+                                            {option}
                                         </span>
                                     ))}
                                 </div>
@@ -155,7 +172,7 @@ const DashBoardMain = ({ handleToggle }) => {
                             {Array.isArray(questions) && questions.length > 0 && questions.slice(0, 5).map((items, questionIndex) => (
                                 <div className="recent" key={items.id}>
                                     {/* Render question details */}
-                                    <span className="quest-num">Question {questionIndex}</span>
+                                    <span className="quest-num">Question {questionIndex + 1}</span>
                                     <span><strong>Subject: </strong>{items.subject}</span>
                                     <span><strong>Header: </strong>{items.header}</span>
                                     <p>{items.body}</p>

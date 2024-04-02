@@ -1,11 +1,12 @@
 import uuid
+from random import shuffle
 from models import db
 from models.question import Question
 from models.student import Student
 from models.quiz import Quiz
 from models.teacher import Teacher
 from models.score import Score
-from api.v1.views import app_views, needed
+from api.v1.views import app_views, needed, question_options
 from flask import Flask, request, abort, jsonify
 
 @app_views.route('/verify/<id>', methods=['POST'])
@@ -30,17 +31,24 @@ def register_student(id):
         abort(404)
     firstname = student_names.get('firstName')
     lastname = student_names.get('LastName')
+    email = student_names.get('Email')
+    print(email)
     print(firstname)
     print(lastname)
     if not firstname or not lastname:
         abort(404)
 
     quiz = db.get_or_404(Quiz, id)
+<<<<<<< HEAD
     student = db.session.execute(db.select(Student).filter_by(firstname=firstname)).first()
+=======
+    student = db.session.execute(db.select(Student).filter_by(email=email)).first()
+>>>>>>> 71e3fd1c4c60382218592eb7ba6cb4faeb7ce373
 
     
     if not student:
         student = Student(id=uuid.uuid4(),
+                          email= email,
                           firstname=firstname,
                           lastname=lastname)
         student.teachers.append(quiz.teacher)
@@ -63,10 +71,16 @@ def register_student(id):
     questions_list = []
     for question in questions:
         new_dict = {}
+        options = []
         for key, value in question.__dict__.items():
             if key in needed:
                 new_dict[key] = value
+            if key in question_options:
+                options.append(value)
+        shuffle(options)
+        new_dict['options'] = options
         questions_list.append(new_dict)
+    print(questions_list)
     quiz_questions['questions'] = questions_list
 
     return jsonify({'id': student.id, 'isRegistered': True, 'testQuestions': quiz_questions})
@@ -89,6 +103,7 @@ def calculate_score(id):
         
         if selected_option == question.right_answer:
             score += 1
+    score = int(score / len(quiz.questions) * 100)
     score_model = Score(
         id=uuid.uuid4(),
         student_id=student_id,
@@ -118,7 +133,7 @@ def get_teacher_quiz(id):
             new_dict = {}
             for key, value in question.__dict__.items():
                 if key in needed:
-                    new_dict[key] = value
+                    new_dict[key] = value   
             questions_list.append(new_dict)
         quiz_dict[quiz_obj.id] = questions_list
     print(quizs)
