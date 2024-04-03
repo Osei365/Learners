@@ -1,0 +1,244 @@
+
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&family=Quicksand:wght@300..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+/* ======globals===== */
+* {
+    font-family: "Ubuntu", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    --blue: #2a2185;
+    --white: #fff;
+    --purple: rebeccapurple;
+    --purple2: rebeccapurple;
+    --black1: #222;
+    --black2: #999;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --tran-03: all 0.3s ease;
+    --tran-05: all 0.5s ease;
+    --white2: #fff;
+    --white3: #fff;
+    --dark: #1a1a1a;
+    --purple3: rebeccapurple;
+    --grey: #333;
+    --dark2: #000;
+}
+
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--white);
+}
+
+body.dark {
+    --white: #222;
+    --white3: #fff;
+    --purple: #333;
+    --primary-color-light: #3A3B3C;
+    --purple2: #fff;
+    --white2: rebeccapurple;
+    --dark: #fff;
+    --black2: #fff; 
+    --black1: #fff;
+}
+
+
+.choosen2 {
+    padding: 20px;
+    padding-left: 30px;
+}
+.choosen2 h2,
+.choosen2 h4{
+    color: var(--black1);
+    padding: 20px 10px;
+    font-weight: 400;
+
+}
+.choosen2 h4 {
+    font-weight: 500;
+    color: var(--purple3);
+}
+
+.choosen2 .Each-question {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+    line-height: 25px;
+    color: var(--black1);
+    position: relative;
+    margin-bottom: 20px;
+    box-shadow: 0px 7px 25px var(--boxshadow);
+    border-radius: 20px;
+}
+
+.choosen2 .Each-question .Each-quest-num {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 2rem;
+    margin-left: 50px;
+    margin-bottom: 10px;
+    
+}
+.choosen2 .Each-question .subject,
+.choosen2 .Each-question .header {
+    line-height: 30px;
+    color: var(--black1);
+    font-weight: 500;
+}
+.choosen2 .Each-question .subject strong,
+.choosen2 .Each-question .header strong {
+    color: var(--purple3);
+    padding-right: 10px;
+}
+.choosen2 .Each-question .Each-question-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.choosen2 .Each-question .Each-question-details img {
+    text-align: start;
+    width: 300px;
+    border-radius: 6px;
+    margin: 20px 0px;
+}
+
+
+.choosen2 .Each-question p {
+    font-weight: 400;
+    color: var(--black1);
+    line-height: 25px;
+    font-size: 16px;
+    margin: 10px 0px;
+}
+
+
+.choosen2 .Each-question .Each-quest-num::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--black1);
+    background-image: url("../assets/uncheck.png");
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    cursor: pointer;
+    left: 20px;
+    top: 17px;
+   
+}
+
+.choosen2 .Each-question .checked::before {
+    background-image: url("../assets/ok.png");
+}
+.choosen2 .Each-question  .options-div{
+    display: flex;
+    width: 100%;
+}
+
+.choosen2 .Each-question  .options-div span {
+    padding: 20px;
+    font-size: 16px;
+    color: var(--black1);
+}
+
+.choosen2 .Each-question  .options-div span:nth-child(1) {
+    padding-left: 0px;
+}
+.choosen2 .Each-question  .options-div span strong {
+    padding: 0px 10px;
+    color: var(--purple3);
+}
+.sub-btn {
+    padding: 10px 30px;
+    background: var(--dark2);
+    color: var(--white3);
+    border-radius: 10px;
+    margin-left: 12px;
+    font-size: 16px;
+    border: none;
+}
+.sub-btn:hover {
+    background: var(--purple3);
+}
+.choosen2 .quiz-id-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.choosen2 .quiz-id-section h2 {
+    color: var(--purple3);
+}
+
+.choosen2 .quiz-id-section .link {
+    display: flex;
+    width: 70%;
+    padding: 15px 10px;
+    justify-content: space-between;
+    background: rgb(235, 234, 234);
+    border-radius: 10px;
+}
+
+.choosen2 .quiz-id-section .link span i {
+    font-size: 20px;
+    color: var(--purple3)
+}
+
+
+.duration form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.duration form label {
+    font-weight: 500;
+    color: var(--purple3);
+    margin-bottom: 20px;
+    font-size: 18px;
+    width: 100%;
+}
+.duration form  input[type="text"]:focus {
+    background: var(--white);
+    color: orangered;
+    outline: none;
+}
+.duration form  .new-input {
+    background: var(--white);
+    border: none;
+    border: 1px solid var(--white2);
+    height: 40px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px var(--boxshadow);
+    padding: 0px 20px;
+    color: var(--purple3);
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+    width: 170px;
+}
+.duration form .submit-Btn {
+    width: 150px;
+    font-size: 16px;
+    margin-left: 0;
+    margin-top: 20px;
+    background: var(--dark2);
+    color: var(--white3);
+    padding: 15px 0px;
+    border-radius: 10px;
+    border: none;
+}
+
+.duration form .submit-Btn:hover {
+    background: orangered;
+}
+
+
+
