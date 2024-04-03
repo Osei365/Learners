@@ -1,15 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import DashNavBar from '../Dashboard/dash_navBar';
 import './ViewAllStudent.css';
 import 'boxicons/css/boxicons.min.css';
+import MyTable from './StudentTable';
+import { useAuth } from '../AuthContext';
 
 
 const ViewAllStudents = () => {
   const [toggle, setToggle ] = useState(false);
+  const { userId } = useAuth();
+ /* let tableData; */
   const handleToggle = () => {
     setToggle(prevState => !prevState);
     console.log(toggle);
     };
+
+    const tableData = [
+      { data1: 'Value 1', data2: 'Value 2', data3: 'Value 3' },
+      { data1: 'Value 4', data2: 'Value 5', data3: 'Value 6' },
+    ];
+
+    useEffect(() => {
+      const showStudents = async () => {
+        try {
+        const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/get-students/${userId}`);
+        if(!response.ok) {
+          console.log('failed to fetch student');
+        }
+        const Data = await response.json();
+        console.log(Data);
+      }catch(error) {
+        console.log(error);
+      }
+    }
+    showStudents();
+    }, [])
 
   return (
     <div className="container">
@@ -28,8 +53,9 @@ const ViewAllStudents = () => {
                 </div>
             </div>
             <div className="studentTable">
-              
-            </div>
+              <h1>Students</h1>
+                <MyTable data={tableData} />
+              </div>
         </div>
     </div>
   )
