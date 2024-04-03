@@ -1,0 +1,109 @@
+:root {
+    --blue: #2a2185;
+    --white: #fff;
+    --purple: rebeccapurple;
+    --purple2: rebeccapurple;
+    --black1: #222;
+    --black2: #999;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --tran-03: all 0.3s ease;
+    --tran-05: all 0.5s ease;
+    --white2: #fff;
+    --white3: #fff;
+    --dark: #1a1a1a;
+    --purple3: rebeccapurple;
+    --grey: #333;
+    --boxshadow: rgba(0, 0, 0, 0.08);
+    --white4: #fff;
+}
+
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--white);
+}
+
+body.dark {
+    --white: #222;
+    --white3: #fff;
+    --purple: #333;
+    --primary-color-light: #3A3B3C;
+    --purple2: #fff;
+    --white2: rebeccapurple;
+    --dark: #fff;
+    --black2: #fff; 
+    --grey: #fff;
+    --boxshadow: rgba(0, 0, 0, 0.9);
+}
+
+.mainS {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: var(--white);
+    transition: var(--tran-05);
+}
+.mainS.activeS {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+
+.topbarS {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggleS {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: var(--dark);
+}
+.searchS {
+    position: relative;
+    width: 400px;
+    margin: 0 10px;
+}
+
+.searchS label {
+    position:relative;
+    width: 100%;
+}
+.searchS label input {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 20px;
+    padding-left: 35px;
+    font-size: 18px;
+    outline: none;
+    border:1px solid var(--black2);
+}
+
+.searchS label i { 
+position: absolute;
+top: 0;
+left: 10px;
+font-size: 1.2rem;
+}
+
+.userS {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 40px;
+    color: var(--dark);
+}
