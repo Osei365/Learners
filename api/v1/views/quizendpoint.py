@@ -39,11 +39,7 @@ def register_student(id):
         abort(404)
 
     quiz = db.get_or_404(Quiz, id)
-<<<<<<< HEAD
-    student = db.session.execute(db.select(Student).filter_by(firstname=firstname)).first()
-=======
     student = db.session.execute(db.select(Student).filter_by(email=email)).first()
->>>>>>> 71e3fd1c4c60382218592eb7ba6cb4faeb7ce373
 
     
     if not student:

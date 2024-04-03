@@ -34,8 +34,10 @@ const DashBoardMain = ({ handleToggle }) => {
         if (!response.ok) {
             console.log('Seyi did not do her job well')
         }
-        const data = await response.json()
+        const data = await response.json();
+        if(data.totalStudents){
         setStudentCount(data.totalStudents);
+        }
         return data.totalStudents;
         console.log(data);
     };
@@ -187,7 +189,4 @@ const DashBoardMain = ({ handleToggle }) => {
         </>
     );
 }
-
-
-
 export default DashBoardMain;

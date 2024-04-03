@@ -157,11 +157,58 @@ font-size: 1.2rem;
 .created-quiz {
     padding: 20px;
     border-radius: 20px;
-    width: 100%;
+    width: 95%;
     box-shadow: 0px 7px 25px var(--boxshadow);
     margin-left: 20px;
 }
 
 .created-quiz .all-quiz {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+}
+
+.created-quiz .all-quiz .quizName {
+    width: 30%;
+    display : block;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+    background-color: rebeccapurple;
+    border-radius: 10px;
+    box-shadow: 0px 7px 25px var(--boxshadow);
+    color: #fff;
+}
+.created-quiz .all-quiz .quizName:hover {
+    background: #fff;
+    color: var(--purple3);
+}
+.quiz0 {
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    padding: 10px 10px;
+    box-shadow: 0px 7px 25px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+}
+ .linkQuiz{
+    font-weight: 600;
+    color: var(--purple3);
+    font-size: 1.2rem;
+    margin: 10px 0px;
+}
+.Quiz1 {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+}
+.Quiz1 span {
+    display: block;
+    width: 100%;
+    padding: 10px 0px;
+    font-weight: 400;
+    font-weight: 1rem;
+    color: #444;
 }

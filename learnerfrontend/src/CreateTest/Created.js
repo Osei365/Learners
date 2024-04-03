@@ -9,12 +9,22 @@ const Created = () => {
     const [views,  setViews ] = useState(null);
     const { userId } = useAuth();
     const [ quiz, setQuiz ] = useState({});
+    const [selectedKey, setSelectedKey] = useState(null)
 
     const handleToggle = () => {
         setToggle(prevState => !prevState);
         console.log(toggle);
         };
+        const handleKeyClick = (key) => {
+            setSelectedKey(key); // Set the clicked key
+            console.log(selectedKey);
+          };
 
+          const copyToClipboard = (text) => {
+            navigator.clipboard.writeText(text)
+                .then(() => alert("Link copied"))
+                .catch((error) => console.error("Failed to copy link: ", error));
+        };
         const handleAllQuiz = async () => {
             setViews(true);
 
@@ -62,14 +72,29 @@ const Created = () => {
             {views !== null && (
                     <>
                         {views ? (
-                            <div className="all-quiz">
-                                {console.log(Object.keys(quiz))}
-                                {Object.keys(quiz).map((value, index) => {
-                                    {console.log(value)}
-                                    <p key={index}>{value}</p>
-                                })}</div> ) :
-                            (<div className="all-courses">My boy</div>)
-                        }
+                           <div className="all-quiz">
+                           {/* Rendering keys */}
+                           {Object.keys(quiz).map((key, index) => (
+                             <span className="quizName" key={index} onClick={() => handleKeyClick(key)}>
+                               Quiz {index + 1}
+                             </span>
+                           ))}
+                           {selectedKey && (
+                            <div className="quiz0">
+                                <span className="linkQuiz">Link To Quiz: api/learners/v1/take-quiz/${selectedKey} <i className='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${selectedKey}`)}></i></span>
+                                {quiz[selectedKey].map((val, index) => (
+                                    <div  className="Quiz1" key={index}>
+                                        <h3>Question {index + 1}</h3>
+                                        <span className="Quiz1h"><strong>Header:</strong> {val.header}</span>
+                                        <span className="quiz1B"> {val.body}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            )}
+                         </div>
+                       ) : (
+                         <div className="all-courses">My boy</div>
+                       )}
                     </>
                 )}
             </div>
