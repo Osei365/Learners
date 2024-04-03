@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import DashNavBar from '../Dashboard/dash_navBar';
 import 'boxicons/css/boxicons.min.css';
 import './Created.css';
 import { useAuth } from '../AuthContext';
+import getQuizByCourse from './helperFunctions';
 
 const Created = () => {
     const [toggle, setToggle ] = useState(false);
     const [views,  setViews ] = useState(null);
     const { userId } = useAuth();
     const [ quiz, setQuiz ] = useState({});
-    const [selectedKey, setSelectedKey] = useState(null)
+    const [selectedKey, setSelectedKey] = useState(null);
 
     const handleToggle = () => {
         setToggle(prevState => !prevState);
@@ -28,6 +29,19 @@ const Created = () => {
         const handleAllQuiz = async () => {
             setViews(true);
 
+            /*const response = await fetch(`http://127.0.0.1:5000/api/learners/v1//teacher-quiz/${userId}`);
+            if(!response.ok) {
+                throw new Error('failed to get all quiz');
+            }
+            const data = await response.json();
+            console.log(data);
+            setQuiz(data);
+            console.log('show me quiz and dont be silly', quiz);*/
+
+        }
+
+        useEffect(() => {
+            const makeRequest = async() => {
             const response = await fetch(`http://127.0.0.1:5000/api/learners/v1//teacher-quiz/${userId}`);
             if(!response.ok) {
                 throw new Error('failed to get all quiz');
@@ -36,8 +50,12 @@ const Created = () => {
             console.log(data);
             setQuiz(data);
             console.log('show me quiz and dont be silly', quiz);
-
         }
+        makeRequest();
+        }, []);
+
+        const CoursesList = getQuizByCourse(quiz);
+
         const handleCourses = () => {
             setViews(false);
         }
@@ -93,7 +111,13 @@ const Created = () => {
                             )}
                          </div>
                        ) : (
-                         <div className="all-courses">My boy</div>
+                        <>
+                         {CoursesList.map((val,index) => (
+                            <div className="all-courses">
+                                <h4>{val}</h4>
+                            </div>
+                         ))}
+                         </>
                        )}
                     </>
                 )}
