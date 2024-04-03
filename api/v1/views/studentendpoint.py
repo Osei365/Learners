@@ -7,7 +7,7 @@ from flask import jsonify
 
 @app_views.route('/get-students/<id>', methods=['GET'])
 def get_students(id):
-    """gets all stduents that registered with a
+    """gets all students that registered with a
     particular teacher"""
 
     teacher = db.get_or_404(Teacher, id)
