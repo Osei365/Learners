@@ -13,14 +13,16 @@ def get_students(id):
     teacher = db.get_or_404(Teacher, id)
     teacher_quizs= [quiz for quiz in teacher.quizs]
     students = teacher.students
-    students_dictionary = {}
+    students_list = []
     for student in students:
+        students_dictionary = {}
         students_dictionary['firstname'] = student.firstname
         students_dictionary['lastname'] = student.lastname
         student_quizs = [quiz for quiz in student.quizs if quiz in teacher_quizs]
         student_scores = [score.score for score in student.scores if score.quiz in student_quizs]
         students_dictionary['quiz taken'] = len(student_quizs)
         students_dictionary['average score'] = sum(student_scores)/len(student_scores)
+        students_list.append(students_dictionary)
     return jsonify(students_dictionary)
 
 @app_views.route('/get-students', methods=['GET'])
