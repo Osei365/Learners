@@ -22,7 +22,7 @@
 
 ## USAGE
 - create an account or log in on the the app's landing page
-!(readme_images\Screenshot 2024-04-03 225850.png)
+![landing page](https://github.com/Osei365/Learners/blob/mngaster/readme_images/Screenshot%202024-04-03%20225850.png)
 
 
 
