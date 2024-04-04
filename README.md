@@ -21,6 +21,8 @@
    - CSS
 
 ## USAGE
+- create an account or log in on the the app's landing page
+!(https://drive.google.com/file/d/1RlntFDrAqxGeZ7S5gq2sgfqzBqtcxDts/view?usp=sharing)
 
 
 
