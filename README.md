@@ -21,8 +21,9 @@
    - CSS
 
 ## USAGE
-- create an account or log in on the app's landing page
+1. create an account or log in on the app's landing page
 ![landing page](https://github.com/Osei365/Learners/blob/master/readme_images/landingpage.png)
 
-
+2. create a test either from preexisting questions or creating a new quiz.
+![createquiz](https://github.com/Osei365/Learners/blob/master/readme_images/landingpage.png)
 
