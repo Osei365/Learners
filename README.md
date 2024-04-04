@@ -25,5 +25,5 @@
 ![landing page](https://github.com/Osei365/Learners/blob/master/readme_images/landingpage.png)
 
 2. create a test either from preexisting questions or creating a new quiz.
-![createquiz](https://github.com/Osei365/Learners/blob/master/readme_images/landingpage.png)
+![createquiz](https://github.com/Osei365/Learners/blob/master/readme_images/createquiz.png)
 
