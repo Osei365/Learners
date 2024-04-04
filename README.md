@@ -21,8 +21,8 @@
    - CSS
 
 ## USAGE
-- create an account or log in on the the app's landing page
-![landing page](https://github.com/Osei365/Learners/blob/mngaster/readme_images/Screenshot%202024-04-03%20225850.png)
+- create an account or log in on the app's landing page
+![landing page](https://github.com/Osei365/Learners/blob/master/readme_images/landingpage.png)
 
 
 
