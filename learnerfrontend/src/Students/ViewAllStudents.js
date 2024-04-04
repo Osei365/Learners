@@ -9,16 +9,12 @@ import { useAuth } from '../AuthContext';
 const ViewAllStudents = () => {
   const [toggle, setToggle ] = useState(false);
   const { userId } = useAuth();
- /* let tableData; */
+ const [ tableData, setTableData] = useState([]);
+
   const handleToggle = () => {
     setToggle(prevState => !prevState);
     console.log(toggle);
     };
-
-    const tableData = [
-      { data1: 'Value 1', data2: 'Value 2', data3: 'Value 3' },
-      { data1: 'Value 4', data2: 'Value 5', data3: 'Value 6' },
-    ];
 
     useEffect(() => {
       const showStudents = async () => {
@@ -29,12 +25,13 @@ const ViewAllStudents = () => {
         }
         const Data = await response.json();
         console.log(Data);
+        setTableData(Data);
       }catch(error) {
         console.log(error);
       }
     }
     showStudents();
-    }, [])
+    }, [userId])
 
   return (
     <div className="container">

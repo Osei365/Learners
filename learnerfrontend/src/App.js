@@ -10,6 +10,7 @@ import DashBoard from './routes/dashboard';
 import Createtest from './routes/createTest';
 import CreatedBy from "./routes/CreatedBy";
 import { useAuth } from './AuthContext';
+import Student from "./routes/Student";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/dashboard" element={<DashBoard  />} />
         <Route path="/createTest" element={<Createtest  />} />
         <Route path="/created" element={<CreatedBy />} />
+        <Route path="/students" element={<Student  />} />
         </>
         )}
     </Routes>

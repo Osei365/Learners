@@ -160,6 +160,7 @@ font-size: 1.2rem;
     width: 95%;
     box-shadow: 0px 7px 25px var(--boxshadow);
     margin-left: 20px;
+    margin-top: 30px;
 }
 
 .created-quiz .all-quiz {
@@ -211,4 +212,10 @@ font-size: 1.2rem;
     font-weight: 400;
     font-weight: 1rem;
     color: #444;
+}
+
+.all-courses {
+    width: 100%;
+    padding: 10px 20px;
+    color: rgb(99, 247, 99);
 }

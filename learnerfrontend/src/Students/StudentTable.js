@@ -8,17 +8,19 @@ class MyTable extends React.Component {
       <table>
         <thead className="table-header">
           <tr>
-            <th>Header 1</th>
-            <th>Header 2</th>
-            <th>Header 3</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Quiz Taken</th>
+            <th>Average Score</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{item.data1}</td>
-              <td>{item.data2}</td>
-              <td>{item.data3}</td>
+              <td>{item.firstname}</td>
+              <td>{item.lastname}</td>
+              <td>{item.quizTaken}</td>
+              <td>{item.averageScore}</td>
             </tr>
           ))}
         </tbody>

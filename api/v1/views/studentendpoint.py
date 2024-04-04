@@ -23,7 +23,7 @@ def get_students(id):
         students_dictionary['quizTaken'] = len(student_quizs)
         students_dictionary['averageScore'] = sum(student_scores)/len(student_scores)
         students_list.append(students_dictionary)
-    return jsonify(students_dictionary)
+    return jsonify(students_list)
 
 @app_views.route('/get-students', methods=['GET'])
 def getAllStudents():
