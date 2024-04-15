@@ -123,14 +123,14 @@ font-size: 1.2rem;
 .To-Do .add-new,
 .To-Do .add-existing {
     width: 350px;
-    height: 150px;
+    height: 120px;
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
     box-shadow: 0 7px 25px var(--boxshadow);
     align-items: center;
     padding: 0px 40px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 .To-Do .add-new:hover,
 .To-Do .add-existing:hover {
@@ -139,17 +139,17 @@ font-size: 1.2rem;
 }
 
 .To-Do .add-new {
-    background: orangered;
+    background: #fff;
     
 }
 .To-Do .add-existing {
-    background:  rgb(99, 247, 99);
+    background:  #fff;
 }
 
 .To-Do .add-new .new,
 .To-Do .add-existing .new {
-    font-size: 1.5rem;
-    color: var(--white);
+    font-size: 1.2rem;
+    color: var(--purple3);
     max-width: 200px;
     line-height: 2rem;
 

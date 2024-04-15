@@ -19,9 +19,14 @@ def get_students(id):
         students_dictionary['firstname'] = student.firstname
         students_dictionary['lastname'] = student.lastname
         student_quizs = [quiz for quiz in student.quizs if quiz in teacher_quizs]
+        print(student_quizs)
         student_scores = [score.score for score in student.scores if score.quiz in student_quizs]
+        print(student_scores)
         students_dictionary['quizTaken'] = len(student_quizs)
-        students_dictionary['averageScore'] = sum(student_scores)/len(student_scores)
+        if len(student_scores) > 0:
+            students_dictionary['averageScore'] = sum(student_scores)/len(student_scores)
+        else:
+            students_dictionary['averageScore']  = 0
         students_list.append(students_dictionary)
     return jsonify(students_list)
 

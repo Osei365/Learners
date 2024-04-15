@@ -99,7 +99,7 @@ def calculate_score(id):
         
         if selected_option == question.right_answer:
             score += 1
-    score = int(score / len(quiz.questions) * 100)
+    score = int((score / len(quiz.questions)) * 100)
     score_model = Score(
         id=uuid.uuid4(),
         student_id=student_id,

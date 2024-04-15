@@ -93,7 +93,7 @@ const AddNew = ({ setQuestions, setShowForm, setCode, setQuizId, questions, quiz
                         <span>api/learners/v1/take-quiz/{quizId}</span>
                         <span><i class='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${quizId}`)}></i></span>
                     </div>
-                    <span>PassCode: {code} <i class='bx bx-copy' onClick={() => copyToClipboard(`${code}`)}></i></span>
+                    <span className="passcode">PassCode: {code} <i class='bx bx-copy' onClick={() => copyToClipboard(`${code}`)}></i></span>
                 </div>
             ) : (
                 <div>

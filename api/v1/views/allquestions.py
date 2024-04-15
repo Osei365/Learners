@@ -1,6 +1,9 @@
 import os
 import uuid
 import json
+from docx import Document
+from docx2pdf import convert
+from docx.shared import Inches
 from random import shuffle
 from models import db
 from models.question import Question
@@ -11,6 +14,7 @@ from utils import generate_code
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = 'app_images/question_images/'
+DOCUMENT_FOLDER = 'document/files/'
 @app_views.route('/all-questions', methods=['GET'])
 def get_allquestions():
     """gets all questions"""
@@ -58,8 +62,10 @@ def create_new(id):
     quiz.duration = duration
     quiz.code = generate_code()
     quiz.subject = subject
-    db.session.add(quiz)
-    db.session.commit()
+    
+
+    # creates a word document
+    doc = Document()
 
     for n, question_dic in enumerate(question_list):
         question_dic['id'] = uuid.uuid4()
@@ -80,6 +86,32 @@ def create_new(id):
         db.session.add(question)
         quiz.questions.append(question)
         db.session.commit()
+
+        p = doc.add_paragraph('')
+        p.add_run('Question {}'.format(n + 1)).bold = True
+        doc.add_paragraph(question_dic['body'])
+        if question_dic.get('image'):
+            doc.add_picture(question_dic['image'], width=Inches(1.25), height=Inches(1.25))
+        options = [question_dic['right_answer'],
+                   question_dic['wrong_answer1'],
+                   question_dic['wrong_answer2'],
+                   question_dic['wrong_answer3'],
+                   question_dic['wrong_answer4']]
+        shuffle(options)
+        doc.add_paragraph('A {}    B {}    C {}    D {}   E {}'.format(options[0],
+                                                            options[1],
+                                                            options[2],
+                                                            options[3],
+                                                            options[4]))
+    docpath = DOCUMENT_FOLDER+'{}.docx'.format(quiz.id)
+    docpdf = DOCUMENT_FOLDER+'{}.pdf'.format(quiz.id)
+    doc.save(docpath)
+    doc.save(docpdf)
+    quiz.doc = docpath
+    quiz.pdf = docpdf
+    db.session.add(quiz)
+    db.session.commit()
+    
     result = {'quiz_id': quiz.id, 'message': 'quiz created', 'code': quiz.code}
     return jsonify(result)
 
@@ -95,19 +127,49 @@ def create_existing(id):
         abort(404)
     question_id_list = question_metadata.get('ids')
     duration = question_metadata.get('duration')
+    subject = question_metadata.get('Subject')
     if not question_id_list:
         abort(404)
     quiz = Quiz(id = uuid.uuid4())
     quiz.teacher_id = id
     quiz.duration = duration
     quiz.code = generate_code()
-    db.session.add(quiz)
-    db.session.commit()
+    quiz.subject = subject
+    
 
-    for q_id in question_id_list:
+    doc = Document()
+
+    for n, q_id in enumerate(question_id_list):
         question = db.get_or_404(Question, q_id)
         quiz.questions.append(question)
         db.session.commit()
+
+        p = doc.add_paragraph('')
+        p.add_run('Question {}'.format(n + 1)).bold = True
+        doc.add_paragraph(question.body)
+        if question.image:
+            doc.add_picture(question.image, width=Inches(2.0), height=Inches(1.25))
+        options = [question.right_answer,
+                   question.wrong_answer1,
+                   question.wrong_answer2,
+                   question.wrong_answer3,
+                   question.wrong_answer4]
+        shuffle(options)
+        doc.add_paragraph('A.{}    B.{}    C.{}    D.{}    E.{}'.format(options[0],
+                                                            options[1],
+                                                            options[2],
+                                                            options[3],
+                                                            options[4]))
+    docpath = DOCUMENT_FOLDER+'{}.docx'.format(quiz.id)
+    docpdf = DOCUMENT_FOLDER+'{}.pdf'.format(quiz.id)
+    doc.save(docpath)
+    doc.save(docpdf)
+    quiz.doc = docpath
+    quiz.pdf = docpdf
+    db.session.add(quiz)
+    db.session.commit()
+    
+    convert(docpath)
     result = {'quiz_id': quiz.id, 'message': 'quiz created', 'code': quiz.code}
     return jsonify(result)
     

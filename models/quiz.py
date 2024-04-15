@@ -10,6 +10,8 @@ class Quiz(db.Model):
     duration = Column(Integer, nullable=False)
     code = Column(String(120))
     subject = Column(String(120))
+    doc = Column(String(240), nullable=True)
+    pdf = Column(String(240))
 
     # relationships
     teacher = relationship('Teacher', back_populates='quizs')

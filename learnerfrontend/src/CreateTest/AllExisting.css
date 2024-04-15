@@ -171,6 +171,7 @@ body.dark {
     display: flex;
     flex-direction: column;
     padding: 40px;
+    padding-top: 0px;
 }
 
 .choosen2 .quiz-id-section h2 {
@@ -184,11 +185,21 @@ body.dark {
     justify-content: space-between;
     background: rgb(235, 234, 234);
     border-radius: 10px;
+    margin-bottom: 30px;
 }
 
-.choosen2 .quiz-id-section .link span i {
+.choosen2 .quiz-id-section .link span i, .choosen2 .quiz-id-section .pass i {
     font-size: 20px;
     color: var(--purple3)
+}
+
+.choosen2 .quiz-id-section .pass {
+    display: flex;
+    width: 40%;
+    padding: 15px 10px;
+    justify-content: space-between;
+    background: rgb(235, 234, 234);
+    border-radius: 10px;
 }
 
 

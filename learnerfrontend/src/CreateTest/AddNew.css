@@ -203,6 +203,10 @@ body.dark {
     color: var(--purple3)
 }
 
+.choosen .quiz-id-section .passcode  {
+    margin-top: 30px;
+}
+
 .submit-details-btn {
     width: 150px;
     font-size: 16px;

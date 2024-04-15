@@ -80,7 +80,7 @@ const AddExisting = ({ question }) => {
                         <span>api/learners/v1/take-quiz/{quizId}</span>
                         <span><i class='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${quizId}`)}></i></span>
                     </div>
-                    <span>PassCode: {code} <i class='bx bx-copy' onClick={() => copyToClipboard(`${code}`)}></i></span>
+                    <span className="pass"><strong>Passcode: {code} </strong><i class='bx bx-copy' onClick={() => copyToClipboard(`${code}`)}></i></span>
                 </div>
             ) : (
                 <div>
