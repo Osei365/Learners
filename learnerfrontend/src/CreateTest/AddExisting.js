@@ -124,12 +124,13 @@ const AddExisting = ({ question, setShowQuestion, setDuration, testDuration, sho
                     ) : (
                         <div className="duration">
                             <form onSubmit={setDetailsList}>
-                                <label className="label">Enter subject Name</label>
-                                    <select className="new-input" name="subject" id="Subject" value={subject} onChange={handleSubject}>
-                                        {Subject.map((subject) => (
-                                        <option value={subject}>{subject}</option>)
-                                        )}
-                                    </select>
+                            <label className="label">Enter subject Name</label>
+                                <select className="new-input" name="subject" id="Subject" value={subject} onChange={handleSubject}>
+                                    <option value="">None</option> {/* Placeholder option */}
+                                    {Subject.map((subject) => (
+                                        <option key={subject} value={subject}>{subject}</option>
+                                    ))}
+                                </select>
                                 <label className="label">Test Duration</label>
                                 <select className="new-input" name="duration" id="duration" value={testDuration} onChange={handleDuration}>
                                     <option value="30">30 min</option>
