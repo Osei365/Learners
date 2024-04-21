@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import './AddNew.css';
 import QuestionForm from './QuestionForm';
 import { useAuth } from '../AuthContext';
+import { Link } from 'react-router-dom';
 
 const AddNew = ({ setQuestions, setShowForm, setCode, setQuizId, questions, quizId, code, showForm}) => {
     const [numQuestions, setNumQuestions] = useState(1);
     const [testDuration, setDuration] = useState(30);
     const { userId } = useAuth();
     const [subject, setSubject ] = useState('');
+    const [filename, setFilename ] = useState(null);
     const handleNumQuestionsChange = (e) => {
         setNumQuestions(parseInt(e.target.value));
     };
@@ -73,6 +75,7 @@ const AddNew = ({ setQuestions, setShowForm, setCode, setQuizId, questions, quiz
             setNumQuestions(1);
             setQuestions([]);
             setShowForm(false);
+            setFilename(data.docFile);
         } catch (error) {
             console.error(error);
         }
@@ -94,6 +97,7 @@ const AddNew = ({ setQuestions, setShowForm, setCode, setQuizId, questions, quiz
                         <span><i class='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${quizId}`)}></i></span>
                     </div>
                     <span className="passcode">PassCode: {code} <i class='bx bx-copy' onClick={() => copyToClipboard(`${code}`)}></i></span>
+                    <Link to={`http://127.0.0.1:5000/api/learners/v1/${filename}`} className="pass">Download Questions docx</Link>
                 </div>
             ) : (
                 <div>

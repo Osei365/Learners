@@ -52,7 +52,7 @@ const Created = () => {
             console.log('show me quiz and dont be silly', quiz);
         }
         makeRequest();
-        }, []);
+        }, [userId, quiz ]);
 
         const CoursesList = getQuizByCourse(quiz);
 

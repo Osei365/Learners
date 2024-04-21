@@ -167,8 +167,8 @@ body {
 @media screen and (max-width: 477px) { 
     .body1 {
         margin-top: 60px;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
     }
     .body1 .container {
         display: flex;

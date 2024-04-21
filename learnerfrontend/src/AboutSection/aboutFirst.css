@@ -1,16 +1,9 @@
 body {
     width: 100%;
     min-height: 100vh;
-    background: #1a1a1a; /* #faf9f9; */
+    background: #1a1a1a;
     overflow-x: hidden;
     position: relative;
-}
-
-:root {
-    --body-color: #fff;
-    --colored-border: #333;
-    --dark-color: #0a032e;
-    --light-color: #fff;
 }
 
 #about-head {
@@ -19,7 +12,7 @@ body {
     align-items: center;
     justify-content: center;
     background-color: #1a1a1a;
-    color: var(--light-color);
+    color: #fff;
     min-height: 80vh;
     border-radius: 15px;
     box-shadow: 10px 7px 15px white;
@@ -67,7 +60,7 @@ body {
    
     /* about page */
     #about-head {
-        color: var(--light-color);
+        color: #fff;
         min-height: 30vh;
     }
     #about-head .about-text h1 {
@@ -99,7 +92,7 @@ body {
     }
 /* about page */
      #about-head {
-        color: var(--light-color);
+        color: #fff;
         min-height: 30vh;
     }
     #about-head .about-text h1 {

@@ -62,7 +62,6 @@ def create_new(id):
     quiz.duration = duration
     quiz.code = generate_code()
     quiz.subject = subject
-    
 
     # creates a word document
     doc = Document()
