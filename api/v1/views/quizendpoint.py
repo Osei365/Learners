@@ -121,16 +121,39 @@ def get_teacher_quiz(id):
     if not teacher:
         abort(404)
     quizs = teacher.quizs
-    quiz_dict = {}
-    for quiz_obj in quizs:
-        questions = quiz_obj.questions
-        questions_list = []
-        for question in questions:
-            new_dict = {}
-            for key, value in question.__dict__.items():
-                if key in needed:
-                    new_dict[key] = value   
-            questions_list.append(new_dict)
-        quiz_dict[quiz_obj.id] = questions_list
+    # quiz_dict = {}
+    # for quiz_obj in quizs:
+    #     questions = quiz_obj.questions
+    #     questions_list = []
+    #     for question in questions:
+    #         new_dict = {}
+    #         for key, value in question.__dict__.items():
+    #             if key in needed:
+    #                 new_dict[key] = value   
+    #         questions_list.append(new_dict)
+    #     quiz_dict[quiz_obj.id] = questions_list
+    quiz_ids = [quiz.id for quiz in quizs]
     print(quizs)
-    return jsonify(quiz_dict)
+    return jsonify(quiz_ids)
+
+@app_views.route('/quiz-details/<id>')
+def get_quiz_details(id):
+    """gets the quiz info"""
+
+    quiz = db.get_or_404(Quiz, id)
+    questions = quiz.questions
+    questions_list = []
+    for question in questions:
+        new_dict = {}
+        for key, value in question.__dict__.items():
+            if key in needed:
+                new_dict[key] = value   
+        questions_list.append(new_dict)
+    return_dict = {}
+    return_dict['docFile'] = quiz.doc
+    return_dict['questions'] = questions_list
+    return_dict['excelScoreFile'] = f'/download-studentscore/{id}'
+
+    return jsonify(return_dict)
+
+    
