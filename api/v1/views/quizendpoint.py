@@ -131,6 +131,8 @@ def get_teacher_quiz(id):
                 if key in needed:
                     new_dict[key] = value   
             questions_list.append(new_dict)
-        quiz_dict[quiz_obj.id] = questions_list
+        quiz_dict[quiz_obj.id] = {'question': questions_list,
+                                  'docFile': quiz_obj.doc,
+                                  'pdfFile': quiz_obj.pdf}
     print(quizs)
     return jsonify(quiz_dict)
