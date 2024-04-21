@@ -112,7 +112,7 @@ def create_new(id):
     db.session.add(quiz)
     db.session.commit()
     
-    result = {'quiz_id': quiz.id, 'message': 'quiz created', 'code': quiz.code}
+    result = {'quiz_id': quiz.id, 'message': 'quiz created', 'code': quiz.code, 'docFile': quiz.doc}
     return jsonify(result)
 
 @app_views.route('/create-existing/<id>', methods=['POST'])
@@ -170,7 +170,7 @@ def create_existing(id):
     db.session.commit()
     
     convert(docpath)
-    result = {'quiz_id': quiz.id, 'message': 'quiz created', 'code': quiz.code}
+    result = {'quiz_id': quiz.id, 'message': 'quiz created', 'code': quiz.code, 'docFile': quiz.doc}
     return jsonify(result)
     
 
