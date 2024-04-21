@@ -12,3 +12,4 @@ from api.v1.views.allquestions import *
 from api.v1.views.quizendpoint import *
 from api.v1.views.images_api import *
 from api.v1.views.studentendpoint import *
+from api.v1.views.documents_api import *
