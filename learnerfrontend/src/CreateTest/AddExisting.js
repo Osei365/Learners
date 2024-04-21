@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { useAuth } from '../AuthContext';
 import './AllExisting.css';
+import { Link } from 'react-router-dom';
+import getQuestionsBysubject from '../Utils/utils';
 
-const AddExisting = ({ question }) => {
+const AddExisting = ({ question, setShowQuestion, setDuration, testDuration, showQuestion}) => {
     console.log('existing ', question);
     const [checkedStates, setCheckedStates] = useState(Array(question.length).fill(null));
     const { userId } = useAuth();
-    const [showQuestion, setShowQuestion] = useState(true);
-    const [testDuration, setDuration] = useState(30);
+    /*const [showQuestion, setShowQuestion] = useState(true);
+    const [testDuration, setDuration] = useState(30);*/
     const [ quizId, setQuizId ] = useState(null);
     const [code , setCode] = useState(null);
     const [subject, setSubject] = useState('');
+    const [filename, setFilename ] = useState(null);
 
     const setDetailsList = (event) => {
         event.preventDefault();
@@ -19,6 +22,9 @@ const AddExisting = ({ question }) => {
             console.log(testDuration);
   
       }
+
+    const Subject = getQuestionsBysubject(question);
+    console.log('all subject :', Subject);
 
     const handleDuration = (e) => {
         setDuration(parseInt(e.target.value));
@@ -45,6 +51,7 @@ const AddExisting = ({ question }) => {
             console.log(data);
             setCode(data.code);
             setQuizId(data.quiz_id);
+            setFilename(data.docFile);
             setCheckedStates(Array(question.length).fill(null));
         } catch (error) {
             console.log('The Error: ', error.message);
@@ -70,6 +77,7 @@ const AddExisting = ({ question }) => {
             .catch((error) => console.error("Failed to copy link: ", error));
     };
 
+    const Question = getQuestionsBysubject(question, subject);
 
     return (
         <div className="choosen2">
@@ -81,6 +89,7 @@ const AddExisting = ({ question }) => {
                         <span><i class='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${quizId}`)}></i></span>
                     </div>
                     <span className="pass"><strong>Passcode: {code} </strong><i class='bx bx-copy' onClick={() => copyToClipboard(`${code}`)}></i></span>
+                    <Link to={`http://127.0.0.1:5000/api/learners/v1/${filename}`} className="passes">Download Questions docx</Link>
                 </div>
             ) : (
                 <div>
@@ -88,7 +97,7 @@ const AddExisting = ({ question }) => {
                     {testDuration !== null && !showQuestion ? (
                         <>
                             <h4>Select Question</h4>
-                            {question.map((items, questionIndex) => (
+                            {Question.map((items, questionIndex) => (
                                 <div key={items.id} className="Each-question">
                                     <span
                                         className={`Each-quest-num ${checkedStates[questionIndex] === items.id ? 'checked' : ''}`}
@@ -116,13 +125,11 @@ const AddExisting = ({ question }) => {
                         <div className="duration">
                             <form onSubmit={setDetailsList}>
                                 <label className="label">Enter subject Name</label>
-                                    <input
-                                        className="new-input"
-                                        type="text"
-                                        id="Subject"
-                                        value={subject}
-                                        onChange={handleSubject}
-                                    />
+                                    <select className="new-input" name="subject" id="Subject" value={subject} onChange={handleSubject}>
+                                        {Subject.map((subject) => (
+                                        <option value={subject}>{subject}</option>)
+                                        )}
+                                    </select>
                                 <label className="label">Test Duration</label>
                                 <select className="new-input" name="duration" id="duration" value={testDuration} onChange={handleDuration}>
                                     <option value="30">30 min</option>

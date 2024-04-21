@@ -13,6 +13,8 @@ const CreateTest = () => {
     const [code, setCode ] = useState();
     const [showForm, setShowForm] = useState(false); // Initially, don't show the form
     const [question, setQuestion] = useState([]);
+    const [showQuestion, setShowQuestion] = useState(true);
+    const [testDuration, setDuration] = useState(30);
     
 
     const handleToggle = () => {
@@ -28,6 +30,8 @@ const CreateTest = () => {
             setShowForm(false);
         }
         const handleCreateExisting = async () => {
+            setShowQuestion(true);
+            setDuration(30);
             
             const response = await fetch('http://127.0.0.1:5000/api/learners/v1/all-questions');
             if(!response.ok) {
@@ -73,7 +77,7 @@ const CreateTest = () => {
                     <>
                         {createNew ? 
                             (<AddNew setQuestions={setQuestions} setShowForm={setShowForm} setQuizId={setQuizId} setCode={setCode} questions={questions} showForm={showForm} code={code} quizId={quizId}/>) :
-                            (<AddExisting  question={question} />)
+                            (<AddExisting  question={question} setShowQuestion={setShowQuestion} setDuration={setDuration} testDuration={testDuration} showQuestion={showQuestion} />)
                         }
                     </>
                 )}

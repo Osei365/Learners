@@ -196,16 +196,40 @@ body.dark {
     justify-content: space-between;
     background: rgb(235, 234, 234);
     border-radius: 10px;
+    color: var(--purple3);
+    font-weight: 500;
 }
 
-.choosen .quiz-id-section .link span i {
+.choosen .quiz-id-section .link span i, .choosen .quiz-id-section .pass i {
     font-size: 20px;
     color: var(--purple3)
 }
 
-.choosen .quiz-id-section .passcode  {
+.choosen .quiz-id-section .pass {
+    display: flex;
+    width: 40%;
+    padding: 15px 10px;
+    justify-content: space-between;
+    background: rgb(235, 234, 234);
+    border-radius: 10px;
     margin-top: 30px;
+    margin-bottom: 30px;
+    color: var(--purple3);
+    font-weight: 500;
 }
+
+.choosen .quiz-id-section .passes {
+    display: flex;
+    width: 40%;
+    padding: 15px 10px;
+    background: rgb(235, 234, 234);
+    border-radius: 10px;
+    color: var(--purple3);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
 
 .submit-details-btn {
     width: 150px;
