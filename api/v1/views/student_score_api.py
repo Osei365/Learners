@@ -33,7 +33,7 @@ def get_student_score(id):
         student = db.get_or_404(Student, score.student_id)
         worksheet.cell(row=max_row + n + 1, column=1, value=student.firstname)
         worksheet.cell(row=max_row + n + 1, column=2, value=student.lastname)
-        worksheet.cell(row=max_row + n + 1, column=3, value=student.score)
+        worksheet.cell(row=max_row + n + 1, column=3, value=score.score)
     
     if os.path.exists(filepath):
         workbook.save(filename=filepath)
