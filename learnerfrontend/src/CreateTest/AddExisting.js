@@ -89,7 +89,7 @@ const AddExisting = ({ question, setShowQuestion, setDuration, testDuration, sho
                         <span><i class='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${quizId}`)}></i></span>
                     </div>
                     <span className="pass"><strong>Passcode: {code} </strong><i class='bx bx-copy' onClick={() => copyToClipboard(`${code}`)}></i></span>
-                    <Link to={`http://127.0.0.1:5000/api/learners/v1/${filename}`} className="passes">Download Questions docx</Link>
+                    <Link to={`http://127.0.0.1:5000/api/learners/v1/${filename}`} className="passes">Click Here Download Questions docx</Link>
                 </div>
             ) : (
                 <div>

@@ -4,24 +4,48 @@ import 'boxicons/css/boxicons.min.css';
 import './Created.css';
 import { useAuth } from '../AuthContext';
 import getQuizByCourse from './helperFunctions';
+import { Link } from 'react-router-dom';
 
 const Created = () => {
     const [toggle, setToggle ] = useState(false);
     const [views,  setViews ] = useState(null);
     const { userId } = useAuth();
-    const [ quiz, setQuiz ] = useState({});
+    const [ quizids, setQuizid ] = useState([]);
+    const [quiz, setQuiz] = useState([]);
     const [selectedKey, setSelectedKey] = useState(null);
+    const [showPopup, setShowPopup] = useState({});
+    const [filename, setFilename] = useState('');
+    const [score, setScore] = useState('')
 
     const handleToggle = () => {
         setToggle(prevState => !prevState);
         console.log(toggle);
         };
         const handleKeyClick = (key) => {
-            setSelectedKey(key); // Set the clicked key
+            console.log(key);
+            setSelectedKey(key);
             console.log(selectedKey);
-          };
+            setShowPopup(prevState => ({
+                ...Object.fromEntries(Object.entries(prevState).map(([k, v]) => [k, k === key])),
+                [key]: !prevState[key]
+            }));
+            const Request = async() => {
+                const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/quiz-details/${key}`);
+                if(!response.ok) {
+                    throw new Error('failed to get all quiz');
+                }
+                const dict = await response.json();
+                console.log(dict);
+                setQuiz(dict.questions);
+                setFilename(dict.docFile);
+                if(dict.excelScoreFile) {
+                    setScore(dict.excelScoreFile)
+                }
+            }
+            Request();
+            };
 
-          const copyToClipboard = (text) => {
+        const copyToClipboard = (text) => {
             navigator.clipboard.writeText(text)
                 .then(() => alert("Link copied"))
                 .catch((error) => console.error("Failed to copy link: ", error));
@@ -42,19 +66,19 @@ const Created = () => {
 
         useEffect(() => {
             const makeRequest = async() => {
-            const response = await fetch(`http://127.0.0.1:5000/api/learners/v1//teacher-quiz/${userId}`);
+            const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/teacher-quiz/${userId}`);
             if(!response.ok) {
                 throw new Error('failed to get all quiz');
             }
             const data = await response.json();
+            setQuizid(data);
             console.log(data);
-            setQuiz(data);
-            console.log('show me quiz and dont be silly', quiz);
+            console.log('show me quiz and dont be silly', quizids);
         }
         makeRequest();
-        }, [userId, quiz ]);
+        }, [userId]);
 
-        const CoursesList = getQuizByCourse(quiz);
+        const CoursesList = getQuizByCourse(quizids);
 
         const handleCourses = () => {
             setViews(false);
@@ -92,23 +116,19 @@ const Created = () => {
                         {views ? (
                            <div className="all-quiz">
                            {/* Rendering keys */}
-                           {Object.keys(quiz).map((key, index) => (
-                             <span className="quizName" key={index} onClick={() => handleKeyClick(key)}>
-                               Quiz {index + 1}
-                             </span>
-                           ))}
-                           {selectedKey && (
-                            <div className="quiz0">
-                                <span className="linkQuiz">Link To Quiz: api/learners/v1/take-quiz/${selectedKey} <i className='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${selectedKey}`)}></i></span>
-                                {quiz[selectedKey].map((val, index) => (
-                                    <div  className="Quiz1" key={index}>
-                                        <h3>Question {index + 1}</h3>
-                                        <span className="Quiz1h"><strong>Header:</strong> {val.header}</span>
-                                        <span className="quiz1B"> {val.body}</span>
+                           {quizids.map((key, index) => (
+                             <div className="popup" key={index} onClick={() => handleKeyClick(key)}>
+                               <span>Quiz {index + 1} </span>
+                                <div className={`popuptext ${showPopup[key] ? 'show' : ''}`}>
+                                    <div className="pop">
+                                        <Link className="link-Quiz" to={`http://127.0.0.1:5000/api/learners/v1/${filename}`}><i class='bx bxs-file-doc'></i> Download Quiz</Link>
+                                        <span className="link-Quiz"><i class='bx bxs-edit-alt'></i>View Quiz</span>
+                                        <Link className="link-Quiz"  to={`http://127.0.0.1:5000/api/learners/v1/${score}`}><i class='bx bxs-door-open'></i> View Score In Excel</Link>
+                                        <span className="link-Quiz"><i className='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${selectedKey}`)}></i> Copy Link</span>
                                     </div>
-                                ))}
-                            </div>
-                            )}
+                                </div>
+                             </div>
+                           ))}
                          </div>
                        ) : (
                         <>

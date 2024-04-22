@@ -2,7 +2,6 @@ import os
 import uuid
 import json
 from docx import Document
-from docx2pdf import convert
 from docx.shared import Inches
 from random import shuffle
 from models import db
@@ -168,7 +167,6 @@ def create_existing(id):
     db.session.add(quiz)
     db.session.commit()
     
-    convert(docpath)
     result = {'quiz_id': quiz.id, 'message': 'quiz created', 'code': quiz.code, 'docFile': quiz.doc}
     return jsonify(result)
     

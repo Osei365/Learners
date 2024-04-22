@@ -155,7 +155,6 @@ font-size: 1.2rem;
     color: var(--white);
 }
 .created-quiz {
-    padding: 20px;
     border-radius: 20px;
     width: 95%;
     box-shadow: 0px 7px 25px var(--boxshadow);
@@ -170,17 +169,17 @@ font-size: 1.2rem;
     margin: 0px auto;
 }
 
-.created-quiz .all-quiz .quizName {
-    width: 30%;
+.created-quiz .all-quiz .popup {
+    margin-top: 10px;
+    width: 100%;
     display : block;
     font-size: 1rem;
     font-weight: 700;
     padding: 10px 10px;
     margin-bottom: 20px;
-    background-color: rebeccapurple;
     border-radius: 10px;
     box-shadow: 0px 7px 25px var(--boxshadow);
-    color: #fff;
+    color: rebeccapurple;
 }
 .created-quiz .all-quiz .quizName:hover {
     background: #fff;
@@ -219,3 +218,92 @@ font-size: 1.2rem;
     padding: 10px 20px;
     color: rgb(99, 247, 99);
 }
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .popup .popuptext {
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    color: rebeccapurple;
+    background-color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: fixed;
+    z-index: 3;
+    bottom: 125%;
+    left: 0%;
+    top: 0%;
+  }
+  .popup .popuptext .pop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 40%;
+    height: 150px;
+    background: rebeccapurple;
+    color: #fff;
+    border-radius: 20px;
+    padding: 20px; 
+  };
+
+  .popup .popuptext .pop span {
+    font-size: 2rem;
+  }
+
+  .popup .popuptext .pop .link-Quiz {
+    display: flex;
+    flex-direction: column;
+    min-width: 80px;
+    background: #fff;
+    align-items: space-between;
+    color: rebeccapurple;
+    padding: 10px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    text-decoration: none;
+  }
+
+  .popup .popuptext .pop .link-Quiz:hover {
+    background: #222;
+  } 
+
+  .popup .popuptext .pop .link-Quiz i {
+    font-size: 2rem;
+  }
+
+  
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+  }
+  
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
