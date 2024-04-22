@@ -19,10 +19,15 @@ def get_student_score(id):
     filepath = DOCUMENT_FOLDER+'{}.xlsx'.format(quiz.id)
     if os.path.exists(filepath):
         workbook = load_workbook(filename=filepath)
+        worksheet = workbook.active
     else:
         workbook = Workbook()
-    worksheet = workbook.active
-    max_row = worksheet.max_row()
+        worksheet = workbook.active
+        worksheet.cell(row=1, column=1, value="Student's first name")
+        worksheet.cell(row=1, column=2, value="Student's last name")
+        worksheet.cell(row=1, column=3, value='Score')
+    
+    max_row = worksheet.max_row
 
     for n, score in enumerate(scores):
         student = db.get_or_404(Student, score.student_id)
@@ -31,7 +36,7 @@ def get_student_score(id):
         worksheet.cell(row=max_row + n + 1, column=3, value=student.score)
     
     if os.path.exists(filepath):
-        workbook.save()
+        workbook.save(filename=filepath)
     else:
         workbook.save(filename=filepath)
 
