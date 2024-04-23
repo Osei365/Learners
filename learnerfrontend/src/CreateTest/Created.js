@@ -15,13 +15,16 @@ const Created = () => {
     const [selectedKey, setSelectedKey] = useState(null);
     const [showPopup, setShowPopup] = useState({});
     const [filename, setFilename] = useState('');
-    const [score, setScore] = useState('')
+    const [score, setScore] = useState('');
+    const [quizView, setQuizView] = useState({});
+    let coursesList = []
 
     const handleToggle = () => {
         setToggle(prevState => !prevState);
         console.log(toggle);
         };
         const handleKeyClick = (key) => {
+            console.log('it entered here');
             console.log(key);
             setSelectedKey(key);
             console.log(selectedKey);
@@ -43,6 +46,7 @@ const Created = () => {
                 }
             }
             Request();
+            setQuizView(false);
             };
 
         const copyToClipboard = (text) => {
@@ -52,16 +56,6 @@ const Created = () => {
         };
         const handleAllQuiz = async () => {
             setViews(true);
-
-            /*const response = await fetch(`http://127.0.0.1:5000/api/learners/v1//teacher-quiz/${userId}`);
-            if(!response.ok) {
-                throw new Error('failed to get all quiz');
-            }
-            const data = await response.json();
-            console.log(data);
-            setQuiz(data);
-            console.log('show me quiz and dont be silly', quiz);*/
-
         }
 
         useEffect(() => {
@@ -78,10 +72,30 @@ const Created = () => {
         makeRequest();
         }, [userId]);
 
-        const CoursesList = getQuizByCourse(quizids);
-
-        const handleCourses = () => {
+        const handleCourses = async () => {
             setViews(false);
+            coursesList = getQuizByCourse(userId);
+        }
+
+        const handleViews = (key) =>  {
+            console.log('the quiz: ', quiz);
+            setQuizView(prevState => ({
+                ...prevState,
+                [key]: !prevState[key]
+            }));
+            console.log(quizView)
+                setShowPopup(prevState => ({
+                    ...prevState,
+                    [key]: false
+                }));
+            
+        }
+
+        const handleClickBack = (key) => {
+            setQuizView(prevState => ({
+                ...prevState,
+                [key]: false
+            }));
         }
 
   return (
@@ -114,25 +128,46 @@ const Created = () => {
             {views !== null && (
                     <>
                         {views ? (
-                           <div className="all-quiz">
-                           {/* Rendering keys */}
-                           {quizids.map((key, index) => (
-                             <div className="popup" key={index} onClick={() => handleKeyClick(key)}>
-                               <span>Quiz {index + 1} </span>
-                                <div className={`popuptext ${showPopup[key] ? 'show' : ''}`}>
-                                    <div className="pop">
-                                        <Link className="link-Quiz" to={`http://127.0.0.1:5000/api/learners/v1/${filename}`}><i class='bx bxs-file-doc'></i> Download Quiz</Link>
-                                        <span className="link-Quiz"><i class='bx bxs-edit-alt'></i>View Quiz</span>
-                                        <Link className="link-Quiz"  to={`http://127.0.0.1:5000/api/learners/v1/${score}`}><i class='bx bxs-door-open'></i> View Score In Excel</Link>
-                                        <span className="link-Quiz"><i className='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${selectedKey}`)}></i> Copy Link</span>
+                            <div className="all-quiz">
+                            {quizids.map((key, index) => (
+                                <div className="popup" key={index}>
+                                <span onClick={() => handleKeyClick(key)}>Quiz {index + 1} </span>
+                                    <div className={`popuptext ${showPopup[key] ? 'show' : ''}`}>
+                                        <div className="pop">
+                                            <Link className="link-Quiz" to={`http://127.0.0.1:5000/api/learners/v1/${filename}`}>
+                                                <i class='bx bxs-file-doc'></i> Download Quiz
+                                            </Link>
+                                            <span className="link-Quiz"  onClick={(e) => { e.stopPropagation(); handleViews(key) }}>
+                                                <i class='bx bxs-edit-alt'></i>View Quiz
+                                            </span>
+                                            <Link className="link-Quiz"  to={`http://127.0.0.1:5000/api/learners/v1/${score}`}>
+                                                <i class='bx bxs-door-open'></i> View Score In Excel
+                                            </Link>
+                                            <span className="link-Quiz">
+                                                <i className='bx bx-copy' onClick={() => copyToClipboard(`api/learners/v1/take-quiz/${selectedKey}`)}></i> Copy Link
+                                            </span>
+                                        </div>
                                     </div>
+                                    {showPopup[key] === false && quizView[key] === true &&(
+                                    <div className="questionaire">
+                                        <span className="back" onClick={() => handleClickBack(key)}><i class='bx bx-left-arrow-alt'></i> Back</span>
+                                        <p className="sub">{quiz[0].subject}</p>
+                                        {quiz.map((items, index) => (
+                                            <div className="real" key={index}>
+                                                <span>Question {index  + 1}</span>
+                                                <span className="head-er"><strong>Header: </strong>{items.header}</span>
+                                                {items.image && <img src={`http://localhost:5000/api/learners/v1/${items.image}`} alt={`img-${items.id}`} />}
+                                                <p>{items.body}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    )}
                                 </div>
-                             </div>
-                           ))}
-                         </div>
-                       ) : (
+                            ))}
+                            </div>
+                        ) : (
                         <>
-                         {CoursesList.map((val,index) => (
+                         {coursesList.map((val,index) => (
                             <div className="all-courses">
                                 <h4>{val}</h4>
                             </div>
