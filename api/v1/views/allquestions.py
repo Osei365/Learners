@@ -14,11 +14,16 @@ from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = 'app_images/question_images/'
 DOCUMENT_FOLDER = 'document/files/'
+
+@app_views.route('/all-questions/<teacher_id>', methods=['GET'])
 @app_views.route('/all-questions', methods=['GET'])
-def get_allquestions():
+def get_allquestions(teacher_id=""):
     """gets all questions"""
 
-    questions = db.session.execute(db.select(Question)).all()
+    if teacher_id:
+        questions = db.session.execute(db.select(Question).filter_by(teacher_id=teacher_id)).all()
+    else:
+        questions = db.session.execute(db.select(Question)).all()
     print(questions)
     if questions:
         new_questions = []
