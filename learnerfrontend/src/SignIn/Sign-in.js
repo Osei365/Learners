@@ -12,6 +12,7 @@ const Signin = () => {
     const { loginUser, userId } = useAuth();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [error, setError] = useState(null);
+    const [showError, setShowError] = useState(false);
 
     const [formData, setFormData] = useState({
         email: '',
@@ -38,7 +39,8 @@ const Signin = () => {
                 body: JSON.stringify(formData)
             });
             if(!response.ok) {
-                throw new Error("Sign Up failed");
+                setError('Incorrect password or Email');
+                throw new Error('Invalid credentials'); 
             }
 
             const data = await response.json();
@@ -51,26 +53,30 @@ const Signin = () => {
             } else {
                 setIsLoggedIn(false);
             }
-            setError(null);
+            setError('');
         } catch (error) {
-            setError(error.message);
+            console.log(error.message)
+            
         }
     };
 
     if (isLoggedIn) {
         return  navigate("/dashboard");;
     }
-
-
-    if (isLoggedIn) {
-        return  navigate("/dashboard");
+  
+    const handleClick = () => {
+        setError(null);
+        setShowError(true);
+        setTimeout(() => {
+            setShowError(false);
+        }, 2000);
     }
 
 
     return (
     <div class="container3">
-            {error && <div class="logo2">
-            {error}
+            {error && <div class={`logo2  ${showError ? 'showError' : ''}`}>
+            <span>{error}</span><span className="x" onClick={handleClick}><i class='bx bx-x'></i></span>
             </div>}
             <div class="welcome-me2">
                 <span class="hello-msg2">Hello</span>

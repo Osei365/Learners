@@ -17,7 +17,7 @@ DOCUMENT_FOLDER = 'document/files/'
 
 @app_views.route('/all-questions/<teacher_id>', methods=['GET'])
 @app_views.route('/all-questions', methods=['GET'])
-def get_allquestions(teacher_id=""):
+def get_allquestions(teacher_id=''):
     """gets all questions"""
 
     if teacher_id:

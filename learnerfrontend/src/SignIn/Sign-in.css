@@ -24,8 +24,29 @@
     background: rebeccapurple;
     color: white;
     min-height: 100vh;
+    position: relative;
 }
 
+.logo2 {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    width: 400px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    position: absolute;
+    color: rebeccapurple;
+    top: 35%;
+}
+
+.showError {
+    display: none;
+}
+
+.logo2 .x {
+    color: red;
+    font-size: 1.5rem;
+}
 .welcome-me2 {
     display: flex;
     flex-direction: column;

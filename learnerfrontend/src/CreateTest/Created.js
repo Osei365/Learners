@@ -17,15 +17,12 @@ const Created = () => {
     const [filename, setFilename] = useState('');
     const [score, setScore] = useState('');
     const [quizView, setQuizView] = useState({});
-    let coursesList = []
+    const [ coursesList, setCoursesList ] = useState([]);
 
     const handleToggle = () => {
         setToggle(prevState => !prevState);
-        console.log(toggle);
         };
         const handleKeyClick = (key) => {
-            console.log('it entered here');
-            console.log(key);
             setSelectedKey(key);
             console.log(selectedKey);
             setShowPopup(prevState => ({
@@ -38,7 +35,6 @@ const Created = () => {
                     throw new Error('failed to get all quiz');
                 }
                 const dict = await response.json();
-                console.log(dict);
                 setQuiz(dict.questions);
                 setFilename(dict.docFile);
                 if(dict.excelScoreFile) {
@@ -66,15 +62,14 @@ const Created = () => {
             }
             const data = await response.json();
             setQuizid(data);
-            console.log(data);
-            console.log('show me quiz and dont be silly', quizids);
         }
         makeRequest();
         }, [userId]);
 
-        const handleCourses = async () => {
+        const handleCourses = () => {
             setViews(false);
-            coursesList = getQuizByCourse(userId);
+            const courses = getQuizByCourse(userId);
+            setCoursesList(courses);
         }
 
         const handleViews = (key) =>  {
@@ -95,6 +90,10 @@ const Created = () => {
             setQuizView(prevState => ({
                 ...prevState,
                 [key]: false
+            }));
+            setShowPopup(prevState => ({
+                ...Object.fromEntries(Object.entries(prevState).map(([k, v]) => [k, k === key])),
+                [key]: !prevState[key]
             }));
         }
 
@@ -130,8 +129,8 @@ const Created = () => {
                         {views ? (
                             <div className="all-quiz">
                             {quizids.map((key, index) => (
-                                <div className="popup" key={index}>
-                                <span onClick={() => handleKeyClick(key)}>Quiz {index + 1} </span>
+                                <div className="popup" onClick={() => handleKeyClick(key)} key={index}>
+                                <span >Quiz {index + 1} </span>
                                     <div className={`popuptext ${showPopup[key] ? 'show' : ''}`}>
                                         <div className="pop">
                                             <Link className="link-Quiz" to={`http://127.0.0.1:5000/api/learners/v1/${filename}`}>
@@ -167,11 +166,11 @@ const Created = () => {
                             </div>
                         ) : (
                         <>
-                         {coursesList.map((val,index) => (
-                            <div className="all-courses">
+                        {coursesList.map((val, index) => (
+                            <div className="all-courses" key={index}>
                                 <h4>{val}</h4>
                             </div>
-                         ))}
+                        ))}
                          </>
                        )}
                     </>
