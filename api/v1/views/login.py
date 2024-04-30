@@ -10,6 +10,8 @@ def login():
     """logs a user in"""
     data = request.get_json()
     email = data.get('email')
+    if email:
+        email = email.lower()
     password = data.get('password')
     teacher = db.one_or_404(db.select(Teacher).filter_by(email=email))
     if bcrypt.checkpw(password.encode('utf-8'), teacher.password.encode('utf-8')):
@@ -17,4 +19,4 @@ def login():
                           "isValid": True})
         return result
     else:
-        abort(404)
+        abort(404, description='incorrect password')

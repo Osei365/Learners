@@ -14,3 +14,5 @@ from api.v1.views.images_api import *
 from api.v1.views.studentendpoint import *
 from api.v1.views.documents_api import *
 from api.v1.views.student_score_api import *
+from api.v1.views.update_name import *
+from api.v1.views.update_password import *
