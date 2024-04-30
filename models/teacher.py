@@ -13,6 +13,7 @@ class Teacher(db.Model, UserMixin):
     email = Column(String(120), nullable=False)
     password = Column(String(120), nullable=False)
     institution = Column(String(120), nullable=True)
+    teacher_image = Column(String(120))
 
     # relationships
     questions = relationship('Question', back_populates='teacher')
