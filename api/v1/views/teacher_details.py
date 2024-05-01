@@ -1,7 +1,10 @@
+import os
 from models import db
 from models.teacher import Teacher
 from flask import request, jsonify, abort
 from api.v1.views import app_views
+from werkzeug.utils import secure_filename
+from api.v1.views.signup import TEACHER_IMAGE_FOLDER
 
 
 @app_views.route('/teacher-details/<teacher_id>')
@@ -21,12 +24,19 @@ def teacher_details(teacher_id):
 @app_views.route('/save-teacherimage/<teacher_id>', methods=['PUT'])
 def save_teacherimage(teacher_id):
     """saves the teacher's new image"""
-    teacher_image = request.get_json()
-    if not teacher_image:
+    files = request.files
+    if not files:
         abort(400, description='image of teacher is missing')
 
     teacher = db.get_or_404(Teacher, id)
-    teacher.teacher_image = teacher_image
-    db.session.commit()
+    file = files.get('image')
+    if file:
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(TEACHER_IMAGE_FOLDER, filename)
+        file.save(filepath)
+        teacher.teacher_image = filepath
+        db.session.commit()
+    else:
+        abort(400, description='it is not a file')
 
     return jsonify({'status_code': 'successfully'})
