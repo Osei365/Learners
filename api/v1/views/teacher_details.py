@@ -39,4 +39,5 @@ def save_teacherimage(teacher_id):
     else:
         abort(400, description='it is not a file')
 
-    return jsonify({'status_code': 'successfully'})
+    return jsonify({'status_code': 'successfully',
+                    'teacherImage': filepath})
