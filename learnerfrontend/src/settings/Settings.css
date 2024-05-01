@@ -23,6 +23,8 @@
     --dark: #1a1a1a;
     --purple3: rebeccapurple;
     --grey: #333;
+    --boxshadow: rgba(0, 0, 0, 0.08);
+    --rgba: rgba(255, 255, 255, 0.5);
 }
 
 
@@ -42,6 +44,8 @@ body.dark {
     --dark: #fff;
     --black2: #fff; 
     --grey: #fff;
+    --boxshadow: rgba(0, 0, 0, 0.9);
+    --rgba: rgba(0, 0, 0, 0.6);
 }
 
 .main1 {
@@ -229,6 +233,120 @@ body.dark {
 .settings .forgotPassword .changes {
     color: var(--purple3);
     cursor: pointer;
+}
+
+.userName .namePopUp {
+    display:flex;
+    flex-direction: column;
+}
+
+.userName .namePopUp .errmsg {
+    margin: 10px 0px;
+    padding: 10px 10px;
+    background: rgb(236, 152, 152);
+    color: red;
+    font-size: 14px;
+    width: 400px;
+}
+.userName .namePopUp .success {
+    color: rgb(14, 204, 14);
+    font-size: 2rem;
+}
+.settings .userName {
+    position: relative;
+}
+
+.userName .namePopUp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--rgba);
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: fixed;
+    z-index: 3;
+    bottom: 125%;
+    left: 0%;
+    top: 0%;
+    border: 1px solid black;
+}
+
+.userName .namePopUp .PopUp {
+    display: flex;
+    flex-direction: column;
+    background: rebeccapurple;
+    width: 400px;
+    min-height: 150px;
+    border-radius: 10px;
+    color: #fff;
+    padding: 20px 20px;
+}
+.userName .namePopUp .PopUp label {
+    width: 100%;
+    text-align: start;
+}
+
+.userName .namePopUp .PopUp label .valid {
+    display: inline-block;
+}
+
+.userName .namePopUp .PopUp label span {
+    color: rgb(21, 172, 21);
+    font-size: 1rem;
+}
+.userName .namePopUp .PopUp label .hide {
+    display: none;
+}
+
+.userName .namePopUp .PopUp label .invalid {
+    color: red;
+}
+
+.userName .namePopUp .PopUp button {
+    height: 50px;
+    width: 100px;
+    color: #fff;
+    background: #000;
+    margin: 15px 0px;
+    border-radius: 13px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.userName .namePopUp .PopUp button[disabled] {
+    opacity: 0.5; 
+    cursor: not-allowed;
+  }
+
+.userName .namePopUp .PopUp input {
+    height: 40px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background: hsl(0, 0%, 100%);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.userName .namePopUp .PopUp .instructions{
+    margin: 10px 0px;
+    padding: 5px 10px;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    line-height: 18px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.offscreen {
+    position: absolute;
+    left: -1500px;
 }
 
 

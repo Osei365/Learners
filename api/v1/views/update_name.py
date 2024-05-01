@@ -3,7 +3,7 @@ from models.teacher import Teacher
 from api.v1.views import app_views
 from flask import Flask, request, abort, jsonify
 
-@app_views.route('update-name/<teacher_id>')
+@app_views.route('update-name/<teacher_id>', methods=['PUT'])
 def update_name(teacher_id):
     """updates the name of the Teacher"""
 
@@ -15,7 +15,9 @@ def update_name(teacher_id):
     new_name = names.get('newName')
 
     teacher = db.get_or_404(Teacher, teacher_id)
-    teacher.first_name = new_name
+    lastname, firstname = new_name.split()
+    teacher.first_name = firstname
+    teacher.last_name = lastname
     db.session.commit()
 
     return jsonify({'status': 'successful'})

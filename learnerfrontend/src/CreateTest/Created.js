@@ -93,7 +93,7 @@ const Created = () => {
             }));
             setShowPopup(prevState => ({
                 ...Object.fromEntries(Object.entries(prevState).map(([k, v]) => [k, k === key])),
-                [key]: !prevState[key]
+                [key]: false
             }));
         }
 
@@ -129,7 +129,7 @@ const Created = () => {
                         {views ? (
                             <div className="all-quiz">
                             {quizids.map((key, index) => (
-                                <div className="popup" onClick={() => handleKeyClick(key)} key={index}>
+                                <div className="popup" onClick={quizView[key] ? null : () => handleKeyClick(key)} key={index}>
                                 <span >Quiz {index + 1} </span>
                                     <div className={`popuptext ${showPopup[key] ? 'show' : ''}`}>
                                         <div className="pop">
