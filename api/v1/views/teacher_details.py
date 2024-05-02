@@ -28,12 +28,15 @@ def save_teacherimage(teacher_id):
     if not files:
         abort(400, description='image of teacher is missing')
 
-    teacher = db.get_or_404(Teacher, id)
+    teacher = db.get_or_404(Teacher, teacher_id)
     file = files.get('image')
     if file:
         filename = secure_filename(file.filename)
         filepath = os.path.join(TEACHER_IMAGE_FOLDER, filename)
         file.save(filepath)
+        if teacher.teacher_image:
+            if os.path.exists(teacher.teacher_image):
+                os.remove(teacher.teacher_image)
         teacher.teacher_image = filepath
         db.session.commit()
     else:
