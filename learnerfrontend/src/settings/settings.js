@@ -3,6 +3,8 @@ import 'boxicons/css/boxicons.min.css';
 import './Settings.css';
 import DashNavBar from '../Dashboard/dash_navBar';
 import { useAuth } from '../AuthContext';
+import {submitName, submitPwd, timeoutFunction, 
+fetchData, saveUpdateImage } from './helperFunction';
 
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9\s-_]{1,38}[a-zA-Z0-9]$/;
@@ -22,20 +24,27 @@ const Settings = () => {
     const [settingsClickable, setSettingsClickable] = useState(null); 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState('');
+    const [imageSuccess, setImageSuccess] = useState('')
+    let errorImage = ''
 
     const [newName, setNewName] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
 
     const [showNamePop, setShowNamePop]  = useState(false);
+    const [showPwdPop, setShowPwdPop] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false)
+    const [success, setSuccess] = useState(false);
+    const [success2, setSuccess2] = useState(false);
+    const [errMsg2, setErrMsg2] = useState('');
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
+
+    const [oldPwd, setOldPwd] = useState('');
 
     const [matchPwd, setMatchPwd] = useState('');
     const [validMatch, setValidMatch] = useState(false);
@@ -46,29 +55,14 @@ const Settings = () => {
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/teacher-details/${userId}`);
-                const data = await response.json();
-                console.log('the given data: ',data);
-                if(data.teacher_image) {
-                setImageExist(data.teacher_image);
-                }
-                setFirstName(data.first_name);
-                setLastName(data.last_name)
-                setEmail(data.email)
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-    
-        fetchData();
-    }, [userId]);
+        fetchData(userId, setImageExist, setFirstName, setLastName, setEmail);
+    }, [userId, setImageExist, setFirstName, setLastName, setEmail]);
 
     const handleChange = (e) => {
         console.log('I am in here');
         const file = e.target.files[0];
-        setImage(URL.createObjectURL(file));
+        setImage(file);
+        console.log(image);
         setSaveImage(true);
     }
 
@@ -76,7 +70,11 @@ const Settings = () => {
         setImageExist(null);
         setEditImage(false);
         setSaveImage(false);
-        setUpdatedImage(image); // Update image only if it's been changed
+        console.log(image);
+        const { imagePath, success, errors} = await saveUpdateImage(userId, image);
+        setUpdatedImage(imagePath); // Update image only if it's been changed
+        setImageSuccess(success);
+        errorImage = errors
     }
 
     useEffect(() => {
@@ -85,6 +83,15 @@ const Settings = () => {
         console.log(newName);
         setValidName(result);
     }, [newName])
+
+    useEffect(() => {
+        const result = PWD_REGEX.test(pwd);
+        console.log(result);
+        console.log(pwd);
+        setValidPwd(result);
+        const match = pwd === matchPwd;
+        setValidMatch(match);
+    }, [pwd, matchPwd])
 
     
     const handleEdit = () => {
@@ -115,53 +122,48 @@ const Settings = () => {
             setErrMsg("Invalid Entry");
             return;
         }
-        try {
-            const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/update-name/${userId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ 
-                    newName: newName,
-                }),
-            });
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data);
-                setSuccess(true);
-                const [last, first ] = newName.split(' ');
-                setFirstName(first);
-                setLastName(last);
-            } else {
-                if (response.status === 404) {
-                    setErrMsg('UserName Taken');
-                } else {
-                    setErrMsg('Failed to update name');
-                }
-                errRef.current.focus();
-            }
-        } catch (err) {
-            console.error('Error:', err);
-            setErrMsg('No Server Response');
-            errRef.current.focus();
+        const { Last, first, error } = await submitName(userId, newName);
+        if(Last || first) {
+            setFirstName(first)
+            setLastName(Last)
+            setSuccess(true)
+        } else if(error) {
+            setErrMsg(error)
+            errRef.current.focus()
         }
     };
 
-    setTimeout(() => {
-        if(success){
-        setSuccess(false);
-        setShowNamePop(false);
+    const handleSubmitPwd = async (e) => {
+        e.preventDefault();
+        const v1 = PWD_REGEX.test(pwd);
+        if (!v1 && !oldPwd) {
+            setErrMsg("Invalid Entry");
+            return;
         }
-    }, 2000)
 
-     useEffect(() => {
-        const result = PWD_REGEX.test(pwd);
-        console.log(result);
-        console.log(pwd);
-        setValidPwd(result);
-        const match = pwd === matchPwd;
-        setValidMatch(match);
-    }, [pwd, matchPwd])
+        const { error, success } = await submitPwd(userId, oldPwd, pwd);
+        if(success){
+            setSuccess2(true);
+        } else if(error) {
+            setErrMsg2(error)
+            errRef.current.focus()
+        }
+
+    }
+
+    timeoutFunction('pwd', success, success2, setSuccess, setShowNamePop, setSuccess2, setShowPwdPop);
+
+    const handlePwdChange = () => {
+        setShowPwdPop(prevState => !prevState)
+    }
+
+    setTimeout(() => {
+        if (imageSuccess) {
+            setImageSuccess('');
+        } else if(errorImage) {
+            errorImage = '';
+        }
+    }, 2000);
 
   return (
     <div className="container">
@@ -170,19 +172,25 @@ const Settings = () => {
             <div className="topbar1">
                 <div className="toggle1" onClick={handleToggle}><i className='bx bx-menu'></i></div>
                 <div className="user1">
-                    {updatedImage ? 
-                    <img src={updatedImage} alt="profile" /> :
-                    <i className='bx bxs-user-circle'></i>
-                    }
+                    {imageExist !== null ? (
+                        <img src={`http://localhost:5000/api/learners/v1/${imageExist}`} alt="profile-pics" />
+                        ) : updatedImage !== null ? (
+                        <img src={`http://localhost:5000/api/learners/v1/${updatedImage}`}alt="profile-pics" />
+                        ) : (
+                        <i className='bx bxs-user-circle'></i>
+                    )}
                 </div>
             </div>
             <div className="settings" onClick={settingsClickable ? null : handleDisableEdit}>
                 <div className="editpics">
+                    {imageSuccess ? (<h4 className="imageSuccess">{imageSuccess} <i class='bx bx-check-circle'></i></h4>) : (
+                        <h4 className="imageError">{errorImage}</h4>
+                    )}
                     <div className="picsEdit">
                         {imageExist !== null ? (
                             <img src={`http://localhost:5000/api/learners/v1/${imageExist}`} alt="profile-pics" />
                             ) : updatedImage !== null ? (
-                            <img src={updatedImage} alt="profile-pics" />
+                            <img src={`http://localhost:5000/api/learners/v1/${updatedImage}`} alt="profile-pics" />
                             ) : (
                             <i className='bx bxs-user-circle'></i>
                         )}
@@ -253,21 +261,31 @@ const Settings = () => {
                 </div>
                 <div className="password">
                     <h4>Password</h4>
-                    <span className="changes">Change Password</span>
-                    {showNamePop && <div className="namePopUp" onClick={handleNameChange}>
-                    {success ? (
+                    <span className="changes" onClick={handlePwdChange}>Change Passwords</span>
+                    {showPwdPop && <div className="namePopUp2" onClick={handlePwdChange}>
+                    {success2 ? (
                         <p className="success">Successfull <i class='bx bx-check-circle'></i></p>
                     ): (
                     <>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <form>
+                    <p ref={errRef} className={errMsg2 ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg2}</p>
+                    <form className="PopUp2" onSubmit={handleSubmitPwd} onClick={(e) => e.stopPropagation()}>
+                        <label htmlFor="oldpwd">
+                            Old password
+                        </label>
+                        <input 
+                            type="password"
+                            id="oldpwd"
+                            onChange={(e) => setOldPwd(e.target.value)}
+                            required
+                            style={{ marginBottom:'20px' }}
+                        />
                         <label htmlFor="password">
                             Password:&nbsp;
                             <span className={validPwd ? "valid" : "hide"}>
-                                <FontAwesomeIcon icon={faCheck} />
+                                <i class='bx bx-check'></i> 
                             </span>
                             <span className={validPwd || !pwd ? "hide" : "invalid"}>
-                                <FontAwesomeIcon icon={faTimes} />
+                            <i class='bx bx-x'></i>
                             </span>
                         </label>
                         <input 
@@ -282,7 +300,7 @@ const Settings = () => {
                             style={{ marginBottom: pwdFocus && !validPwd ? '0px' : '20px' }}
                         />
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />&nbsp;
+                            <i class='bx bx-info-circle'></i>&nbsp;
                                 8 to 24 characters.<br />
                             Must include uppercase and lowercase letters, a number and a special character.<br />
                             Allowed special characters: <span aria-label="exclamation mark">! </span>
@@ -293,10 +311,10 @@ const Settings = () => {
                         <label htmlFor="confirm_pwd">
                             Confirm Password:&nbsp;
                             <span className={validMatch && matchPwd ? "valid" : "hide"}>
-                                <FontAwesomeIcon icon={faCheck} />
+                                <i class='bx bx-check'></i> 
                             </span>
                             <span className={validMatch || !matchPwd ? "hide" : "invalid"}>
-                                <FontAwesomeIcon icon={faTimes} />
+                                <i class='bx bx-x'></i>
                             </span>
                         </label>
                         <input 
@@ -311,10 +329,11 @@ const Settings = () => {
                             style={{ marginBottom: matchFocus && !validMatch ? '0px' : '20px' }}
                         />
                         <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />&nbsp;
+                            <i class='bx bx-info-circle'></i>&nbsp;
                             8 to 24 characters.<br />
                             Must match the first password input field.
                         </p>
+                        <button disabled={!validPwd || !oldPwd || !validMatch ? true : false}>Save</button>
                         </form>
                     </>)}
                     </div>

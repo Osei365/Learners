@@ -67,6 +67,7 @@ body.dark {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-right: 30px;
 }
 
 .toggle1 {
@@ -111,6 +112,15 @@ body.dark {
     justify-content: center;
     align-items: center;
     font-size: 1rem;
+}
+
+.settings .editpics .imageSuccess {
+    color: rgb(14, 207, 14);
+    margin-bottom: 10px;
+}
+
+.settings .editpics .imageError {
+    color: red;
 }
 
 .settings .picsEdit, .settings .editpics .picsImage  {
@@ -235,12 +245,14 @@ body.dark {
     cursor: pointer;
 }
 
-.userName .namePopUp {
+.userName .namePopUp,
+.password .namePopUp2 {
     display:flex;
     flex-direction: column;
 }
 
-.userName .namePopUp .errmsg {
+.userName .namePopUp .errmsg,
+.password .namePopUp2 .errmsg {
     margin: 10px 0px;
     padding: 10px 10px;
     background: rgb(236, 152, 152);
@@ -248,15 +260,18 @@ body.dark {
     font-size: 14px;
     width: 400px;
 }
-.userName .namePopUp .success {
+.userName .namePopUp .success,
+.password .namePopUp2 .success{
     color: rgb(14, 204, 14);
     font-size: 2rem;
 }
-.settings .userName {
+.settings .userName,
+.settings .password {
     position: relative;
 }
 
-.userName .namePopUp {
+.userName .namePopUp,
+.password .namePopUp2 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -274,7 +289,8 @@ body.dark {
     border: 1px solid black;
 }
 
-.userName .namePopUp .PopUp {
+.userName .namePopUp .PopUp,
+.password .namePopUp2 .PopUp2 {
     display: flex;
     flex-direction: column;
     background: rebeccapurple;
@@ -284,28 +300,34 @@ body.dark {
     color: #fff;
     padding: 20px 20px;
 }
-.userName .namePopUp .PopUp label {
+.userName .namePopUp .PopUp label,
+.password .namePopUp2 .PopUp2 label {
     width: 100%;
     text-align: start;
 }
 
-.userName .namePopUp .PopUp label .valid {
+.userName .namePopUp .PopUp label .valid,
+.password .namePopUp2 .PopUp2 label .valid {
     display: inline-block;
 }
 
-.userName .namePopUp .PopUp label span {
+.userName .namePopUp .PopUp label span,
+.password .namePopUp2 .PopUp2 label span {
     color: rgb(21, 172, 21);
     font-size: 1rem;
 }
-.userName .namePopUp .PopUp label .hide {
+.userName .namePopUp .PopUp label .hide,
+.password .namePopUp2 .PopUp2 label .hide {
     display: none;
 }
 
-.userName .namePopUp .PopUp label .invalid {
+.userName .namePopUp .PopUp label .invalid,
+.password .namePopUp2 .PopUp2 label .invalid {
     color: red;
 }
 
-.userName .namePopUp .PopUp button {
+.userName .namePopUp .PopUp button,
+.password .namePopUp2 .PopUp2 button {
     height: 50px;
     width: 100px;
     color: #fff;
@@ -319,12 +341,14 @@ body.dark {
     cursor: pointer;
 }
 
-.userName .namePopUp .PopUp button[disabled] {
+.userName .namePopUp .PopUp button[disabled],
+.password .namePopUp2 .PopUp2 button[disabled] {
     opacity: 0.5; 
     cursor: not-allowed;
   }
 
-.userName .namePopUp .PopUp input {
+.userName .namePopUp .PopUp input,
+.password .namePopUp2 .PopUp2 input{
     height: 40px;
     outline: none;
     border: none;
@@ -333,7 +357,8 @@ body.dark {
     padding: 10px;
     margin-bottom: 20px;
 }
-.userName .namePopUp .PopUp .instructions{
+.userName .namePopUp .PopUp .instructions,
+.password .namePopUp2 .PopUp2 .instructions{
     margin: 10px 0px;
     padding: 5px 10px;
     background: #000;
@@ -342,6 +367,7 @@ body.dark {
     line-height: 18px;
     border-radius: 10px;
     width: 100%;
+    text-align: start;
 }
 
 .offscreen {

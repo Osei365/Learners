@@ -12,6 +12,7 @@ import CreatedBy from "./routes/CreatedBy";
 import { useAuth } from './AuthContext';
 import Student from "./routes/Student";
 import Setting from "./routes/setting";
+import Help from './settings/Help';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/created" element={<CreatedBy />} />
         <Route path="/students" element={<Student  />} />
         <Route path="/settings" element={<Setting />} />
+        <Route path="/help" element={<Help />} />
         </>
         )}
     </Routes>
