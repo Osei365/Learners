@@ -28,8 +28,9 @@ def save_teacherimage(teacher_id):
     if not files:
         abort(400, description='image of teacher is missing')
 
-    teacher = db.get_or_404(Teacher, teacher_id)
+    teacher = db.get_or_404(Teacher, teacher_id )
     file = files.get('image')
+    print(file)
     if file:
         filename = secure_filename(file.filename)
         filepath = os.path.join(TEACHER_IMAGE_FOLDER, filename)
@@ -42,5 +43,5 @@ def save_teacherimage(teacher_id):
     else:
         abort(400, description='it is not a file')
 
-    return jsonify({'status_code': 'successfully',
+    return jsonify({'status_code': 'Profile updated successfully',
                     'teacherImage': filepath})
